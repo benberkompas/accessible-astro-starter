@@ -7,19 +7,21 @@ import Feature from '@components/Feature.astro'
 <DefaultLayout title="Accessible components">
     <PageHeader
         title="Approach"
-        subtitle=""
-        bgType=""
+        subtitle="Subtitle"
+        bgType="bordered"
         showBreadcrumbs=""
     />
     
-    <div class="container">
-        <h2>
-            The right solution<sup>3</sup> to the right problem<sup>2</sup> for the right people<sup>1</sup>...
-        </h2>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quasi nobis optio? Qui in quo accusantium debitis sapiente obcaecati magnam incidunt sit.</p>
-    </div>
+    <section class="my-12">
+        <div class="container">
+            <h2>
+                The right solution<sup>3</sup> to the right problem<sup>2</sup> for the right people<sup>1</sup>...
+            </h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quasi nobis optio? Qui in quo accusantium debitis sapiente obcaecati magnam incidunt sit.</p>
+        </div>
+    </section>
 
-    <section class="my-24">
+    <section class="my-12">
         <div class="container">
             <div class="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3">
                 <Feature icon="lucide:user" title="1. Right people">
@@ -35,14 +37,16 @@ import Feature from '@components/Feature.astro'
         </div>
     </section>
 
-    <div class="container">
-        <h2>
-            ...Built to deliver user value<sup>4</sup> that drives business value<sup>5</sup> in a way that's technically sustainable<sup>6</sup>.
-        </h2>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quasi nobis optio? Qui in quo accusantium debitis sapiente obcaecati magnam incidunt sit.</p>
-    </div>
+    <section class="my-12">
+        <div class="container">
+            <h2>
+                ...Built to deliver user value<sup>4</sup> that drives business value<sup>5</sup> in a way that's technically sustainable<sup>6</sup>.
+            </h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quasi nobis optio? Qui in quo accusantium debitis sapiente obcaecati magnam incidunt sit.</p>
+        </div>
+    </section>
 
-    <section class="my-24">
+    <section class="my-12">
         <div class="container">
             <div class="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3">
                 <Feature icon="lucide:sparkles" title="4. User value">

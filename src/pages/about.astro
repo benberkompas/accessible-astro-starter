@@ -8,15 +8,15 @@ import { Heading } from 'accessible-astro-components'
 <DefaultLayout title="About">
 
     <!-- There's an issue with PageHeader on this page specifically. It throws off the styling of Feature when everything compiles at build time. -->
-     
-    <PageHeader
-        title="About"
-        subtitle=""
-        bgType=""
-        showBreadcrumbs=""
-    />
 
-    <section class="my-64">
+    <!-- <PageHeader
+        title="About"
+        subtitle="Subtitle"
+        bgType="bordered"
+        showBreadcrumbs=""
+    /> -->
+
+    <section class="my-12">
         <div class="container">
             <Heading level="h2" class="mb-8">Features</Heading>
             <div class="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3">

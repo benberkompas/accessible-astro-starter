@@ -4,6 +4,7 @@ import { Accordion, AccordionItem } from 'accessible-astro-components'
 import Feature from '@components/Feature.astro'
 import { Modal } from 'accessible-astro-components'
 import { Badge } from 'accessible-astro-components'
+import { Button } from 'accessible-astro-components'
 import { Icon } from 'astro-icon/components'
 import Counter from '@components/Counter.astro'
 import PageHeader from '@components/PageHeader.astro'
@@ -52,12 +53,12 @@ const avgYears = (avgMonths / 12).toFixed(1); // one decimal place
     
     <PageHeader
         title="Experience"
-        subtitle=""
-        bgType=""
+        subtitle="Subtitle"
+        bgType="bordered"
         showBreadcrumbs=""
     />
     
-    <section class="mb-12">
+    <section class="my-12">
         <div class="container">
             <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
                 <div class="bordered">
@@ -78,12 +79,7 @@ const avgYears = (avgMonths / 12).toFixed(1); // one decimal place
             <div class="bordered">
                 <div class="mb-12">
                     <h3>Covenant Eyes</h3>
-                    <!-- <Media
-                        class="rounded-lg"
-                        ratio="21:9"
-                        src="../src/assets/img/covenant-eyes.jpg"
-                    /> -->
-                    <div class="text-neutral-600">
+                    <div class="text-neutral-600 mb-4">
                         <div>
                             <Icon name="lucide:calendar" class="inline-icon mr-2" />Nov 2018 - Present (<span id="diff-nov-2018"></span>)
                         </div>
@@ -94,12 +90,16 @@ const avgYears = (avgMonths / 12).toFixed(1); // one decimal place
                             <Icon name="lucide:link" class="inline-icon mr-2" /><a href="https://www.covenanteyes.com" target="new"><span class="text-neutral-600">covenanteyes.com</span></a>
                         </div>
                     </div>
+                    <!-- <Button type="primary" animateOnHover
+                        ><Icon aria-hidden="true" name="lucide:panels-top-left" size="24" />View Projects</Button
+                    > -->
                 </div>
                 <div class="grid grid-cols-1 gap-24 md:grid-cols-2">
                     <div class="space-content">
                         <h4>About</h4>
                         <p>We are confronting the problem of pornography with a distinctly relational form of accountability that connects people who want to quit porn with others who can help them achieve lasting victory.</p>
                         <p>This has been a very gratifying chapter in my career, helping me to see the potential of design to drive life-changing results. Just as I had hoped when I joined CE, we're using technology to "redeem" itself, in a way. The stakes are enormously high, making it both a privilege and a heavy weight to carry.</p>
+
                         <h4>Skills</h4>
                         <div class="flex flex-wrap gap-2">
                             <Badge type="default">Information Architecture</Badge>
