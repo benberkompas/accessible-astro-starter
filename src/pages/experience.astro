@@ -25,7 +25,7 @@ if (months < 0) {
 const companies = [
   { start: new Date(2018, 10), end: new Date() },       // Covenant Eyes, Nov 2018 – present
   { start: new Date(2011, 10), end: new Date(2018, 9) }, // Home Depot, Nov 2011 – Oct 2018
-  { start: new Date(2008, 7), end: new Date(2010, 12) },  // Contractor, Aug 2008 – Jan 2011
+//   { start: new Date(2008, 7), end: new Date(2010, 12) },  // Contractor, Aug 2008 – Jan 2011
 ];
 
 // Helper to calculate months between two dates
@@ -68,7 +68,8 @@ const avgYears = (avgMonths / 12).toFixed(1); // one decimal place
                     <Counter count="3" title="companies" sub="employed by someone else" />
                 </div>
                 <div class="bordered">
-                    <Counter count={avgYears} title="years" sub="avg. tenure per company" />
+                    <Counter count={avgYears} title="years" sub="avg. company tenure*" />
+                    <div class="text-neutral-500 text-sm" style="text-align:center">*since I began working in UX roles</div>
                 </div>
             </div>
         </div>
