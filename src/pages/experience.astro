@@ -81,7 +81,7 @@ const avgYears = (avgMonths / 12).toFixed(1); // one decimal place
                     <h3>Covenant Eyes</h3>
                     <div class="text-neutral-600 mb-4">
                         <div>
-                            <Icon name="lucide:calendar" class="inline-icon mr-2" />Nov 2018 - Present (<span id="diff-nov-2018"></span>)
+                            <Icon name="lucide:calendar" class="inline-icon mr-2" />Nov 2018 - Present (<span id="company-tenure"></span>)
                         </div>
                         <div>
                             <Icon name="lucide:map-pin" class="inline-icon mr-2" />Remote
@@ -136,7 +136,7 @@ const avgYears = (avgMonths / 12).toFixed(1); // one decimal place
                         <h4>Roles</h4>
                         <Accordion>
                             <AccordionItem title="Senior Product Designer" name="exclusive" open="" variant="chevron">
-                                <div class="mb-4 text-neutral-600"><Icon name="lucide:calendar" class="inline-icon mr-2" />Mar 2024 - Present (<span id="diff-mar-2024"></span>)</div>
+                                <div class="mb-4 text-neutral-600"><Icon name="lucide:calendar" class="inline-icon mr-2" />Mar 2024 - Present (<span id="role-tenure"></span>)</div>
                                 <p>In my unofficial capacity as an information architect, I support the UX team by:</p>
                                 <ul>
                                     <li>Creating and maintaining structural models and standards of our service, so that we can all make more informed decisions</li>
@@ -342,6 +342,60 @@ const avgYears = (avgMonths / 12).toFixed(1); // one decimal place
 
 </DefaultLayout>
 
+<script is:inline>
+(function () {
+  function formatDiff(start) {
+    const startDate = (start instanceof Date) ? start : new Date(start);
+    const now = new Date();
+
+    let years = now.getFullYear() - startDate.getFullYear();
+    let months = now.getMonth() - startDate.getMonth();
+
+    if (now.getDate() < startDate.getDate()) {
+      // Not a full month yet
+      months -= 1;
+    }
+    if (months < 0) {
+      years--;
+      months += 12;
+    }
+
+    const parts = [];
+    if (years > 0) parts.push(`${years} ${years === 1 ? "yr" : "yrs"}`);
+    if (months > 0) parts.push(`${months} ${months === 1 ? "mo" : "mos"}`);
+    if (parts.length === 0) parts.push("0 mo");
+    return parts.join(" ");
+  }
+
+  function run() {
+    try {
+      // adjust these start dates to your actual dates (month is 0-based)
+      const companyStart = new Date(2018, 10); // Nov 2018
+      const roleStart = new Date(2024, 2);    // Mar 2024
+
+      const elCompany = document.getElementById("company-tenure");
+      const elRole = document.getElementById("role-tenure");
+
+      if (elCompany) elCompany.textContent = formatDiff(companyStart);
+      if (elRole) elRole.textContent = formatDiff(roleStart);
+    } catch (e) {
+      // avoid breaking navigation; log for debugging
+      console.error("tenure script error:", e);
+    }
+  }
+
+  // Run now if DOM already ready (covers client-side navigation where DOMContentLoaded won't fire)
+  if (document.readyState === "interactive" || document.readyState === "complete") {
+    run();
+  } else {
+    document.addEventListener("DOMContentLoaded", run);
+  }
+
+  // Ensure it also runs after Astro view-transitions / client-side nav
+  document.addEventListener("astro:page-load", run);
+})();
+</script>
+
 <style>
     .inline-icon {
         display: inline;
@@ -360,42 +414,3 @@ const avgYears = (avgMonths / 12).toFixed(1); // one decimal place
         padding: var(--space-l);
     }
 </style>
-
-<!-- Update time diff for current position -->
-<script>
-    function calculateTimeDiff(startDate, elementId) {
-    const now = new Date();
-
-    let years = now.getFullYear() - startDate.getFullYear();
-    let months = now.getMonth() - startDate.getMonth();
-
-    if (months < 0) {
-        years--;
-        months += 12;
-    }
-
-    let parts = [];
-    if (years > 0) {
-        parts.push(`${years} ${years === 1 ? "yr" : "yrs"}`);
-    }
-    if (months > 0) {
-        parts.push(`${months} ${months === 1 ? "mo" : "mos"}`);
-    }
-
-    if (parts.length === 0) {
-        parts.push("0 mo");
-    }
-
-    document.getElementById(elementId).textContent = parts.join(" ");
-    }
-
-    function updateAll() {
-    calculateTimeDiff(new Date(2024, 2), "diff-mar-2024");   // March 2024
-    calculateTimeDiff(new Date(2018, 10), "diff-nov-2018");    // November 2018
-    calculateTimeDiff(new Date(2008, 7), "diff-aug-2008");    // August 2008
-    }
-
-    // Run immediately + refresh daily
-    updateAll();
-    setInterval(updateAll, 1000 * 60 * 60 * 24);
-</script>
