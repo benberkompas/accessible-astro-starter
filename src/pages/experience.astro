@@ -1,0 +1,401 @@
+---
+import DefaultLayout from '@layouts/DefaultLayout.astro'
+import { Accordion, AccordionItem } from 'accessible-astro-components'
+import Feature from '@components/Feature.astro'
+import { Modal } from 'accessible-astro-components'
+import { Badge } from 'accessible-astro-components'
+import { Icon } from 'astro-icon/components'
+import Counter from '@components/Counter.astro'
+import PageHeader from '@components/PageHeader.astro'
+
+// Calculate total years of experience
+const startDate = new Date(2008, 7); // August 2008 (0-based month index)
+const now = new Date();
+
+let years = now.getFullYear() - startDate.getFullYear();
+let months = now.getMonth() - startDate.getMonth();
+
+if (months < 0) {
+  years--;
+  months += 12;
+}
+
+// Company start/end dates
+const companies = [
+  { start: new Date(2018, 10), end: new Date() },       // Covenant Eyes, Nov 2018 – present
+  { start: new Date(2011, 10), end: new Date(2018, 9) }, // Home Depot, Nov 2011 – Oct 2018
+  { start: new Date(2008, 7), end: new Date(2010, 12) },  // Contractor, Aug 2008 – Jan 2011
+];
+
+// Helper to calculate months between two dates
+function diffInMonths(start, end) {
+  let months = (end.getFullYear() - start.getFullYear()) * 12;
+  months += end.getMonth() - start.getMonth();
+  if (end.getDate() < start.getDate()) {
+    months -= 1; // adjust if not full month yet
+  }
+  return months;
+}
+
+// Calculate average tenure in years (with decimals)
+const totalMonths = companies.reduce(
+  (sum, c) => sum + diffInMonths(c.start, c.end),
+  0
+);
+
+const avgMonths = totalMonths / companies.length;
+const avgYears = (avgMonths / 12).toFixed(1); // one decimal place
+
+---
+
+<DefaultLayout title="Experience">
+    
+    <PageHeader
+        title="Experience"
+        subtitle=""
+        bgType=""
+        showBreadcrumbs=""
+    />
+    
+    <section class="mb-12">
+        <div class="container">
+            <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+                <div class="bordered">
+                    <Counter count={`${years}+`} title="years" sub="experience in design & UX" />
+                </div>
+                <div class="bordered">
+                    <Counter count="3" title="companies" sub="employed by someone else" />
+                </div>
+                <div class="bordered">
+                    <Counter count={avgYears} title="years" sub="avg. tenure per company" />
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="mb-12">
+        <div class="container">
+            <div class="bordered">
+                <div class="mb-12">
+                    <h3>Covenant Eyes</h3>
+                    <!-- <Media
+                        class="rounded-lg"
+                        ratio="21:9"
+                        src="../src/assets/img/covenant-eyes.jpg"
+                    /> -->
+                    <div class="text-neutral-600">
+                        <div>
+                            <Icon name="lucide:calendar" class="inline-icon mr-2" />Nov 2018 - Present (<span id="diff-nov-2018"></span>)
+                        </div>
+                        <div>
+                            <Icon name="lucide:map-pin" class="inline-icon mr-2" />Remote
+                        </div>
+                        <div>
+                            <Icon name="lucide:link" class="inline-icon mr-2" /><a href="https://www.covenanteyes.com" target="new"><span class="text-neutral-600">covenanteyes.com</span></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 gap-24 md:grid-cols-2">
+                    <div class="space-content">
+                        <h4>About</h4>
+                        <p>We are confronting the problem of pornography with a distinctly relational form of accountability that connects people who want to quit porn with others who can help them achieve lasting victory.</p>
+                        <p>This has been a very gratifying chapter in my career, helping me to see the potential of design to drive life-changing results. Just as I had hoped when I joined CE, we're using technology to "redeem" itself, in a way. The stakes are enormously high, making it both a privilege and a heavy weight to carry.</p>
+                        <h4>Skills</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <Badge type="default">Information Architecture</Badge>
+                            <Badge type="default">UX Strategy</Badge>
+                            <Badge type="default">Interaction Design</Badge>
+                            <Badge type="default">User Interface Design</Badge>
+                            <Badge type="default">Prototyping</Badge>
+                            <Badge type="default">Wireframing</Badge>
+                            <Badge type="default">Usability Testing</Badge>
+                            <Badge type="default">User Research</Badge>
+                            <Badge type="default">HTML</Badge>
+                            <Badge type="default">CSS</Badge>
+                            <Badge type="default">JavaScript</Badge>
+                        </div>
+                        <!-- <h4>Projects</h4>
+                        <div class="grid grid-cols-1 gap-12 md:grid-cols-2">
+                            <Card
+                                img="https://images.unsplash.com/photo-1620428268482-cf1851a36764?auto=format&fit=crop&q=100&w=800"
+                                title="Card Title"
+                                footer=""
+                                url=""
+                            >
+                                <span slot="meta">
+                                <Icon name="lucide:clock" />
+                                10 min read
+                                </span>
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quasi nobis optio? Qui in quo accusantium
+                                debitis sapiente obcaecati magnam incidunt sit. Molestiae exercitationem quibusdam quod veritatis laboriosam
+                                est tenetur.
+                            </Card>
+                        </div> -->
+                    </div>
+                    <div class="space-content">
+                        <h4>Roles</h4>
+                        <Accordion>
+                            <AccordionItem title="Senior Product Designer" name="exclusive" open="" variant="chevron">
+                                <div class="mb-4 text-neutral-600"><Icon name="lucide:calendar" class="inline-icon mr-2" />Mar 2024 - Present (<span id="diff-mar-2024"></span>)</div>
+                                <p>In my unofficial capacity as an information architect, I support the UX team by:</p>
+                                <ul>
+                                    <li>Creating and maintaining structural models and standards of our service, so that we can all make more informed decisions</li>
+                                    <li>Reducing the risk of making the “wrong” decision by surfacing new options, hidden implications, risks, and tradeoffs</li>
+                                    <li>Proactively identifying patterns — in user feedback, project proposals, etc. — anticipating future structural work, and responding with future-focused design</li>
+                                    <li>Operationalizing structural design through transparency into my work and process, inclusion of the team whenever possible, and advising teammates in their projects</li>
+                                    <li>Increasing organizational literacy and fluency in structural design through training sessions, consults, and cross-functional diplomacy</li>
+                                </ul>
+                            </AccordionItem>
+                            <AccordionItem title="UX Supervisor" open="" name="exclusive" variant="chevron">
+                                <div class="mb-4 text-neutral-600"><Icon name="lucide:calendar" class="inline-icon mr-2" />Oct 2022 - Mar 2024 (1 yr 6 mos)</div>
+                                <p>Although I had always resisted the idea of going into management, I was given the opportunity in late 2022 and chose to accept. This was a season of relative instability for our team, and I did this more as a service to them than a calculated move to advance my own career.</p>
+                                <p>My responsibilities included:</p>
+                                <ul>
+                                    <li>Handling the typical logistics and admin work, e.g. time off requests</li>
+                                    <li>Taking care of my people through weekly 1-1s, holding team tactical meetings, helping them build career growth plans, and conducting annual reviews</li>
+                                    <li>Taking care of my team, helping them to see the bigger picture and make a meaningful contribution, as well as protecting their capacity so they could focus and do their best work</li>
+                                    <li>Improving on our core accountability service</li>
+                                    <li>Helping stakeholders see the service as a whole</li>
+                                    <li>Maintaining a set of consistent standards and tools to unify our two sub-teams within UX</li>
+                                </ul>
+                            </AccordionItem>
+                            <AccordionItem title="Senior Product Designer" open="" name="exclusive" variant="chevron">
+                                <div class="mb-4 text-neutral-600"><Icon name="lucide:calendar" class="inline-icon mr-2" />Nov 2018 - Oct 2022 (4 yrs)</div>
+                                <ul>
+                                    <li>Handled the functional requirements and design for our filtering service when we redesigned our account management portal.</li>
+                                    <li>Helped transition from our legacy payment processor to Stripe, mainly by designing internal customer support tools.</li>
+                                    <li>Designed customer-facing experience when we began to collect sales tax on subscriptions; this wasn't on any customer's wishlist, however, it allowed us to provide them with clarity about the exact breakdown of their payments — including upcoming payments — and helped us avoid having to absorb the cost ourselves.</li>
+                                    <li>Did a complete audit of our (overly-complex) account structure, which helped establish my reputation as a sort of expert on “account structure” — something which has been helpful ever since.</li>
+                                    <li>Helped design the interactions behind a new B2B program aimed at companies who wanted to offer our service as part of their employee benefits package…</li>
+                                    <li>…which led to an expanded program we offered to colleges who wanted to offer our service to students at a steeply discounted rate.</li>
+                                </ul>
+                            </AccordionItem>
+                        </Accordion>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="my-12">
+        <div class="container">
+            <div class="bordered">
+                <div class="mb-12">
+                    <h3>Home Depot</h3>
+                    <!-- <Media
+                        class="rounded-lg"
+                        ratio="21:9"
+                        src="../src/assets/img/home-depot.jpg"
+                    /> -->
+                    <div class="text-neutral-600">
+                        <div>
+                            <Icon name="lucide:calendar" class="inline-icon mr-2" />Nov 2011 - Oct 2018 (6 yrs 11 mos)
+                        </div>
+                        <div>
+                            <Icon name="lucide:map-pin" class="inline-icon mr-2" />On-site, Vancouver WA
+                        </div>
+                        <div>
+                            <Icon name="lucide:link" class="inline-icon mr-2" /><a href="https://www.homedepot.com" target="new"><span class="text-neutral-600">homedepot.com</span></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 gap-24 md:grid-cols-2">
+                    <div class="space-content">
+                        <h4>About</h4>
+                        <p>What began as a scrappy startup of 2 dozen people when I joined grew into an innovative new division staffed by over 200 people when I left.</p>
+                        <p>We started off with software that helped professional contractors get custom roof truss specifications and purchase them through a Home Depot vendor. After we were acquired by Home Depot in 2014, we set our sights on attracting more Pro business by providing a comprehensive, searchable catalog of special-order products. We achived exactly that.</p>
+                        <p>This was probably the spark that kindled the flame of information architecture in my design career!</p>
+                        <h4>Skills</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <Badge type="default">User Interface Design</Badge>
+                            <Badge type="default">Usability Testing</Badge>
+                            <Badge type="default">Interaction Design</Badge>
+                            <Badge type="default">Wireframing</Badge>
+                            <Badge type="default">Sketching</Badge>
+                            <Badge type="default">Prototyping</Badge>
+                            <Badge type="default">HTML</Badge>
+                            <Badge type="default">CSS</Badge>
+                        </div>
+                    </div>
+                    <div class="space-content">
+                        <h4>Roles</h4>
+                        <Accordion>
+                            <AccordionItem title="Senior UX Designer" open="" name="exclusive" variant="chevron">
+                                <div class="mb-4 text-neutral-600"><Icon name="lucide:calendar" class="inline-icon mr-2" />Feb 2014 - Oct 2018 (4 yrs 9 mos)</div>
+                                <ul>
+                                    <li>Played a central role in designing 3 versions of our e-commerce platform, which is used by associates in over 2,000 Home Depot stores, and in 2017, processed $5.7b in quotes and $1.4m in sales.</li>
+                                    <li>Closely involved in user research projects for over 4 years, facilitating over 2 dozen studies involving 55 interviews and usability testing sessions.</li>
+                                    <li>Built a custom database to store our qualitative research data, which greatly increased our efficiency in finding specific data points from past research, and reduced bottlenecks in our synthesis process.</li>
+                                    <li>Helped to harmonize our emerging UX process with Agile development in close collaboration with Product and Engineering.</li>
+                                    <li>Designed a number of internal data management tools, including a system that allowed us to align special order SKU management with Home Depot's merchandising structure.</li>
+                                </ul>
+                            </AccordionItem>
+                            <AccordionItem title="E-Content Designer" open="" name="exclusive" variant="chevron">
+                                <div class="mb-4 text-neutral-600"><Icon name="lucide:calendar" class="inline-icon mr-2" />Feb 2013 - Feb 2014 (1 yr 1 mo)</div>
+                                <p>Designed information architecture and UI for exploring our brand new product catalog, which created unprecedented opportunities for business expansion.</p>
+                            </AccordionItem>
+                            <AccordionItem title="UX Designer / Business Analyst" open="" name="exclusive" variant="chevron">
+                                <div class="mb-4 text-neutral-600"><Icon name="lucide:calendar" class="inline-icon mr-2" />Nov 2011 - Feb 2013 (1 yr 4 mos)</div>
+                                <p>Designed second-generation workflow and UI for our roof truss configurator, which helped make that product line profitable again, as well as convince Home Depot to acquire our company.</p>
+                            </AccordionItem>
+                        </Accordion>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="my-12">
+        <div class="container">
+            <div class="bordered">
+                <div class="mb-12">
+                    <h3>Ben Berkompas Design</h3>
+                    <div class="text-neutral-600">
+                        <div>
+                            <Icon name="lucide:calendar" class="inline-icon mr-2" />Oct 2010 - Feb 2013 (2 yrs 5 mos)
+                        </div>
+                        <div>
+                            <Icon name="lucide:map-pin" class="inline-icon mr-2" />Remote
+                        </div>
+                    </div>
+                </div>
+                <div class="space-content">
+                    <h4>About</h4>
+                    <p>I ran my own shop on the side for several years, working with my clients on branding, identity design, marketing, and some web design.</p>
+                    <h4>Skills</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <Badge type="default">Graphic Design</Badge>
+                        <Badge type="default">Print Design</Badge>
+                        <Badge type="default">Logo Design</Badge>
+                        <Badge type="default">HTML</Badge>
+                        <Badge type="default">CSS</Badge>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="my-12">
+        <div class="container">
+            <div class="bordered">
+                <div class="mb-12">
+                    <h3>Internship &rarr; Contractor</h3>
+                    <div class="text-neutral-600">
+                        <div>
+                            <Icon name="lucide:calendar" class="inline-icon mr-2" />Aug 2008 - Jan 2011 (2 yrs 6 mos)
+                        </div>
+                        <div>
+                            <Icon name="lucide:map-pin" class="inline-icon mr-2" />On-site, San Antonio TX
+                        </div>
+                    </div>
+                </div>
+                <div class="space-content">
+                    <h4>About</h4>
+                    <p>I took an internship in the creative department of a publisher and retailer in San Antonio, TX. After 11 months, it turned into full-time work. During this time I learned a lot about the production of books, catalogs, and other products. It also exposed me to what it was like to design in the context of a real world business. (I also credit this job with my mastery over Photoshop keyboard shortcuts!)</p>
+                    <h4>Skills</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <Badge type="default">Graphic Design</Badge>
+                        <Badge type="default">Print Design</Badge>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="mt-12 mb-24">
+        <div class="container">
+            <div class="space-content">
+                <h2>What's next?</h2>
+
+                <section class="mt-12 mb-24">
+                    <div class="grid grid-cols-1 gap-10 md:grid-cols-2">
+                        <Feature icon="lucide:drafting-compass" title="Role">
+                            <p>I'm interested in architectural, system-focused UX roles with a path for long-term individual contributors (vs. facing a mandatory move into management in an "up or out" culture).</p>
+                        </Feature>
+                        <Feature icon="lucide:handshake" title="Team">
+                            <p>I want to freely collaborate with people in other disciplines, working together to pursue meaningful outcomes for customers with an emphasis on quality, and more concerned about truly <em>solving problems</em> than merely shipping solutions.</p>
+                        </Feature>
+                        <Feature icon="lucide:rocket" title="Company">
+                            <p>Ideally, my next job will be with a relatively small (20-50 people), product-focused company with a strong remote-first culture, that's been around for 5-10 years &mdash; long enough to achieve some level of product/market fit.</p>
+                        </Feature>
+                        <Feature icon="lucide:earth" title="Difference">
+                            <p>I want to keep working with people who are doing things that align with my personal values and the difference I want to make in the world, e.g. <span id="modal1-trigger" class="modal-trigger">agriculture and food systems</span>, <span id="modal2-trigger" class="modal-trigger">health and chronic disease</span>, and <span id="modal3-trigger" class="modal-trigger">childhood education and life skills</span>.</p>
+                            <Modal triggerId="modal1-trigger" title="Agriculture &amp; food systems">
+                                <p>Especially regenerative methods and local grower/consumer relationships.</p>
+                            </Modal>
+                            <Modal
+                            triggerId="modal2-trigger"
+                            title="Health &amp; chronic disease">
+                                <p>Especially addressing chronic disease through nutrition and lifestyle.</p>
+                            </Modal>
+                            <Modal
+                            triggerId="modal3-trigger"
+                            title="Childhood education &amp; life skills">
+                                <p>Especially addressing harms arising from screens and digital tech.</p>
+                            </Modal>
+                        </Feature>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </section>
+
+</DefaultLayout>
+
+<style>
+    .inline-icon {
+        display: inline;
+        margin-bottom: 4px;
+    }
+    .modal-trigger {
+        border-bottom: 1px dashed;
+    }
+    .modal-trigger:hover {
+        cursor: pointer;
+        /* color: gray; */
+    }
+    .bordered {
+        border: 1px solid var(--border-color-subtle);
+        border-radius: var(--radius-md);
+        padding: var(--space-l);
+    }
+</style>
+
+<!-- Update time diff for current position -->
+<script>
+    function calculateTimeDiff(startDate, elementId) {
+    const now = new Date();
+
+    let years = now.getFullYear() - startDate.getFullYear();
+    let months = now.getMonth() - startDate.getMonth();
+
+    if (months < 0) {
+        years--;
+        months += 12;
+    }
+
+    let parts = [];
+    if (years > 0) {
+        parts.push(`${years} ${years === 1 ? "yr" : "yrs"}`);
+    }
+    if (months > 0) {
+        parts.push(`${months} ${months === 1 ? "mo" : "mos"}`);
+    }
+
+    if (parts.length === 0) {
+        parts.push("0 mo");
+    }
+
+    document.getElementById(elementId).textContent = parts.join(" ");
+    }
+
+    function updateAll() {
+    calculateTimeDiff(new Date(2024, 2), "diff-mar-2024");   // March 2024
+    calculateTimeDiff(new Date(2018, 10), "diff-nov-2018");    // November 2018
+    calculateTimeDiff(new Date(2008, 7), "diff-aug-2008");    // August 2008
+    }
+
+    // Run immediately + refresh daily
+    updateAll();
+    setInterval(updateAll, 1000 * 60 * 60 * 24);
+</script>
