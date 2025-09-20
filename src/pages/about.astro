@@ -2,105 +2,53 @@
 import DefaultLayout from '@layouts/DefaultLayout.astro'
 import PageHeader from '@components/PageHeader.astro'
 import Feature from '@components/Feature.astro'
+import { Heading } from 'accessible-astro-components'
 ---
 
 <DefaultLayout title="About me">
     
-    <PageHeader
+    <!-- <PageHeader
         title="About me"
         subtitle=""
         bgType=""
         showBreadcrumbs=""
-    />
+    /> -->
 
-    <div class="container">
-        <h2>Ikigai</h2>
-        <p>生き甲斐 'a reason for being'</p>
-
-        <section class="mt-12 mb-24">
+    <section class="my-64">
+        <div class="container">
+        <Heading level="h2" class="mb-8">Features</Heading>
             <div class="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3">
-                <Feature icon="lucide:circle-gauge" title="What I'm good at">
-                    <ul>
-                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit</li>
-                        <li>Architecto quasi nobis optio</li>
-                        <li>Qui in quo accusantium debitis sapiente obcaecati magnam incidunt sit</li>
-                    </ul>
+                <Feature icon="lucide:accessibility" title="Accessible by default">
+                Keyboard navigation, focus indicators, ARIA labels, semantic HTML, and more. This theme is designed to be
+                inclusive.
                 </Feature>
-                <Feature icon="lucide:heart" title="What I love to do">
-                    <ul>
-                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit</li>
-                        <li>Architecto quasi nobis optio</li>
-                        <li>Qui in quo accusantium debitis sapiente obcaecati magnam incidunt sit</li>
-                    </ul>
+                <Feature icon="lucide:puzzle" title="A11Y components">
+                25+ components and counting, all tried and tested for the most optimal accessible experience for your
+                visitors.
                 </Feature>
-                <Feature icon="lucide:earth" title="What the world needs">
-                    <ul>
-                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit</li>
-                        <li>Architecto quasi nobis optio</li>
-                        <li>Qui in quo accusantium debitis sapiente obcaecati magnam incidunt sit</li>
-                    </ul>
+                <Feature icon="lucide:moon" title="Dark mode">
+                Fully integrated Dark mode gives your users the choice for their favorite viewing mode.
                 </Feature>
-            </div>
-        </section>
-
-        <h2>Strengths</h2>
-        <p>Things I'm naturally gifted in.</p>
-
-        <section class="mt-12 mb-24">
-            <div class="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3">
-                <Feature icon="lucide:chart-column-big" title="Analytical">
-                    I think about all the factors and root causes that may impact a situation, challenging others to do the same and insisting that theories be sound, even at the expense of being seen as overly logical or rigorous.
+                <Feature icon="lucide:paintbrush" title="Tailwind 4.0">
+                Use the power of Tailwind to greatly improve your productivity and enhance your developer workflow.
                 </Feature>
-                <Feature icon="lucide:telescope" title="Deliberative">
-                    I take great care in making decisions, anticipate obstacles, and draw risks into the open where they can be dealt with.
+                <Feature icon="lucide:sparkles" title="Prettier">
+                Less worry about formatting your code, let the Astro Prettier integration do the heavy lifting.
                 </Feature>
-                <Feature icon="lucide:graduation-cap" title="Learner">
-                    I have a strong desire to be learning, finding more satisfaction in the process than the result, and the pursuit of mastery that emphasizes the journey more than the destination of subject matter expertise.
+                <Feature icon="lucide:code" title="ESLint">
+                Lint your code with strict a11y settings to ensure you stay on track with the WCAG standards.
                 </Feature>
-                <Feature icon="lucide:archive" title="Input">
-                    I feel a need to collect and archive, possessing an inquisitive, curious mind that compiles things for later in case it proves valuable.
+                <Feature icon="lucide:bookmark" title="Blog & portfolio">
+                This theme comes with a fully integrated blog and portfolio, dynamic pages and SEO optimization.
                 </Feature>
-                <Feature icon="lucide:refresh-cw" title="Connectedness">
-                    I believe we are all connected, a part of something larger, and that this connectedness implies certain responsibilities.
+                <Feature icon="lucide:file-text" title="Markdown & MDX">
+                Easily use .md and .mdx pages to build your websites or use it with Netlify CMS.
+                </Feature>
+                <Feature icon="lucide:blocks" title="Design system">
+                The theme offers some very handy utilities to help you build your website faster.
                 </Feature>
             </div>
-        </section>
-
-        <!-- <h2>Red Threads</h2>
-        <p>How I make sure I'm doing the things I'm great at and love most to do, and deploy my efforts in ways that others find extraordinarily useful.</p>
-
-        <section class="mt-12 mb-24">
-            <div class="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
-                <Feature icon="lucide:puzzle" title="Understand the inherent architecture of things">
-                    How they work, why they work the way they do, and what that can teach me about the world; this is where I can get pretty philosophical, analytical, and, honestly, lost if I'm not careful
-                </Feature>
-                <Feature icon="lucide:arrow-right-left" title="Discover novel, useful connections">
-                    Taking data that's been collected and playing with it to see what I can learn, testing those findings against the original data to see if they hold up, explaining what I've discovered to others
-                </Feature>
-                <Feature icon="lucide:sprout" title="Systems thinking">
-                    Finding opportunities to develop “systems of mutual wellbeing”, where all involved derive benefit (directly or indirectly) and where the system itself is deliberately designed to achieve and maintain this kind of harmony
-                </Feature>
-                <Feature icon="lucide:brain" title="Spend quality time in deep thought">
-                    Thinking just for the enjoyment of it, wondering what might be true and experimenting with possible explanations in my mind, thinking out loud and through visual methods (e.g. diagrams)
-                </Feature>
-                <Feature icon="lucide:users" title="Be a “partner in thought” with others">
-                    Joining someone else in thinking through what they're working on, which can lead to some interesting and useful questions; I don't necessarily provide answers, I help them find the questions that will yield insights they truly need
-                </Feature>
-                <Feature icon="lucide:smile" title="Help others discover meaning and satisfaction in their work">
-                    Don't settle for just helping others think about their work, help them actually unearth what makes it worth doing, the value in store for them and for others, how to deliver something that is systemically beneficial to all involved; “what gets me excited about my work is getting other people excited about theirs again.”
-                </Feature>
-                <Feature icon="lucide:compass" title="Contribute to taking deliberate action in the “right” direction">
-                    Don't just think, apply those thoughts to decisions that result in action; hopefully in the direction we consider to be “right” or at least better than where we are now
-                </Feature>
-                <Feature icon="lucide:sparkles" title="Do intrinsically excellent work">
-                    Take principled, effective action; practice my craft with high quality, not making it dependent on external factors to affirm or confirm its goodness, and not measuring quality purely by whether the work achieves everything I'm hoping for
-                </Feature>
-                <Feature icon="lucide:hammer" title="Turn my ideas into reality">
-                    “See my intentions manifest concretely in the world,” (HT Cal Newport) make things that are real, and connect my efforts with tangible results, even if I wasn't directly involved in every step to get there
-                </Feature>
-            </div>
-        </section> -->
-
-    </div>
+        </div>
+    </section>
 
 </DefaultLayout>
