@@ -1,7 +1,7 @@
 ---
 import { Link } from 'accessible-astro-components'
 import { Image } from 'astro:assets'
-import logo from '../assets/img/logo.svg'
+import logo from '../assets/img/bb-logo_gray.svg'
 
 /**
  * Logo Component
@@ -20,6 +20,6 @@ const { loading = 'eager' }: Props = Astro.props
 ---
 
 <Link href="/" class="flex items-center gap-2">
-  <Image src={logo} alt="Accessible Astro Logo" width="47" height="37" loading={loading} />
+  <Image src={logo} alt="Ben Berkompas Logo" width="32" height="32" loading={loading} />
   <span class="font-bold">Ben Berkompas</span>
 </Link>
