@@ -5,6 +5,7 @@ import Feature from '@components/Feature.astro'
 import { Modal } from 'accessible-astro-components'
 import { Badge } from 'accessible-astro-components'
 import { Button } from 'accessible-astro-components'
+import { Card } from 'accessible-astro-components'
 import { Icon } from 'astro-icon/components'
 import Counter from '@components/Counter.astro'
 import PageHeader from '@components/PageHeader.astro'
@@ -114,23 +115,6 @@ const avgYears = (avgMonths / 12).toFixed(1); // one decimal place
                             <Badge type="default">HTML</Badge>
                             <Badge type="default">CSS</Badge>
                         </div>
-                        <!-- <h4>Projects</h4>
-                        <div class="grid grid-cols-1 gap-12 md:grid-cols-2">
-                            <Card
-                                img="https://images.unsplash.com/photo-1620428268482-cf1851a36764?auto=format&fit=crop&q=100&w=800"
-                                title="Card Title"
-                                footer=""
-                                url=""
-                            >
-                                <span slot="meta">
-                                <Icon name="lucide:clock" />
-                                10 min read
-                                </span>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quasi nobis optio? Qui in quo accusantium
-                                debitis sapiente obcaecati magnam incidunt sit. Molestiae exercitationem quibusdam quod veritatis laboriosam
-                                est tenetur.
-                            </Card>
-                        </div> -->
                     </div>
                     <div class="space-content">
                         <h4>Roles</h4>
@@ -171,6 +155,20 @@ const avgYears = (avgMonths / 12).toFixed(1); // one decimal place
                                 </ul>
                             </AccordionItem>
                         </Accordion>
+
+                        <h4>Featured Project</h4>
+                        <Card
+                            img="/projects/project-image-1.png"
+                            title="Voice-First Smart Home Assistant"
+                            footer=""
+                            url="../portfolio/project-01"
+                        >
+                            <span slot="meta">
+                            <Icon name="lucide:clock" />
+                            8 min read
+                            </span>
+                            A comprehensive smart home solution designed specifically for users with visual impairments, featuring voice-first interactions and haptic feedback.
+                        </Card>
                     </div>
                 </div>
             </div>
