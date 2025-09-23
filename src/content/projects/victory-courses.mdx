@@ -97,6 +97,15 @@ I have a principle: “design in layers, implement in slices.“
 import BlockQuote from '@components/BlockQuote.astro'
 import BreakoutImage from '@components/BreakoutImage.astro'
 import { Image } from 'astro:assets'
+import AccessibleGallery from '@components/AccessibleGallery.astro'
+
+<AccessibleGallery
+  client:load
+  images={[
+    {src: '/projects/victory-courses.png', alt: 'Nested object matrix', caption: 'Nested object matrix'},
+    {src: '/projects/project-image-1.png', alt: 'Another image', caption: 'Another image'}
+  ]}
+/>
 
 <BreakoutImage src="/projects/victory-courses.png" />
 

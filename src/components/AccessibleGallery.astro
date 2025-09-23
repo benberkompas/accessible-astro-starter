@@ -1,0 +1,60 @@
+---
+// import 'glightbox/dist/css/glightbox.css';
+// import GLightbox from 'glightbox';
+import { Media } from "accessible-astro-components"
+
+const { images, galleryId = "case-study" } = Astro.props;
+/*
+  Example usage:
+  <AccessibleGallery
+    images={[
+      { src: '/images/case1.png', alt: 'Homepage redesign', caption: 'Homepage redesign' },
+      { src: '/images/case2.png', alt: 'Mobile flow', caption: 'Mobile flow improvements' },
+      { src: '/images/case3.png', alt: 'Dashboard charts', caption: 'Dashboard charts' },
+    ]}
+  />
+*/
+---
+
+<div class="gallery" role="list">
+  {images.map((img) => (
+    <figure role="listitem">
+      <a 
+        href={img.src} 
+        class="glightbox" 
+        data-gallery={galleryId} 
+        data-title={img.caption}
+      >
+        <Media src={img.src} alt={img.alt} />
+      </a>
+      <figcaption>{img.caption}</figcaption>
+    </figure>
+  ))}
+</div>
+
+<style>
+  .gallery {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+  figure {
+    margin: 0;
+  }
+  figcaption {
+    margin-top: 0.25rem;
+    font-size: 0.875rem;
+    color: #555;
+    text-align: center;
+  }
+</style>
+
+<script>
+  import GLightbox from 'glightbox';
+  import 'glightbox/dist/css/glightbox.css';
+
+  // Initialize on client
+  if (typeof window !== "undefined") {
+    GLightbox({ selector: '.glightbox' });
+  }
+</script>
