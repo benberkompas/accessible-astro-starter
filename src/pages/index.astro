@@ -6,13 +6,16 @@ import Counter from '@components/Counter.astro'
 import ContentMedia from '@components/ContentMedia.astro'
 import FeaturedProjects from '@components/FeaturedProjects.astro'
 import FeaturedPosts from '@components/FeaturedPosts.astro'
+import BlockQuote from '@components/BlockQuote.astro'
 import { Accordion, AccordionItem, Avatar, AvatarGroup, Heading, Link } from 'accessible-astro-components'
 import { Icon } from 'astro-icon/components'
 ---
 
 <DefaultLayout title="Home">
+  
   <Hero />
-  <section class="my-64">
+
+  <!-- <section class="my-64">
     <div class="container">
       <Heading level="h2" class="mb-8">Approach</Heading>
       <div class="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3">
@@ -36,8 +39,17 @@ import { Icon } from 'astro-icon/components'
         </Feature>
       </div>
     </div>
+  </section> -->
+
+  <section>
+    <div class="container">
+      <BlockQuote author="Jon Daiello, UX Manager (2021)">
+        Ben is both intelligent and people-oriented. As a UX designer, he is able to think in terms of systems that work together and carve out efficient paths for users to move through those systems... Ben is a genuinely pleasant person to work with and his approach invites you to level up your skills as you work with him.
+      </BlockQuote>
+    </div>
   </section>
-  <!-- <ContentMedia imgSrc="/accessible-components.webp">
+
+  <ContentMedia imgSrc="/accessible-components.webp">
     <Heading level="h2">Accessible components</Heading>
     <p class="text-2xl">
       This theme provides plenty of tried and tested Accessible Astro Components. Some are native to this theme and a
@@ -46,18 +58,41 @@ import { Icon } from 'astro-icon/components'
         href="https://github.com/incluud/accessible-astro-components">separate package</Link
       >. They'll get you up and running in building an accessible solution for your visitors.
     </p>
-  </ContentMedia> -->
-  <!-- <ContentMedia imgSrc="/wcag-compliant.webp" reverseImg={true}>
+  </ContentMedia>
+
+  <ContentMedia imgSrc="/wcag-compliant.webp" reverseImg={true}>
     <Heading level="h2">WCAG 2.2 AA compliant</Heading>
     <p class="text-2xl">
       Using semantic HTML, landmarks, skip links, screen reader friendly content, aria-labels, keyboard accessible
       navigation and components, clear outlines and tab indicators and the right color contrast, you're more certain of
       reaching WCAG AA compliance.
     </p>
-  </ContentMedia> -->
+  </ContentMedia>
+
+  <ContentMedia imgSrc="/accessible-components.webp">
+    <Heading level="h2">Accessible components</Heading>
+    <p class="text-2xl">
+      This theme provides plenty of tried and tested Accessible Astro Components. Some are native to this theme and a
+      lot of others are integrated using a <Link
+        isExternal
+        href="https://github.com/incluud/accessible-astro-components">separate package</Link
+      >. They'll get you up and running in building an accessible solution for your visitors.
+    </p>
+  </ContentMedia>
+
+  <section>
+    <div class="container">
+      <BlockQuote author="Leo Frishberg, UX Manager (2018)">
+        I have had the pleasure of having Ben on my team for over 18 months as we transition from a predominately UI-focused organization to embrace the broader UX scope. Throughout this transition, Ben has been out in front taking the lead, experimenting, trying on new roles and testing new ways of working.
+      </BlockQuote>
+    </div>
+  </section>
+
   <FeaturedProjects />
-  <FeaturedPosts />
-  <section class="my-64">
+
+  <!-- <FeaturedPosts /> -->
+
+  <!-- <section class="my-64">
     <div class="container grid grid-cols-1 gap-12 md:grid-cols-2">
       <div class="flex flex-col items-start gap-4">
         <Heading level="h2">FAQ</Heading>
@@ -117,8 +152,9 @@ import { Icon } from 'astro-icon/components'
         </Accordion>
       </div>
     </div>
-  </section>
-  <section class="my-64">
+  </section> -->
+
+  <!-- <section class="my-64">
     <div class="space-content container">
       <Heading level="h2">Our community</Heading>
       <p class="text-2xl">
@@ -137,8 +173,9 @@ import { Icon } from 'astro-icon/components'
         <Avatar initials="TC" title="Thomas Chen" subtitle="Frontend Developer" />
       </AvatarGroup>
     </div>
-  </section>
-  <section class="mt-64 mb-32">
+  </section> -->
+  
+  <!-- <section class="mt-64 mb-32">
     <div class="container">
       <Heading level="h2" class="mb-16">Impact in numbers</Heading>
       <div class="grid grid-cols-1 gap-12 sm:grid-cols-2 md:grid-cols-4">
@@ -148,7 +185,8 @@ import { Icon } from 'astro-icon/components'
         <Counter count="48+" title="Months" sub="Since launch" />
       </div>
     </div>
-  </section>
+  </section> -->
+
 </DefaultLayout>
 
 <style>

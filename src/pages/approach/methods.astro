@@ -1,0 +1,33 @@
+---
+import DefaultLayout from '@layouts/DefaultLayout.astro'
+import PageHeader from '@components/PageHeader.astro'
+import Feature from '@components/Feature.astro'
+---
+
+<DefaultLayout title="Methods">
+    <PageHeader
+        title="Methods"
+        subtitle=""
+        bgType="bordered"
+    />
+
+    <section class="my-12">
+        <div class="container space-content">
+            <div class="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3">
+                <Feature icon="lucide:user" title="Object-Oriented UX">
+                    The specific people we've chosen to serve, defined in terms of their relevant characteristics, contexts, and the domain they operate within.
+                </Feature>
+                <Feature icon="lucide:puzzle" title="Continuous Discovery">
+                    The specific problems those people actually face in the domain &mdash; whether obstacles or unmet needs &mdash; and that make sense for us to address.
+                </Feature>
+                <Feature icon="lucide:lightbulb" title="Opportunity Solution Tree">
+                    The solution(s) that we believe will do the best job of addressing those problems. This is highly experimental.
+                </Feature>
+                <Feature icon="lucide:lightbulb" title="Opportunity Solution Tree">
+                    The solution(s) that we believe will do the best job of addressing those problems. This is highly experimental.
+                </Feature>
+            </div>
+        </div>
+        </section>
+
+</DefaultLayout>

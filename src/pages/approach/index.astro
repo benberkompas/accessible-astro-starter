@@ -2,14 +2,15 @@
 import DefaultLayout from '@layouts/DefaultLayout.astro'
 import PageHeader from '@components/PageHeader.astro'
 import Feature from '@components/Feature.astro'
-import { Button } from 'accessible-astro-components'
+import { Link } from 'accessible-astro-components'
 ---
 
 <DefaultLayout title="Approach">
     <PageHeader
         title="Approach"
-        subtitle=""
+        subtitle="How I work"
         bgType="bordered"
+        showBreadcrumbs=""
     />
     <section class="my-12">
         <div class="container space-content">
@@ -36,6 +37,17 @@ import { Button } from 'accessible-astro-components'
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quasi nobis optio? Qui in quo accusantium.
                 </Feature>
             </div>
+        </div>
+    </section>
+
+    <section class="mb-12">
+        <div class="container">
+            <Link href="/approach/methods" isButton type="primary" animateOnHover animationType="boop">
+                Methods
+            </Link>
+            <Link href="/approach/philosophy" isButton type="primary" animateOnHover animationType="boop">
+                Philosophy
+            </Link>
         </div>
     </section>
 

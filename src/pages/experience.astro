@@ -4,7 +4,7 @@ import { Accordion, AccordionItem } from 'accessible-astro-components'
 import Feature from '@components/Feature.astro'
 import { Modal } from 'accessible-astro-components'
 import { Badge } from 'accessible-astro-components'
-import { Button } from 'accessible-astro-components'
+import { Avatar, AvatarGroup } from 'accessible-astro-components'
 import { Card } from 'accessible-astro-components'
 import { Icon } from 'astro-icon/components'
 import Counter from '@components/Counter.astro'
@@ -54,7 +54,7 @@ const avgYears = (avgMonths / 12).toFixed(1); // one decimal place
     
     <PageHeader
         title="Experience"
-        subtitle=""
+        subtitle="Where I've worked"
         bgType="bordered"
         showBreadcrumbs=""
     />
@@ -113,14 +113,26 @@ const avgYears = (avgMonths / 12).toFixed(1); // one decimal place
                             <Badge type="default">Wireframing</Badge>
                             <Badge type="default">Usability Testing</Badge>
                             <Badge type="default">User Research</Badge>
+                            <Badge type="default">Qualitative Data Analysis</Badge>
                             <Badge type="default">HTML</Badge>
                             <Badge type="default">CSS</Badge>
                         </div>
+
+                        <h4>Software Tools</h4>
+                        <AvatarGroup display="grid" gridGap="1.5rem">
+                            <Avatar size="sm" shape="square" label="Miro" title="Miro" subtitle="Modeling & workshops" img="/tools/miro.svg" />
+                            <Avatar size="sm" shape="square" label="Notion" title="Notion" subtitle="Notes & task management" img="/tools/notion.svg" />
+                            <Avatar size="sm" shape="square" label="Figma" title="Figma" subtitle="Wireframing & prototyping" img="/tools/figma.svg" />
+                            <Avatar size="sm" shape="square" label="Condens" title="Condens" subtitle="Qualitative data analysis" img="/tools/condens.png" />
+                            <Avatar size="sm" shape="square" label="Confluence" title="Confluence" subtitle="Documentation" img="/tools/confluence.svg" />
+                            <Avatar size="sm" shape="square" label="Jira" title="Jira" subtitle="Project management" img="/tools/jira.svg" />
+                        </AvatarGroup>
+
                     </div>
                     <div class="space-content">
                         <h4>Roles</h4>
                         <Accordion>
-                            <AccordionItem title="Senior Product Designer" name="exclusive" open="" variant="chevron">
+                            <AccordionItem title="Senior Product Designer" name="covenant-eyes" open="true" variant="chevron">
                                 <div class="mb-4 text-neutral-600"><Icon name="lucide:calendar" class="inline-icon mr-2" />Mar 2024 - Present (<span id="role-tenure"></span>)</div>
                                 <p>In my unofficial capacity as an information architect, I support the UX team by:</p>
                                 <ul>
@@ -131,7 +143,7 @@ const avgYears = (avgMonths / 12).toFixed(1); // one decimal place
                                     <li>Increasing organizational literacy and fluency in structural design through training sessions, consults, and cross-functional diplomacy</li>
                                 </ul>
                             </AccordionItem>
-                            <AccordionItem title="UX Supervisor" open="" name="exclusive" variant="chevron">
+                            <AccordionItem title="UX Supervisor" open="" name="covenant-eyes" variant="chevron">
                                 <div class="mb-4 text-neutral-600"><Icon name="lucide:calendar" class="inline-icon mr-2" />Oct 2022 - Mar 2024 (1 yr 6 mos)</div>
                                 <p>Although I had always resisted the idea of going into management, I was given the opportunity in late 2022 and chose to accept. This was a season of relative instability for our team, and I did this more as a service to them than a calculated move to advance my own career.</p>
                                 <p>My responsibilities included:</p>
@@ -144,7 +156,7 @@ const avgYears = (avgMonths / 12).toFixed(1); // one decimal place
                                     <li>Maintaining a set of consistent standards and tools to unify our two sub-teams within UX</li>
                                 </ul>
                             </AccordionItem>
-                            <AccordionItem title="Senior Product Designer" open="" name="exclusive" variant="chevron">
+                            <AccordionItem title="Senior Product Designer" open="" name="covenant-eyes" variant="chevron">
                                 <div class="mb-4 text-neutral-600"><Icon name="lucide:calendar" class="inline-icon mr-2" />Nov 2018 - Oct 2022 (4 yrs)</div>
                                 <ul>
                                     <li>Handled the functional requirements and design for our filtering service when we redesigned our account management portal.</li>
@@ -156,20 +168,6 @@ const avgYears = (avgMonths / 12).toFixed(1); // one decimal place
                                 </ul>
                             </AccordionItem>
                         </Accordion>
-
-                        <!-- <h4>Featured Project</h4>
-                        <Card
-                            img="/projects/project-image-1.png"
-                            title="Voice-First Smart Home Assistant"
-                            footer=""
-                            url="../portfolio/project-01"
-                        >
-                            <span slot="meta">
-                            <Icon name="lucide:clock" />
-                            8 min read
-                            </span>
-                            A comprehensive smart home solution designed specifically for users with visual impairments, featuring voice-first interactions and haptic feedback.
-                        </Card> -->
                     </div>
                 </div>
             </div>
@@ -217,11 +215,22 @@ const avgYears = (avgMonths / 12).toFixed(1); // one decimal place
                             <Badge type="default">HTML</Badge>
                             <Badge type="default">CSS</Badge>
                         </div>
+
+                        <h4>Software Tools</h4>
+                        <AvatarGroup display="grid" gridGap="1.5rem">
+                            <Avatar size="sm" shape="square" label="Evernote" title="Evernote" subtitle="Note-taking" img="/tools/evernote.png" />
+                            <Avatar size="sm" shape="square" label="Balsamiq" title="Balsamiq" subtitle="Wireframing" img="/tools/balsamiq.png" />
+                            <Avatar size="sm" shape="square" label="Sketch" title="Sketch" subtitle="UI design & prototyping" img="/tools/sketch.png" />
+                            <Avatar size="sm" shape="square" label="Fieldbook" title="Fieldbook" subtitle="Qualitative data analysis" img="/tools/fieldbook.png" />
+                            <Avatar size="sm" shape="square" label="Confluence" title="Confluence" subtitle="Documentation" img="/tools/confluence.svg" />
+                            <Avatar size="sm" shape="square" label="Jira" title="Jira" subtitle="Project & task management" img="/tools/jira.svg" />
+                        </AvatarGroup>
+
                     </div>
                     <div class="space-content">
                         <h4>Roles</h4>
                         <Accordion>
-                            <AccordionItem title="Senior UX Designer" open="" name="exclusive" variant="chevron">
+                            <AccordionItem title="Senior UX Designer" open="true" name="home-depot" variant="chevron">
                                 <div class="mb-4 text-neutral-600"><Icon name="lucide:calendar" class="inline-icon mr-2" />Feb 2014 - Oct 2018 (4 yrs 9 mos)</div>
                                 <ul>
                                     <li>Played a central role in designing 3 versions of our e-commerce platform, which is used by associates in over 2,000 Home Depot stores, and in 2017, processed $5.7b in quotes and $1.4m in sales.</li>
@@ -231,11 +240,11 @@ const avgYears = (avgMonths / 12).toFixed(1); // one decimal place
                                     <li>Designed a number of internal data management tools, including a system that allowed us to align special order SKU management with Home Depot's merchandising structure.</li>
                                 </ul>
                             </AccordionItem>
-                            <AccordionItem title="E-Content Designer" open="" name="exclusive" variant="chevron">
+                            <AccordionItem title="E-Content Designer" open="" name="home-depot" variant="chevron">
                                 <div class="mb-4 text-neutral-600"><Icon name="lucide:calendar" class="inline-icon mr-2" />Feb 2013 - Feb 2014 (1 yr 1 mo)</div>
                                 <p>Designed information architecture and UI for exploring our brand new product catalog, which created unprecedented opportunities for business expansion.</p>
                             </AccordionItem>
-                            <AccordionItem title="UX Designer / Business Analyst" open="" name="exclusive" variant="chevron">
+                            <AccordionItem title="UX Designer / Business Analyst" open="" name="home-depot" variant="chevron">
                                 <div class="mb-4 text-neutral-600"><Icon name="lucide:calendar" class="inline-icon mr-2" />Nov 2011 - Feb 2013 (1 yr 4 mos)</div>
                                 <p>Designed second-generation workflow and UI for our roof truss configurator, which helped make that product line profitable again, as well as convince Home Depot to acquire our company.</p>
                             </AccordionItem>
