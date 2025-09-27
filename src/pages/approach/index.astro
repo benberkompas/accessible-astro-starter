@@ -3,17 +3,19 @@ import DefaultLayout from '@layouts/DefaultLayout.astro'
 import PageHeader from '@components/PageHeader.astro'
 import Feature from '@components/Feature.astro'
 import { Link } from 'accessible-astro-components'
+import { Heading } from 'accessible-astro-components'
 ---
 
 <DefaultLayout title="Approach">
     <PageHeader
         title="Approach"
-        subtitle="How I work"
+        subtitle="How I work + the philosophy and methods behind my approach"
         bgType="bordered"
         showBreadcrumbs=""
     />
     <section class="my-12">
         <div class="container space-content">
+            <Heading level="h2">Philosophy</Heading>
             <p class="text-2xl">
                 The right solution<sup>3</sup> to the right problem<sup>2</sup> for the right people<sup>1</sup>. Built to deliver user value<sup>4</sup> that drives business value<sup>5</sup> in a way that's technically sustainable<sup>6</sup>.
             </p>
@@ -37,18 +39,16 @@ import { Link } from 'accessible-astro-components'
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quasi nobis optio? Qui in quo accusantium.
                 </Feature>
             </div>
+            <Link href="/approach/philosophy" isButton type="primary" animateOnHover animationType="boop">
+                More about my Philosophy
+            </Link>
         </div>
-    </section>
 
-    <section class="mb-12">
-        <div class="container">
+        <div class="container space-content">
+            <Heading level="h2">Methods</Heading>
             <Link href="/approach/methods" isButton type="primary" animateOnHover animationType="boop">
                 Methods
             </Link>
-            <Link href="/approach/philosophy" isButton type="primary" animateOnHover animationType="boop">
-                Philosophy
-            </Link>
         </div>
     </section>
-
 </DefaultLayout>
