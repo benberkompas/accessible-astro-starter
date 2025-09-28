@@ -1,0 +1,41 @@
+---
+import DefaultLayout from '@layouts/DefaultLayout.astro'
+import PageHeader from '@components/PageHeader.astro'
+import ContentMedia from '@components/ContentMedia.astro'
+import { Avatar, AvatarGroup } from 'accessible-astro-components'
+import { Heading } from 'accessible-astro-components'
+import { Link } from 'accessible-astro-components'
+---
+
+<DefaultLayout title="Resources">
+    <PageHeader
+        title="Resources"
+        subtitle=""
+        bgType="bordered"
+    />
+
+    <section class="my-12">
+        <div class="container space-content">
+            <Heading level="h2">Authors</Heading>
+            <AvatarGroup display="grid" gridGap="2rem">
+                <Avatar size="lg" label="Miro" title="Person A" subtitle="" img="" />
+                <Avatar size="lg" label="Notion" title="Person B" subtitle="" img="" />
+                <Avatar size="lg" label="Figma" title="Person C" subtitle="" img="" />
+                <Avatar size="lg" label="Condens" title="Person D" subtitle="" img="" />
+                <Avatar size="lg" label="Confluence" title="Person E" subtitle="" img="" />
+                <Avatar size="lg" label="Jira" title="Persom F" subtitle="" img="" />
+            </AvatarGroup>
+        </div>
+    </section>
+
+    <section class="my-12">
+        <div class="container space-content">
+            <Heading level="h2">Books</Heading>
+            <ContentMedia imgSrc="/accessible-components.webp">
+                <Heading level="h3">Accessible components</Heading>
+                
+            </ContentMedia>
+        </div>
+    </section>
+
+</DefaultLayout>
