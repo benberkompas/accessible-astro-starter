@@ -1,45 +1,63 @@
 ---
 title: Victory Courses and Beyond
 author: Ben Berkompas
-description: A comprehensive smart home solution designed specifically for users with visual impairments, featuring voice-first interactions and haptic feedback
+description: ...
 minutes: 8
 ---
 
+import { 
+  Heading, 
+  Media,
+  Avatar, 
+  AvatarGroup
+} from 'accessible-astro-components'
+import BlockQuote from '@components/BlockQuote.astro'
+import Callout from '@components/Callout.astro'
+import BreakoutImage from '@components/BreakoutImage.astro'
+import { Image } from 'astro:assets'
+import AccessibleGallery from '@components/AccessibleGallery.astro'
+    
 ## Overview
 
 Covenant Eyes helps people break free from pornography through relationship-focused accountability. Our paid service monitors, evaluates and relays activity from their devices to a person of their choosing, encouraging them toward transparency and honesty.
 
-This is obviously an ultra-private, ultra-sensitive space! The stakes can be enormously high, with marriages in disarray, trust hanging by a thread, and devastated people pulling away from those they love, retreating further into secrecy and isolation.
+This is an ultra-private, ultra-sensitive space! The stakes can be enormously high with marriages in disarray, trust hanging by a thread, and devastated people pulling away from those they love, retreating further into secrecy and isolation.
 
 ## Context
 
-### History of courses
+For 25 years, we’ve been known for our accountability service, which we offer as a paid subscription through our Victory app.
 
-We began offering short courses as a way to advance our mission of “helping the world to live porn-free”. They were available for free to anyone who created an account, so even people who weren’t ready or able to subscribe to our paid accountability service could begin their journey to victory.
+We publish a lot of supplemental material to teach people about accountability and help them get the most out of our service, mostly in the form of eBooks and blog posts.
 
-Over the years these courses never contributed noticeably to revenue, conversion, or retention. They were simply aimed at delivering customer value. That was it.
+At this point we had never offered educational content within the app itself.
 
-### Deciding to expand
+### Short courses
 
-Colleagues had mixed feelings about whether courses could (or should) be considered as a potential revenue driver for us, but as soon as we began thinking about expanding *beyond* courses and offering a fuller set of recovery-focused features, there was a renewed interest in the possibility.
+In 2022, we began offering short courses in Victory as a way to advance our mission of “helping the world to live porn-free”. These courses were available for free to anyone who created an account, so even people who weren’t ready or able to subscribe to our paid accountability service could begin their journey to victory.
 
-After all, expansion revenue is an important goal for most SaaS companies. This is about building additional revenue streams besides your core subscription revenue.
+Since then, courses never contributed noticeably to revenue, conversion, or retention. That hadn’t been our goal.
 
-We had recently overhauled our main navigation and carved out a section labeled “Grow” to signal our intent to go beyond courses but nobody knew exactly what that meant. We had a lot of ideas, but that’s the easy part!
+### Time to “Grow”
 
-Our Recovery Education team had the clearest vision of anyone, but they needed help to get others on board.
+Leaders in Product and Marketing had mixed feelings about whether courses could (or should) become a revenue driver. However, when we began thinking about expanding *beyond* courses there was renewed interest in the possibility. 
 
-I joined them to figure out how to achieve the long-term outcomes they were envisioning, as well as make some smaller “quality of life” improvements for customers along the way.
+<Callout>
+  Keep in mind, we had been accustomed to charging for our core subscription service and that had been the case for 2 decades. The idea of producing independently valuable offers — and charging money for them — was more of a paradigm shift for us than you might expect. 
+</Callout>
+
+I had recently helped overhaul the main navigation labels in Victory where we renamed “Learning” to “Grow”, signalling our intent to go beyond courses and offer a fuller set of recovery-focused features. 
+
+“Grow” was more of an aspirational move. Nobody had a “master plan” for where we were going or how to get there. Our Recovery Education team had the clearest vision of anyone, but they needed help to get others on board.
+
+I joined them to figure out how to achieve the long-term outcomes they were envisioning.
 
 ### Timeline
 
-My official involvement lasted around 5 months.
+<BreakoutImage src="/projects/project-image-1.png" />
 
-There was not an obvious “start” or “end” date because this was not a clearly-scoped project. In fact, defining “done” was one of my biggest challenges!
+I was directly involved in the project for 5 months, between May and September, 2025. After that I shifted gears and offered “backstage” long-term support.
 
 ### Team
-
-import { Avatar, AvatarGroup } from 'accessible-astro-components'
 
 <AvatarGroup display="grid" gridItemsSize="300px" gridGap="2rem">
   <Avatar initials="BB" title="Ben" subtitle="Product Designer" />
@@ -53,40 +71,29 @@ import { Avatar, AvatarGroup } from 'accessible-astro-components'
   <Avatar initials="WM" title="Bill" subtitle="Data Scientist" />
 </AvatarGroup>
 
-### My role & contribution
+### My role
 
-import Feature from '@components/Feature.astro'
+- **Project management & facilitation:** Help stakeholders see the breadth of opportunities — things we *could* do — while making clear decisions about what we *should* do. Facilitate alignment between stakeholders through workshops, clear communication, and thorough documentation of our work.
 
-<div class="grid grid-cols-1 gap-12 md:grid-cols-2">
-  <Feature icon="lucide:drafting-compass" title="Information architecture & OOUX">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quasi nobis optio? Qui in quo accusantium debitis sapiente obcaecati magnam incidunt sit.
-  </Feature>
-  <Feature icon="lucide:square-kanban" title="Project management & facilitation">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quasi nobis optio? Qui in quo accusantium debitis sapiente.
-  </Feature>
-  <Feature icon="lucide:mouse-pointer-click" title="Interaction design & prototyping">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quasi nobis optio? Qui in quo accusantium.
-  </Feature>
-  <Feature icon="lucide:scan" title="TBD">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quasi nobis optio? Qui in quo accusantium.
-  </Feature>
-</div>
+- **Information architecture:** Design the invisible structure behind our service so users can find, understand, and accomplish what matters to them. Provide clear conceptual models that guide product decisions, help teams align, reduce risk, and help us deliver more intuitive experiences.
+
+- **Interaction design & prototyping:** Translate ideas from abstract concepts into concrete design outputs that demonstrate the logical implications of our decisions. Use AI to generate “high-interaction-fidelity” prototypes that feel realistic but not “final”, helping us to maintain a more experimental mindset.
 
 ## Challenge
 
-### <span class="number">1</span>Help others see the opportunity
+### 1. Help others see the opportunity
 
 The first challenge was to help people see the latent opportunity in this part of our service.
 
 As I’ve already mentioned, courses were not perceived as a revenue driver. Consequently, we invested in the experience very sparingly. We continued to add new courses, reaching about 40 at the time of this writing. In some ways, that put an extra strain on the navigation, which had been designed when we had far fewer courses.
 
-### <span class="number">2</span>Clarify our vision for the future
+### 2. Clarify our vision for the future
 
 Secondly, we had just declared this to be an “up and coming” area of our service by giving it a new, more expensive label in the main navigation. This is ironic given my first point about it’s relatively low priority.
 
 So, the second challenge was to paint a more vivid picture of what the future would look like. This would obviously help us convince people to invest in it!
 
-### <span class="number">3</span>Remain grounded in the present
+### 3. Remain grounded in the present
 
 Right on the heels of that was our third challenge: reaching into the future while remaining grounded in the present. We couldn’t just catch people on a grandiose vision of “someday”, we would need to help them see the practical steps required to get there.
 
@@ -94,20 +101,15 @@ Our process for prioritizing and selecting work tends to favor smaller, self con
 
 I have a principle: “design in layers, implement in slices.“
 
-import BlockQuote from '@components/BlockQuote.astro'
-import BreakoutImage from '@components/BreakoutImage.astro'
-import { Image } from 'astro:assets'
-import AccessibleGallery from '@components/AccessibleGallery.astro'
-
 <AccessibleGallery
   client:load
   images={[
-    {src: '/projects/victory-courses.png', alt: 'Nested object matrix', caption: 'Nested object matrix'},
+    {src: '/projects/victory-courses/victory-courses.png', alt: 'Nested object matrix', caption: 'Nested object matrix'},
     {src: '/projects/project-image-1.png', alt: 'Another image', caption: 'Another image'}
   ]}
 />
 
-<BreakoutImage src="/projects/victory-courses.png" />
+<BreakoutImage src="/projects/victory-courses/victory-courses.png" />
 
 ## Technical Challenges
 
