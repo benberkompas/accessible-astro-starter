@@ -1,0 +1,61 @@
+---
+import DefaultLayout from '@layouts/DefaultLayout.astro'
+import PageHeader from '@components/PageHeader.astro'
+import { Heading } from 'accessible-astro-components'
+import Image from 'astro/components/Image.astro'
+import Feature from '@components/Feature.astro'
+import { Link } from 'accessible-astro-components'
+---
+
+<DefaultLayout title="Philosophy">
+    <PageHeader
+        title="Philosophy"
+        subtitle="The right solution to the right problem for the right people. Built to deliver customer value that drives business value in a way that's technically sustainable."
+        bgType="bordered"
+    />
+
+    <section class="my-12">
+        <div class="container space-content">
+            <p class="text-2xl">
+                The right solution<sup>3</sup> to the right problem<sup>2</sup> for the right people<sup>1</sup>. Built to deliver customer value<sup>4</sup> that drives business value<sup>5</sup> in a way that's technically sustainable<sup>6</sup>.
+            </p>
+            <div class="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-2">
+                <Image
+                    src="/philosophy/people-problem-solution.png"
+                    alt="Valid and invalid combinations"
+                    width={1200}
+                    height={600}
+                    class="h-full w-full rounded-lg object-cover"
+                />
+                <Image
+                    src="/philosophy/customer-business-tech.png"
+                    alt="Valid and invalid combinations"
+                    width={1200}
+                    height={600}
+                    class="h-full w-full rounded-lg object-cover"
+                />
+            </div>
+            <div class="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3">
+                <Feature icon="lucide:user" title="1. Right people">
+                    The specific people we've chosen to serve, defined in terms of their relevant characteristics, contexts, and the domain they operate within.
+                </Feature>
+                <Feature icon="lucide:puzzle" title="2. Right problem">
+                    The specific problems those people actually face in the domain &mdash; whether obstacles or unmet needs &mdash; and that make sense for us to address.
+                </Feature>
+                <Feature icon="lucide:lightbulb" title="3. Right solution">
+                    The solution(s) that we believe will do the best job of addressing those problems. This is highly experimental.
+                </Feature>
+                <Feature icon="lucide:sparkles" title="4. Customer value">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quasi nobis optio? Qui in quo accusantium debitis sapiente obcaecati magnam.
+                </Feature>
+                <Feature icon="lucide:radar" title="5. Business value">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quasi nobis optio? Qui in quo accusantium debitis.
+                </Feature>
+                <Feature icon="lucide:code" title="6. Technical sustainability">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quasi nobis optio? Qui in quo accusantium.
+                </Feature>
+            </div>
+        </div>
+    </section>
+
+</DefaultLayout>
