@@ -1,6 +1,6 @@
 ---
 import DefaultLayout from '@layouts/DefaultLayout.astro'
-import { Accordion, AccordionItem } from 'accessible-astro-components'
+import { Accordion, AccordionItem, Heading } from 'accessible-astro-components'
 import Feature from '@components/Feature.astro'
 import { Modal } from 'accessible-astro-components'
 import { Badge } from 'accessible-astro-components'
@@ -9,6 +9,8 @@ import { Card } from 'accessible-astro-components'
 import { Icon } from 'astro-icon/components'
 import Counter from '@components/Counter.astro'
 import PageHeader from '@components/PageHeader.astro'
+import Header from '@components/Header.astro'
+import Image from 'astro/components/Image.astro'
 
 // Calculate total years of experience
 const startDate = new Date(2008, 7); // August 2008 (0-based month index)
@@ -60,7 +62,54 @@ const avgYears = (avgMonths / 12).toFixed(1); // one decimal place
     />
     
     <section class="my-12">
-        <div class="container">
+        <div class="container space-content">
+            <!-- <Heading level="h2">Credentials</Heading> -->
+            <AvatarGroup display="grid" gridGap="2rem" class="bordered">
+                <Avatar size="md" shape="square" label="Certified OOUX Strategist" title="Certified OOUX Strategist" subtitle="Issued Nov 2025 by Rewired UX Studio (00000000)" img="/certifications/ooux.jpg" />
+                <Avatar size="md" shape="square" label="Certified Scrum Product Owner" title="Certified Scrum Product Owner" subtitle="Issued Sep 2017 by Scrum Alliance (000696817)" img="/certifications/cspo.png" />
+                <Avatar size="md" shape="square" label="UX Certification" title="UX Certification" subtitle="Issued May 2015 by Neilsen Norman Group (000696817)" img="/certifications/nng.png" />
+                <!-- <Avatar size="sm" shape="square" label="Mobile Design Specialty Certification" title="Mobile Design Specialty Certification" subtitle="Issued May 2015 by Neilsen Norman Group (ID 1008199)" img="/certifications/nng.png" /> -->
+            </AvatarGroup>
+            <!-- <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+                <Card
+                    img="https://images.unsplash.com/photo-1620428268482-cf1851a36764?auto=format&fit=crop&q=100&w=800"
+                    title="Certified OOUX Strategist"
+                    footer="Rewired UX Studio"
+                >
+                    <ul>
+                        <li>Issued Nov 2025</li>
+                        <li>Expires Nov 2028</li>
+                        <li>Credential ID 00000000</li>
+                    </ul>
+                </Card>
+                <Card
+                    img="https://images.unsplash.com/photo-1620428268482-cf1851a36764?auto=format&fit=crop&q=100&w=800"
+                    title="Certified Scrum Product Owner"
+                    footer="Scrum Alliance"
+                >
+                    <ul>
+                        <li>Issued Sep 2017</li>
+                        <li>Expired Sep 2019</li>
+                        <li>Credential ID 000696817</li>
+                    </ul>
+                </Card>
+                <Card
+                    img="https://images.unsplash.com/photo-1620428268482-cf1851a36764?auto=format&fit=crop&q=100&w=800"
+                    title="UX Certification, and Mobile Design Specialty Certification"
+                    footer="Nielsen Norman Group"
+                >
+                    <ul>
+                        <li>Issued May 2015</li>
+                        <li>Credential ID 1008199</li>
+                    </ul>
+                </Card>
+            </div> -->
+        </div>
+    </section>
+    
+    <section class="my-12">
+        <div class="container space-content">
+            <!-- <Heading level="h2">Companies</Heading> -->
             <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
                 <div class="bordered">
                     <Counter count={`${years}+`} title="years" sub="experience in design & UX" />
@@ -119,8 +168,8 @@ const avgYears = (avgMonths / 12).toFixed(1); // one decimal place
                             <Badge type="default">CSS</Badge>
                         </div>
 
-                        <h4>Software Tools</h4>
-                        <p>At Covenant Eyes, I rely on these tools to get most of my work done.</p>
+                        <h4>Tools</h4>
+                        <p>At Covenant Eyes, I rely on these software tools to get most of my work done.</p>
                         <AvatarGroup display="grid" gridGap="1.5rem">
                             <Avatar size="sm" shape="square" label="Miro" title="Miro" subtitle="Modeling & workshops" img="/tools/miro.svg" />
                             <Avatar size="sm" shape="square" label="Notion" title="Notion" subtitle="Notes & task management" img="/tools/notion.svg" />
@@ -134,7 +183,7 @@ const avgYears = (avgMonths / 12).toFixed(1); // one decimal place
                     <div class="space-content">
                         <h4>Roles</h4>
                         <Accordion>
-                            <AccordionItem title="Senior Product Designer" name="covenant-eyes" open="true" variant="chevron">
+                            <AccordionItem title="Senior Product Designer (Information Architect)" name="covenant-eyes" open="true" variant="chevron">
                                 <div class="mb-4 text-neutral-600"><Icon name="lucide:calendar" class="inline-icon mr-2" />Mar 2024 - Present (<span id="role-tenure"></span>)</div>
                                 <p>In my unofficial capacity as an information architect, I support the UX team by:</p>
                                 <ul>
@@ -197,9 +246,10 @@ const avgYears = (avgMonths / 12).toFixed(1); // one decimal place
                 <div class="grid grid-cols-1 gap-24 md:grid-cols-2">
                     <div class="space-content">
                         <h4>About</h4>
-                        <p>What began as a scrappy startup of 2 dozen people when I joined grew into an innovative new division staffed by over 200 people when I left.</p>
-                        <p>We started off with software that helped professional contractors get custom roof truss specifications and purchase them through a Home Depot vendor. After we were acquired by Home Depot in 2014, we set our sights on attracting more Pro business by providing a comprehensive, searchable catalog of special-order products. We achived exactly that.</p>
-                        <p>This was probably the spark that kindled the flame of information architecture in my design career!</p>
+                        <p>What began as a scrappy startup of 2 dozen people when I joined (as their first design hire) grew into an innovative new division staffed by over 200 people when I left 7 years later.</p>
+                        <p>We started off with software that helped professional contractors get custom roof truss specifications and purchase them through a Home Depot vendor.</p>
+                        <p>After we were acquired by Home Depot in 2014, we set our sights on attracting more business from professional contractors by providing a comprehensive, searchable catalog of special-order products for in-store sales associates to reference. It was the first time they could look up pricing without referring to printed price sheets or picking up the phone.</p>
+                        <p>That became a powerful estimation and quoting platform that did, indeed, help Home Depot gain marketshare in the pro contractor market. It was rolled out to over 2,000 Home Depot stores in the U.S. and in 2017 processed $5.7b in quotes and $1.4m in sales.</p>
                         
                         <h4>Skills</h4>
                         <!-- <p>These are the skills I used on a regular basis at Home Depot.</p> -->
@@ -214,8 +264,8 @@ const avgYears = (avgMonths / 12).toFixed(1); // one decimal place
                             <Badge type="default">CSS</Badge>
                         </div>
 
-                        <h4>Software Tools</h4>
-                        <p>These are the tools I used at Home Depot, along with whiteboards, graph paper, and markers!</p>
+                        <h4>Tools</h4>
+                        <p>These are the software tools I used at Home Depot, along with whiteboards, graph paper, and markers!</p>
                         <AvatarGroup display="grid" gridGap="1.5rem">
                             <Avatar size="sm" shape="square" label="Evernote" title="Evernote" subtitle="Note-taking" img="/tools/evernote.png" />
                             <Avatar size="sm" shape="square" label="Balsamiq" title="Balsamiq" subtitle="Wireframing" img="/tools/balsamiq.png" />
@@ -241,11 +291,14 @@ const avgYears = (avgMonths / 12).toFixed(1); // one decimal place
                             </AccordionItem>
                             <AccordionItem title="E-Content Designer" open="" name="home-depot" variant="chevron">
                                 <div class="mb-4 text-neutral-600"><Icon name="lucide:calendar" class="inline-icon mr-2" />Feb 2013 - Feb 2014 (1 yr 1 mo)</div>
-                                <p>Designed information architecture and UI for exploring our brand new product catalog, which created unprecedented opportunities for business expansion.</p>
+                                <p>Designed information architecture and UI for exploring our brand new searchable special order product catalog, which created unprecedented opportunities for business expansion.</p>
                             </AccordionItem>
                             <AccordionItem title="UX Designer / Business Analyst" open="" name="home-depot" variant="chevron">
                                 <div class="mb-4 text-neutral-600"><Icon name="lucide:calendar" class="inline-icon mr-2" />Nov 2011 - Feb 2013 (1 yr 4 mos)</div>
-                                <p>Designed second-generation workflow and UI for our roof truss configurator, which helped make that product line profitable again, as well as convince Home Depot to acquire our company.</p>
+                                <ul>
+                                    <li>Designed second-generation workflow and UI for our roof truss configurator, which helped make that product line profitable again.</li>
+                                    <li>Designed the proof of concept that helped convince Home Depot to acquire our company.</li>
+                                </ul>
                             </AccordionItem>
                         </Accordion>
                     </div>
