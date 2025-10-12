@@ -11,6 +11,8 @@ import Counter from '@components/Counter.astro'
 import PageHeader from '@components/PageHeader.astro'
 import Header from '@components/Header.astro'
 import Image from 'astro/components/Image.astro'
+import { Link } from 'accessible-astro-components'
+import BlockQuote from '@components/BlockQuote.astro'
 
 // Calculate total years of experience
 const startDate = new Date(2008, 7); // August 2008 (0-based month index)
@@ -56,56 +58,10 @@ const avgYears = (avgMonths / 12).toFixed(1); // one decimal place
     
     <PageHeader
         title="Experience"
-        subtitle="Where I've worked + my professional trajectory"
+        subtitle=""
         bgType="bordered"
         showBreadcrumbs=""
     />
-    
-    <section class="my-12">
-        <div class="container space-content">
-            <!-- <Heading level="h2">Credentials</Heading> -->
-            <AvatarGroup display="grid" gridGap="2rem" class="bordered">
-                <Avatar size="md" shape="square" label="Certified OOUX Strategist" title="Certified OOUX Strategist" subtitle="Issued Nov 2025 by Rewired UX Studio (00000000)" img="/certifications/ooux.jpg" />
-                <Avatar size="md" shape="square" label="Certified Scrum Product Owner" title="Certified Scrum Product Owner" subtitle="Issued Sep 2017 by Scrum Alliance (000696817)" img="/certifications/cspo.png" />
-                <Avatar size="md" shape="square" label="UX Certification" title="UX Certification" subtitle="Issued May 2015 by Neilsen Norman Group (000696817)" img="/certifications/nng.png" />
-                <!-- <Avatar size="sm" shape="square" label="Mobile Design Specialty Certification" title="Mobile Design Specialty Certification" subtitle="Issued May 2015 by Neilsen Norman Group (ID 1008199)" img="/certifications/nng.png" /> -->
-            </AvatarGroup>
-            <!-- <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
-                <Card
-                    img="https://images.unsplash.com/photo-1620428268482-cf1851a36764?auto=format&fit=crop&q=100&w=800"
-                    title="Certified OOUX Strategist"
-                    footer="Rewired UX Studio"
-                >
-                    <ul>
-                        <li>Issued Nov 2025</li>
-                        <li>Expires Nov 2028</li>
-                        <li>Credential ID 00000000</li>
-                    </ul>
-                </Card>
-                <Card
-                    img="https://images.unsplash.com/photo-1620428268482-cf1851a36764?auto=format&fit=crop&q=100&w=800"
-                    title="Certified Scrum Product Owner"
-                    footer="Scrum Alliance"
-                >
-                    <ul>
-                        <li>Issued Sep 2017</li>
-                        <li>Expired Sep 2019</li>
-                        <li>Credential ID 000696817</li>
-                    </ul>
-                </Card>
-                <Card
-                    img="https://images.unsplash.com/photo-1620428268482-cf1851a36764?auto=format&fit=crop&q=100&w=800"
-                    title="UX Certification, and Mobile Design Specialty Certification"
-                    footer="Nielsen Norman Group"
-                >
-                    <ul>
-                        <li>Issued May 2015</li>
-                        <li>Credential ID 1008199</li>
-                    </ul>
-                </Card>
-            </div> -->
-        </div>
-    </section>
     
     <section class="my-12">
         <div class="container space-content">
@@ -120,6 +76,42 @@ const avgYears = (avgMonths / 12).toFixed(1); // one decimal place
                 <div class="bordered">
                     <Counter count={avgYears} title="years" sub="avg. company tenure*" />
                     <div class="text-neutral-500 text-sm" style="text-align:center">*since I began working in software</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="my-12">
+        <div class="container space-content">
+            <!-- <Heading level="h2">Credentials</Heading> -->
+            <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+                <div class="bordered space-content">
+                    <Avatar size="lg" shape="square" label="Certified OOUX Strategist" title="Certified OOUX Strategist" subtitle="Nov 2025 • Rewired UX Studio" img="/certifications/ooux.png" />
+                    <Link href="/" isButton type="default" size="sm" class="full-width">
+                        <Icon aria-hidden="true" name="lucide:badge-check" />
+                        View certificate
+                    </Link>
+                </div>
+                <div class="bordered space-content">
+                    <Avatar size="lg" shape="square" label="Certified Scrum Product Owner" title="Certified Scrum Product Owner" subtitle="Sep 2017 • Scrum Alliance" img="/certifications/cspo.png" />
+                    <Link href="/" isButton type="default" size="sm" class="full-width">
+                        <Icon aria-hidden="true" name="lucide:badge-check" />
+                        View certificate
+                    </Link>
+                </div>
+                <div class="bordered space-content">
+                    <Avatar size="lg" shape="square" label="UX Certification" title="UX Certification" subtitle="May 2015 • Neilsen Norman Group" img="/certifications/nng.png" />
+                    <Link href="/" isButton type="default" size="sm" class="full-width">
+                        <Icon aria-hidden="true" name="lucide:badge-check" />
+                        View certificate
+                    </Link>
+                </div>
+                <div class="bordered space-content">
+                    <Avatar size="lg" shape="square" label="UX Certification" title="Mobile Design Specialty Certification" subtitle="May 2015 • Neilsen Norman Group" img="/certifications/nng.png" />
+                    <Link href="/" isButton type="default" size="sm" class="full-width">
+                        <Icon aria-hidden="true" name="lucide:badge-check" />
+                        View certificate
+                    </Link>
                 </div>
             </div>
         </div>
@@ -169,7 +161,7 @@ const avgYears = (avgMonths / 12).toFixed(1); // one decimal place
                         </div>
 
                         <h4>Tools</h4>
-                        <p>At Covenant Eyes, I rely on these software tools to get most of my work done.</p>
+                        <!-- <p>At Covenant Eyes, I rely on these software tools to get most of my work done.</p> -->
                         <AvatarGroup display="grid" gridGap="1.5rem">
                             <Avatar size="sm" shape="square" label="Miro" title="Miro" subtitle="Modeling & workshops" img="/tools/miro.svg" />
                             <Avatar size="sm" shape="square" label="Notion" title="Notion" subtitle="Notes & task management" img="/tools/notion.svg" />
@@ -185,26 +177,26 @@ const avgYears = (avgMonths / 12).toFixed(1); // one decimal place
                         <Accordion>
                             <AccordionItem title="Senior Product Designer (Information Architect)" name="covenant-eyes" open="true" variant="chevron">
                                 <div class="mb-4 text-neutral-600"><Icon name="lucide:calendar" class="inline-icon mr-2" />Mar 2024 - Present (<span id="role-tenure"></span>)</div>
-                                <p>In my unofficial capacity as an information architect, I support the UX team by:</p>
+                                <!-- <p>In my unofficial capacity as an information architect, I support the UX team by:</p> -->
                                 <ul>
-                                    <li>Creating and maintaining structural models and standards of our service, so that we can all make more informed decisions</li>
-                                    <li>Reducing the risk of making the “wrong” decision by surfacing new options, hidden implications, risks, and tradeoffs</li>
-                                    <li>Proactively identifying patterns — in user feedback, project proposals, etc. — anticipating future structural work, and responding with future-focused design</li>
-                                    <li>Operationalizing structural design through transparency into my work and process, inclusion of the team whenever possible, and advising teammates in their projects</li>
-                                    <li>Increasing organizational literacy and fluency in structural design through training sessions, consults, and cross-functional diplomacy</li>
+                                    <li>Create and maintain structural models and standards of our service, so that we can all make more informed decisions</li>
+                                    <li>Reduce the risk of making the “wrong” decision by surfacing new options, hidden implications, risks, and tradeoffs</li>
+                                    <li>Proactively identify patterns — in user feedback, project proposals, etc. — anticipating future structural work, and responding with future-focused design</li>
+                                    <li>Operationalize structural design through transparency into my work and process, inclusion of the team whenever possible, and advising teammates in their projects</li>
+                                    <li>Increase organizational literacy and fluency in structural design through training sessions, consults, and cross-functional diplomacy</li>
                                 </ul>
                             </AccordionItem>
                             <AccordionItem title="UX Supervisor" open="" name="covenant-eyes" variant="chevron">
                                 <div class="mb-4 text-neutral-600"><Icon name="lucide:calendar" class="inline-icon mr-2" />Oct 2022 - Mar 2024 (1 yr 6 mos)</div>
-                                <p>Although I had always resisted the idea of going into management, I was given the opportunity in late 2022 and chose to accept. This was a season of relative instability for our team, and I did this more as a service to them than a calculated move to advance my own career.</p>
-                                <p>My responsibilities included:</p>
+                                <!-- <p>Although I had always resisted the idea of going into management, I was given the opportunity in late 2022 and chose to accept. This was a season of relative instability for our team, and I did this more as a service to them than a calculated move to advance my own career.</p>
+                                <p>My responsibilities included:</p> -->
                                 <ul>
-                                    <li>Handling the typical logistics and admin work, e.g. time off requests</li>
-                                    <li>Taking care of my people through weekly 1-1s, holding team tactical meetings, helping them build career growth plans, and conducting annual reviews</li>
-                                    <li>Taking care of my team, helping them to see the bigger picture and make a meaningful contribution, as well as protecting their capacity so they could focus and do their best work</li>
-                                    <li>Improving on our core accountability service</li>
-                                    <li>Helping stakeholders see the service as a whole</li>
-                                    <li>Maintaining a set of consistent standards and tools to unify our two sub-teams within UX</li>
+                                    <li>Handled the typical logistics and admin work, e.g. time off requests</li>
+                                    <li>Took care of my people through weekly 1-1s, holding team tactical meetings, helping them build career growth plans, and conducting annual reviews</li>
+                                    <li>Helped my team see the bigger picture and make a meaningful contribution, as well as protecting their capacity so they could focus and do their best work</li>
+                                    <li>Improved on our core accountability service</li>
+                                    <li>Helped stakeholders see the service as a whole</li>
+                                    <li>Maintained a set of consistent standards and tools to unify our two sub-teams within UX</li>
                                 </ul>
                             </AccordionItem>
                             <AccordionItem title="Senior Product Designer" open="" name="covenant-eyes" variant="chevron">
@@ -214,8 +206,7 @@ const avgYears = (avgMonths / 12).toFixed(1); // one decimal place
                                     <li>Helped transition from our legacy payment processor to Stripe, mainly by designing internal customer support tools.</li>
                                     <li>Designed customer-facing experience when we began to collect sales tax on subscriptions; this wasn't on any customer's wishlist, however, it allowed us to provide them with clarity about the exact breakdown of their payments — including upcoming payments — and helped us avoid having to absorb the cost ourselves.</li>
                                     <li>Did a complete audit of our (overly-complex) account structure, which helped establish my reputation as a sort of expert on “account structure” — something which has been helpful ever since.</li>
-                                    <li>Helped design the interactions behind a new B2B program aimed at companies who wanted to offer our service as part of their employee benefits package…</li>
-                                    <li>…which led to an expanded program we offered to colleges who wanted to offer our service to students at a steeply discounted rate.</li>
+                                    <li>Helped design the interactions behind a new B2B program which led to expansion into colleges and organizations.</li>
                                 </ul>
                             </AccordionItem>
                         </Accordion>
@@ -265,7 +256,7 @@ const avgYears = (avgMonths / 12).toFixed(1); // one decimal place
                         </div>
 
                         <h4>Tools</h4>
-                        <p>These are the software tools I used at Home Depot, along with whiteboards, graph paper, and markers!</p>
+                        <!-- <p>These are the software tools I used at Home Depot, along with whiteboards, graph paper, and markers!</p> -->
                         <AvatarGroup display="grid" gridGap="1.5rem">
                             <Avatar size="sm" shape="square" label="Evernote" title="Evernote" subtitle="Note-taking" img="/tools/evernote.png" />
                             <Avatar size="sm" shape="square" label="Balsamiq" title="Balsamiq" subtitle="Wireframing" img="/tools/balsamiq.png" />
@@ -375,7 +366,7 @@ const avgYears = (avgMonths / 12).toFixed(1); // one decimal place
                             <p>I'm interested in architectural, system-focused UX roles with a path for long-term individual contributors (vs. facing a mandatory move into management in an "up or out" culture).</p>
                         </Feature>
                         <Feature icon="lucide:handshake" title="Team">
-                            <p>I want to freely collaborate with people in other disciplines, working together to pursue meaningful outcomes for customers with an emphasis on quality, and more concerned about truly <em>solving problems</em> than merely shipping solutions.</p>
+                            <p>I want to collaborate closely with a cross-functional team, working together to pursue meaningful outcomes for customers with an emphasis on quality, focused on truly <em>solving problems</em> vs. merely shipping solutions.</p>
                         </Feature>
                         <Feature icon="lucide:rocket" title="Company">
                             <p>Ideally, my next job will be with a relatively small (20-50 people), product-focused company with a strong remote-first culture, that's been around for 5-10 years &mdash; long enough to achieve some level of product/market fit.</p>
@@ -474,5 +465,8 @@ const avgYears = (avgMonths / 12).toFixed(1); // one decimal place
         border: 1px solid var(--border-color-subtle);
         border-radius: var(--radius-md);
         padding: var(--space-l);
+    }
+    .full-width {
+        width:100%;
     }
 </style>
