@@ -7,7 +7,7 @@ import ContentMedia from '@components/ContentMedia.astro'
 import FeaturedProjects from '@components/FeaturedProjects.astro'
 import FeaturedPosts from '@components/FeaturedPosts.astro'
 import BlockQuote from '@components/BlockQuote.astro'
-import { Accordion, AccordionItem, Avatar, AvatarGroup, Heading, Link } from 'accessible-astro-components'
+import { Accordion, AccordionItem, Avatar, AvatarGroup, Heading, Link, Badge } from 'accessible-astro-components'
 import { Icon } from 'astro-icon/components'
 ---
 
@@ -15,6 +15,19 @@ import { Icon } from 'astro-icon/components'
   
   <Hero />
 
+  <section>
+    <div class="container my-24">
+      <a href="/experience#certifications">
+        <AvatarGroup>
+          <Avatar size="lg" shape="" img="/certifications/nng.png" />
+          <Avatar size="lg" shape="" img="/certifications/cspo.png" />
+          <Avatar size="lg" shape="" img="/certifications/ooux.png" />
+        </AvatarGroup>
+      </a>
+    </div>
+  </section>
+  
+  
   <section>
     <div class="container">
       <BlockQuote author="Jon Daiello, UX Manager (2021)">
@@ -154,11 +167,3 @@ import { Icon } from 'astro-icon/components'
   </section> -->
 
 </DefaultLayout>
-
-<style>
-  .avatar {
-    border: 1px solid var(--border-color-subtle);
-    border-radius: var(--radius-md);
-    padding: var(--space-s);
-  }
-</style>

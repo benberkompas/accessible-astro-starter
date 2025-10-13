@@ -1,18 +1,19 @@
 ---
 import DefaultLayout from '@layouts/DefaultLayout.astro'
-import { Accordion, AccordionItem, Heading } from 'accessible-astro-components'
 import Feature from '@components/Feature.astro'
-import { Modal } from 'accessible-astro-components'
-import { Badge } from 'accessible-astro-components'
-import { Avatar, AvatarGroup } from 'accessible-astro-components'
-import { Card } from 'accessible-astro-components'
 import { Icon } from 'astro-icon/components'
 import Counter from '@components/Counter.astro'
 import PageHeader from '@components/PageHeader.astro'
-import Header from '@components/Header.astro'
-import Image from 'astro/components/Image.astro'
-import { Link } from 'accessible-astro-components'
-import BlockQuote from '@components/BlockQuote.astro'
+import { 
+    Accordion, 
+    AccordionItem, 
+    Heading,
+    Avatar, 
+    AvatarGroup,
+    Link,
+    Modal,
+    Badge
+ } from 'accessible-astro-components'
 
 // Calculate total years of experience
 const startDate = new Date(2008, 7); // August 2008 (0-based month index)
@@ -62,10 +63,10 @@ const avgYears = (avgMonths / 12).toFixed(1); // one decimal place
         bgType="bordered"
         showBreadcrumbs=""
     />
-    
+
     <section class="my-12">
         <div class="container space-content">
-            <!-- <Heading level="h2">Companies</Heading> -->
+            <Heading level="h2" id="overview">Overview</Heading>
             <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
                 <div class="bordered">
                     <Counter count={`${years}+`} title="years" sub="experience in design & UX" />
@@ -83,31 +84,38 @@ const avgYears = (avgMonths / 12).toFixed(1); // one decimal place
     
     <section class="my-12">
         <div class="container space-content">
-            <!-- <Heading level="h2">Credentials</Heading> -->
-            <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+            <Heading level="h2" id="certifications">Certifications</Heading>
+            <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+                <!-- <div class="bordered space-content">
+                    <Avatar size="md" shape="square" label="Certified OOUX Strategist" title="Certified OOUX Strategist" subtitle="Rewired UX Studio" img="/certifications/ooux.png" />
+                    <div>
+                        <Badge type="default" size="sm">#00000000</Badge>
+                        <Badge type="default" size="sm">Issued Nov 2025</Badge>
+                        <Badge type="default" size="sm">Exp. Nov 2028</Badge>
+                    </div>
+                    <Link href="/" isButton type="default" size="sm" class="full-width">
+                        <Icon aria-hidden="true" name="lucide:badge-check" />
+                        View certificate
+                    </Link>
+                </div> -->
                 <div class="bordered space-content">
-                    <Avatar size="lg" shape="square" label="Certified OOUX Strategist" title="Certified OOUX Strategist" subtitle="Nov 2025 • Rewired UX Studio" img="/certifications/ooux.png" />
+                    <Avatar size="md" shape="square" label="Certified Scrum Product Owner" title="Certified Scrum Product Owner" subtitle="Scrum Alliance" img="/certifications/cspo.png" />
+                    <div>
+                        <Badge type="default" size="sm">#000696817</Badge>
+                        <Badge type="default" size="sm">Issued Sep 2017</Badge>
+                        <Badge type="default" size="sm">Exp. Sep 2019</Badge>
+                    </div>
                     <Link href="/" isButton type="default" size="sm" class="full-width">
                         <Icon aria-hidden="true" name="lucide:badge-check" />
                         View certificate
                     </Link>
                 </div>
                 <div class="bordered space-content">
-                    <Avatar size="lg" shape="square" label="Certified Scrum Product Owner" title="Certified Scrum Product Owner" subtitle="Sep 2017 • Scrum Alliance" img="/certifications/cspo.png" />
-                    <Link href="/" isButton type="default" size="sm" class="full-width">
-                        <Icon aria-hidden="true" name="lucide:badge-check" />
-                        View certificate
-                    </Link>
-                </div>
-                <div class="bordered space-content">
-                    <Avatar size="lg" shape="square" label="UX Certification" title="UX Certification" subtitle="May 2015 • Neilsen Norman Group" img="/certifications/nng.png" />
-                    <Link href="/" isButton type="default" size="sm" class="full-width">
-                        <Icon aria-hidden="true" name="lucide:badge-check" />
-                        View certificate
-                    </Link>
-                </div>
-                <div class="bordered space-content">
-                    <Avatar size="lg" shape="square" label="UX Certification" title="Mobile Design Specialty Certification" subtitle="May 2015 • Neilsen Norman Group" img="/certifications/nng.png" />
+                    <Avatar size="md" shape="square" label="UX & Mobile Design" title="UX & Mobile Design" subtitle="Neilsen Norman Group" img="/certifications/nng.png" />
+                    <div>
+                        <Badge type="default" size="sm">#1008199</Badge>
+                        <Badge type="default" size="sm">Issued May 2015</Badge>
+                    </div>
                     <Link href="/" isButton type="default" size="sm" class="full-width">
                         <Icon aria-hidden="true" name="lucide:badge-check" />
                         View certificate
@@ -116,13 +124,14 @@ const avgYears = (avgMonths / 12).toFixed(1); // one decimal place
             </div>
         </div>
     </section>
-    
-    <section class="mb-12">
-        <div class="container">
-            <div class="bordered">
-                <div class="mb-12 space-content">
+
+    <section class="my-12">
+        <div class="container space-content">
+            <Heading level="h2" id="companies">Companies</Heading>
+            <div class="bordered space-content" id="covenant-eyes">
+                <div>
                     <Avatar size="sm" shape="square" label="Covenant Eyes" title="" subtitle="" img="/companies/covenant-eyes.svg" style="float:left" class="mr-2" />
-                    <h3>Covenant Eyes</h3>
+                    <Heading level="h3">Covenant Eyes</Heading>
                     <div class="text-neutral-600 mb-4">
                         <div>
                             <Icon name="lucide:calendar" class="inline-icon mr-2" />Nov 2018 - Present (<span id="company-tenure"></span>)
@@ -140,11 +149,11 @@ const avgYears = (avgMonths / 12).toFixed(1); // one decimal place
                 </div>
                 <div class="grid grid-cols-1 gap-24 md:grid-cols-2">
                     <div class="space-content">
-                        <h4>About</h4>
+                        <Heading level="h4">About</Heading>
                         <p>We are confronting the problem of pornography with a distinctly relational form of accountability that connects people who want to quit porn with others who can help them achieve lasting victory.</p>
                         <p>This has been a very gratifying chapter in my career, helping me to see the potential of design to drive life-changing results. Just as I had hoped when I joined CE, we're using technology to "redeem" itself, in a way. The stakes are enormously high, making it both a privilege and a heavy weight to carry.</p>
 
-                        <h4>Skills</h4>
+                        <Heading level="h4">Skills</Heading>
                         <!-- <p>These are the skills I use on a regular basis at Covenant Eyes.</p> -->
                         <div class="flex flex-wrap gap-2">
                             <Badge type="default">Information Architecture</Badge>
@@ -160,7 +169,7 @@ const avgYears = (avgMonths / 12).toFixed(1); // one decimal place
                             <Badge type="default">CSS</Badge>
                         </div>
 
-                        <h4>Tools</h4>
+                        <Heading level="h4">Tools</Heading>
                         <!-- <p>At Covenant Eyes, I rely on these software tools to get most of my work done.</p> -->
                         <AvatarGroup display="grid" gridGap="1.5rem">
                             <Avatar size="sm" shape="square" label="Miro" title="Miro" subtitle="Modeling & workshops" img="/tools/miro.svg" />
@@ -173,7 +182,7 @@ const avgYears = (avgMonths / 12).toFixed(1); // one decimal place
 
                     </div>
                     <div class="space-content">
-                        <h4>Roles</h4>
+                        <Heading level="h4">Roles</Heading>
                         <Accordion>
                             <AccordionItem title="Senior Product Designer (Information Architect)" name="covenant-eyes" open="true" variant="chevron">
                                 <div class="mb-4 text-neutral-600"><Icon name="lucide:calendar" class="inline-icon mr-2" />Mar 2024 - Present (<span id="role-tenure"></span>)</div>
@@ -213,15 +222,10 @@ const avgYears = (avgMonths / 12).toFixed(1); // one decimal place
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <section class="my-12">
-        <div class="container">
-            <div class="bordered">
-                <div class="mb-12 space-content">
+            <div class="bordered space-content" id="home-depot">
+                <div>
                     <Avatar size="sm" shape="square" label="Home Depot" title="" subtitle="" img="/companies/home-depot.jpg" style="float:left" class="mr-2" />
-                    <h3>Home Depot</h3>
+                    <Heading level="h3">Home Depot</Heading>
                     <div class="text-neutral-600">
                         <div>
                             <Icon name="lucide:calendar" class="inline-icon mr-2" />Nov 2011 - Oct 2018 (6 yrs 11 mos)
@@ -236,13 +240,13 @@ const avgYears = (avgMonths / 12).toFixed(1); // one decimal place
                 </div>
                 <div class="grid grid-cols-1 gap-24 md:grid-cols-2">
                     <div class="space-content">
-                        <h4>About</h4>
+                        <Heading level="h4">About</Heading>
                         <p>What began as a scrappy startup of 2 dozen people when I joined (as their first design hire) grew into an innovative new division staffed by over 200 people when I left 7 years later.</p>
                         <p>We started off with software that helped professional contractors get custom roof truss specifications and purchase them through a Home Depot vendor.</p>
                         <p>After we were acquired by Home Depot in 2014, we set our sights on attracting more business from professional contractors by providing a comprehensive, searchable catalog of special-order products for in-store sales associates to reference. It was the first time they could look up pricing without referring to printed price sheets or picking up the phone.</p>
                         <p>That became a powerful estimation and quoting platform that did, indeed, help Home Depot gain marketshare in the pro contractor market. It was rolled out to over 2,000 Home Depot stores in the U.S. and in 2017 processed $5.7b in quotes and $1.4m in sales.</p>
                         
-                        <h4>Skills</h4>
+                        <Heading level="h4">Skills</Heading>
                         <!-- <p>These are the skills I used on a regular basis at Home Depot.</p> -->
                         <div class="flex flex-wrap gap-2">
                             <Badge type="default">User Interface Design</Badge>
@@ -255,7 +259,7 @@ const avgYears = (avgMonths / 12).toFixed(1); // one decimal place
                             <Badge type="default">CSS</Badge>
                         </div>
 
-                        <h4>Tools</h4>
+                        <Heading level="h4">Tools</Heading>
                         <!-- <p>These are the software tools I used at Home Depot, along with whiteboards, graph paper, and markers!</p> -->
                         <AvatarGroup display="grid" gridGap="1.5rem">
                             <Avatar size="sm" shape="square" label="Evernote" title="Evernote" subtitle="Note-taking" img="/tools/evernote.png" />
@@ -268,7 +272,7 @@ const avgYears = (avgMonths / 12).toFixed(1); // one decimal place
 
                     </div>
                     <div class="space-content">
-                        <h4>Roles</h4>
+                        <Heading level="h4">Roles</Heading>
                         <Accordion>
                             <AccordionItem title="Senior UX Designer" open="true" name="home-depot" variant="chevron">
                                 <div class="mb-4 text-neutral-600"><Icon name="lucide:calendar" class="inline-icon mr-2" />Feb 2014 - Oct 2018 (4 yrs 9 mos)</div>
@@ -295,14 +299,9 @@ const avgYears = (avgMonths / 12).toFixed(1); // one decimal place
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <section class="my-12">
-        <div class="container">
-            <div class="bordered">
-                <div class="mb-12">
-                    <h3>Ben Berkompas Design</h3>
+            <div class="bordered space-content" id="ben-berkompas-design">
+                <div>
+                    <Heading level="h3">Ben Berkompas Design</Heading>
                     <div class="text-neutral-600">
                         <div>
                             <Icon name="lucide:calendar" class="inline-icon mr-2" />Oct 2010 - Feb 2013 (2 yrs 5 mos)
@@ -313,9 +312,9 @@ const avgYears = (avgMonths / 12).toFixed(1); // one decimal place
                     </div>
                 </div>
                 <div class="space-content">
-                    <h4>About</h4>
+                    <Heading level="h4">About</Heading>
                     <p>I ran my own shop on the side for several years, working with my clients on branding, identity design, marketing, and some web design.</p>
-                    <h4>Skills</h4>
+                    <Heading level="h4">Skills</Heading>
                     <div class="flex flex-wrap gap-2">
                         <Badge type="default">Graphic Design</Badge>
                         <Badge type="default">Print Design</Badge>
@@ -325,14 +324,9 @@ const avgYears = (avgMonths / 12).toFixed(1); // one decimal place
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-    
-    <section class="my-12">
-        <div class="container">
-            <div class="bordered">
-                <div class="mb-12">
-                    <h3>Internship &rarr; Contractor</h3>
+            <div class="bordered space-content" id="internship-contractor">
+                <div>
+                    <Heading level="h3">Internship &rarr; Contractor</Heading>
                     <div class="text-neutral-600">
                         <div>
                             <Icon name="lucide:calendar" class="inline-icon mr-2" />Aug 2008 - Jan 2011 (2 yrs 6 mos)
@@ -343,9 +337,9 @@ const avgYears = (avgMonths / 12).toFixed(1); // one decimal place
                     </div>
                 </div>
                 <div class="space-content">
-                    <h4>About</h4>
+                    <Heading level="h4">About</Heading>
                     <p>I took an internship in the creative department of a publisher and retailer in San Antonio, TX. After 11 months, it turned into full-time work. During this time I learned a lot about the production of books, catalogs, and other products. It also exposed me to what it was like to design in the context of a real world business. (I also credit this job with my mastery over Photoshop keyboard shortcuts!)</p>
-                    <h4>Skills</h4>
+                    <Heading level="h4">Skills</Heading>
                     <div class="flex flex-wrap gap-2">
                         <Badge type="default">Graphic Design</Badge>
                         <Badge type="default">Print Design</Badge>
@@ -354,42 +348,39 @@ const avgYears = (avgMonths / 12).toFixed(1); // one decimal place
             </div>
         </div>
     </section>
-    
-    <section class="mt-12 mb-24">
-        <div class="container">
-            <div class="space-content">
-                <h2>What's next?</h2>
 
-                <section class="mt-12 mb-24">
-                    <div class="grid grid-cols-1 gap-10 md:grid-cols-2">
-                        <Feature icon="lucide:drafting-compass" title="Role">
-                            <p>I'm interested in architectural, system-focused UX roles with a path for long-term individual contributors (vs. facing a mandatory move into management in an "up or out" culture).</p>
-                        </Feature>
-                        <Feature icon="lucide:handshake" title="Team">
-                            <p>I want to collaborate closely with a cross-functional team, working together to pursue meaningful outcomes for customers with an emphasis on quality, focused on truly <em>solving problems</em> vs. merely shipping solutions.</p>
-                        </Feature>
-                        <Feature icon="lucide:rocket" title="Company">
-                            <p>Ideally, my next job will be with a relatively small (20-50 people), product-focused company with a strong remote-first culture, that's been around for 5-10 years &mdash; long enough to achieve some level of product/market fit.</p>
-                        </Feature>
-                        <Feature icon="lucide:earth" title="Difference">
-                            <p>I want to keep working with people who are doing things that align with my personal values and the difference I want to make in the world, e.g. <span id="modal1-trigger" class="modal-trigger">agriculture and food systems</span>, <span id="modal2-trigger" class="modal-trigger">health and chronic disease</span>, and <span id="modal3-trigger" class="modal-trigger">childhood education and life skills</span>.</p>
-                            <Modal triggerId="modal1-trigger" title="Agriculture &amp; food systems">
-                                <p>Especially regenerative methods and local grower/consumer relationships.</p>
-                            </Modal>
-                            <Modal
-                            triggerId="modal2-trigger"
-                            title="Health &amp; chronic disease">
-                                <p>Especially addressing chronic disease through nutrition and lifestyle.</p>
-                            </Modal>
-                            <Modal
-                            triggerId="modal3-trigger"
-                            title="Childhood education &amp; life skills">
-                                <p>Especially addressing harms arising from screens and digital tech.</p>
-                            </Modal>
-                        </Feature>
-                    </div>
-                </section>
-            </div>
+    <section class="my-12">
+        <div class="container space-content">
+            <Heading level="h2">What's Next</Heading>
+            <section class="mt-12 mb-24">
+                <div class="grid grid-cols-1 gap-10 md:grid-cols-2">
+                    <Feature icon="lucide:drafting-compass" title="Role">
+                        <p>I'm interested in UX roles that focus on architecture, system design, research, and product strategy.</p>
+                    </Feature>
+                    <Feature icon="lucide:handshake" title="Team">
+                        <p>I want to work with a cross-functional team focused on achieving outcomes vs. just creating outputs, obsessed with quality and customer satisfaction, and intent on truly <em>solving problems</em> vs. merely shipping solutions.</p>
+                    </Feature>
+                    <Feature icon="lucide:rocket" title="Company">
+                        <p>Ideally, my next job will be with a relatively small product-focused company with a strong remote-first culture, that's been around for 5-10 years.</p>
+                    </Feature>
+                    <Feature icon="lucide:earth" title="Mission">
+                        <p>I want to keep working with people who are doing things that align with my personal values, e.g. <span id="modal1-trigger" class="modal-trigger">agriculture and food systems</span>, <span id="modal2-trigger" class="modal-trigger">health and chronic disease</span>, and <span id="modal3-trigger" class="modal-trigger">childhood education and life skills</span>.</p>
+                        <Modal triggerId="modal1-trigger" title="Agriculture &amp; food systems">
+                            <p>Especially regenerative methods and local grower/consumer relationships.</p>
+                        </Modal>
+                        <Modal
+                        triggerId="modal2-trigger"
+                        title="Health &amp; chronic disease">
+                            <p>Especially addressing chronic disease through nutrition and lifestyle.</p>
+                        </Modal>
+                        <Modal
+                        triggerId="modal3-trigger"
+                        title="Childhood education &amp; life skills">
+                            <p>Especially addressing harms arising from screens and digital tech.</p>
+                        </Modal>
+                    </Feature>
+                </div>
+            </section>
         </div>
     </section>
 
@@ -449,7 +440,7 @@ const avgYears = (avgMonths / 12).toFixed(1); // one decimal place
 })();
 </script>
 
-<style>
+<style lang="scss">
     .inline-icon {
         display: inline;
         margin-bottom: 4px;
