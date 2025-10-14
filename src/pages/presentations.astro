@@ -1,0 +1,58 @@
+---
+import DefaultLayout from '@layouts/DefaultLayout.astro'
+import PageHeader from '@components/PageHeader.astro'
+import { Card } from 'accessible-astro-components'
+import { Heading } from 'accessible-astro-components'
+import { Link } from 'accessible-astro-components'
+---
+<DefaultLayout title="Presentations">
+    <PageHeader
+        title="Presentations"
+        subtitle=""
+        bgType="bordered"
+    />
+
+    <section class="my-12">
+        <div class="container space-content">
+            <div class="my-3 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                <Card
+                title="Title"
+                footer="Sep 3, 2025"
+                >
+                    Description of what we covered
+                </Card>
+                <Card
+                title="Title"
+                footer="Sep 3, 2025"
+                >
+                    Description of what we covered
+                </Card>
+                <Card
+                title="Title"
+                footer="Sep 3, 2025"
+                >
+                    Description of what we covered
+                </Card>
+                <Card
+                title="Title"
+                footer="Sep 3, 2025"
+                >
+                    Description of what we covered
+                </Card>
+                <Card
+                title="Title"
+                footer="Sep 3, 2025"
+                >
+                    Description of what we covered
+                </Card>
+                <Card
+                title="Title"
+                footer="Sep 3, 2025"
+                >
+                    Description of what we covered
+                </Card>
+            </div>
+        </div>
+    </section>
+
+</DefaultLayout>
