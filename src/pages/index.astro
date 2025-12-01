@@ -1,6 +1,7 @@
 ---
 import DefaultLayout from '@layouts/DefaultLayout.astro'
 import Hero from '@components/Hero.astro'
+import Header from '@components/Header.astro'
 import Feature from '@components/Feature.astro'
 import Counter from '@components/Counter.astro'
 import ContentMedia from '@components/ContentMedia.astro'
@@ -16,6 +17,12 @@ import { Icon } from 'astro-icon/components'
   <Hero />
 
   <section>
+    <div class="container my-24" style="text-align:center">
+      <p class="text-2xl">I'm a designer specializing in information architecture, systems clarity, and conceptual modeling. I help teams understand complexity, align around shared mental models, and design durable, scalable product foundations.</p>
+    </div>
+  </section> 
+  
+  <section>
     <div class="container my-24">
       <a href="/experience#certifications">
         <AvatarGroup>
@@ -25,8 +32,7 @@ import { Icon } from 'astro-icon/components'
         </AvatarGroup>
       </a>
     </div>
-  </section>
-  
+  </section> 
   
   <section>
     <div class="container">

@@ -70,13 +70,14 @@ const avgYears = (avgMonths / 12).toFixed(1); // one decimal place
             <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
                 <div class="bordered">
                     <Counter count={`${years}+`} title="years" sub="experience in design & UX" />
+                    <div class="text-neutral-600 text-sm" style="text-align:center">I began my UX career in 2011</div>
                 </div>
                 <div class="bordered">
                     <Counter count="3" title="companies" sub="I've been employed by" />
                 </div>
                 <div class="bordered">
                     <Counter count={avgYears} title="years" sub="avg. company tenure*" />
-                    <div class="text-neutral-500 text-sm" style="text-align:center">*since I began working in software</div>
+                    <div class="text-neutral-600 text-sm" style="text-align:center">*since I began working in software</div>
                 </div>
             </div>
         </div>
