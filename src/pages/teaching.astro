@@ -1,0 +1,231 @@
+---
+import DefaultLayout from '@layouts/DefaultLayout.astro'
+import PageHeader from '@components/PageHeader.astro'
+import { Card } from 'accessible-astro-components'
+import { Heading } from 'accessible-astro-components'
+import { Link } from 'accessible-astro-components'
+---
+<DefaultLayout title="Teaching">
+    <PageHeader
+        title="Teaching"
+        subtitle="We learn best by teaching others. I've been presenting on design and hosting topical team discussions for the past 10 years. Leveraging my personal experience to help and serve others is one of my favorite things to do!"
+        bgType="bordered"
+        showBreadcrumbs=""
+    />
+
+    <section class="my-12">
+        <div class="container space-content">
+            <div class="my-3 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                <Card
+                img="/presentations/object-mapping.png"
+                url=""
+                title="Object Mapping: The Backbone of OOUX"
+                footer="Dec 11, 2025"
+                >
+                    Description here...
+                </Card>
+                <Card
+                img="/presentations/ooux-style-sketching.png"
+                url=""
+                title="OOUX-Style Sketching & Wireframing"
+                footer="Sep 11, 2025"
+                >
+                    Description here...
+                </Card>
+                <Card
+                img="/presentations/intro-to-ooux.png"
+                url=""
+                title="An Introduction to Object-Oriented UX (OOUX)"
+                footer="Aug 21, 2025"
+                >
+                    Description here...
+                </Card>
+                <Card
+                img="/presentations/figma-make.png"
+                url=""
+                title="Figma Make: What I've Learned from Years of Prototyping & How Figma Make Can Help"
+                footer="Aug 7, 2025"
+                >
+                    Description here...
+                </Card>
+                <Card
+                img="/presentations/problem-definition.png"
+                url=""
+                title="Sharpening the Axe: A Case for Problem Definition"
+                footer="Feb 13, 2025"
+                >
+                    Description here...
+                </Card>
+                <!-- <Card
+                img="/presentations/"
+                url=""
+                title="How I'm Using Notion In My Work"
+                footer="Jan 30, 2025"
+                >
+                    Description here...
+                </Card> -->
+                <!-- <Card
+                img="/presentations/"
+                url=""
+                title="One Way to Learn About Customer Jobs"
+                footer="Nov 7, 2024"
+                >
+                    Description here...
+                </Card> -->
+                <Card
+                img="/presentations/information-design.png"
+                url=""
+                title="Information Design"
+                footer="Oct 17, 2024"
+                >
+                    Description here...
+                </Card>
+                <!-- <Card
+                img="/presentations/"
+                url=""
+                title="Hot Garbage: Bad Design By Design"
+                footer="Jan 9, 2025"
+                >
+                    Description here...
+                </Card> -->
+                <Card
+                img="/presentations/intro-to-value-proposition-design.png"
+                url=""
+                title="An Intro to Value Proposition Design"
+                footer="Sep 26, 2024"
+                >
+                    Description here...
+                </Card>
+                <Card
+                img="/presentations/intro-to-modeling-2.png"
+                url=""
+                title="An Intro to Modeling: Part 2"
+                footer="Sep 12, 2024"
+                >
+                    Description here...
+                </Card>
+                <Card
+                img="/presentations/intro-to-modeling-1.jpg"
+                url=""
+                title="An Intro to Modeling: Part 1"
+                footer="Aug 15, 2024"
+                >
+                    Description here...
+                </Card>
+                <!-- <Card
+                img="/presentations/"
+                url=""
+                title="Conceptual Model Grammar"
+                footer="Jul 11, 2024"
+                >
+                    Description here...
+                </Card> -->
+                <Card
+                img="/presentations/interaction-flow-diagramming.png"
+                url=""
+                title="Interaction Flow Diagramming"
+                footer="Aug 6, 2021"
+                >
+                    Description here...
+                </Card>
+                <Card
+                img="/presentations/home-coffee-roasting-101.png"
+                url=""
+                title="Home Coffee Roasting 101"
+                footer="Apr 1, 2021"
+                >
+                    Description here...
+                </Card>
+                <Card
+                img="/presentations/grammar-mapping.png"
+                url=""
+                title="Semantic IxD & Grammar Mapping"
+                footer="Feb 12 - Mar 12 2021"
+                >
+                    This was a 4-part series...
+                </Card>
+                <!-- <Card
+                img="/presentations/"
+                url=""
+                title="Structured Brainstorming with the Creative Matrix"
+                footer="Nov 13, 2020"
+                >
+                    Description here...
+                </Card> -->
+                <Card
+                img="/presentations/exploring-ideas-broadly-and-deeply.png"
+                url=""
+                title="Exploring Ideas Broadly & Deeply"
+                footer="Oct 23, 2020"
+                >
+                    How designers can help stakeholders and teams shift their perspective between breadth and depth, and use this perspective to make better decisions on scope.
+                </Card>
+                <Card
+                img="/presentations/thresholds-of-detail.png"
+                url=""
+                title="Thresholds of Detail in Software Work"
+                footer="Sep 25, 2020"
+                >
+                    How to balance detail and time in design (and overall product) work.
+                </Card>
+                <Card
+                img="/presentations/value-dichotomy.png"
+                url=""
+                title="The Value Dichotomy"
+                footer="Jul 3, 2020"
+                >
+                    How producers and consumers can value the same thing differently, and a few ways we can measure "experienced value".
+                </Card>
+                <Card
+                img="/presentations/persuasive-ux-metrics.png"
+                url=""
+                title="Highlights from 'Persuasive UX Metrics'"
+                footer="Jun 19, 2020"
+                >
+                    I shared my takeaways from Jared Spool's 5 day intensive on "Persuasive UX Metrics".
+                </Card>
+                <Card
+                img="/presentations/css-basics.png"
+                url=""
+                title="CSS Basics"
+                footer="May 22, 2020"
+                >
+                    I co-presented on the basics of writing CSS and we worked through an exercise together.
+                </Card>
+                <Card
+                img="/presentations/html-basics.png"
+                url=""
+                title="HTML Basics"
+                footer="May 15, 2020"
+                >
+                    I led a discussion on HTML, where we also got into topics like web accessibility and SEO.
+                </Card>
+                <!-- <Card
+                img="/presentations/"
+                url=""
+                title="Negotiation"
+                footer="May 1, 2020"
+                >
+                    This was a guided discussion on negotiation techniques, drawn from Chris Voss' book "Never Split the Difference".
+                </Card> -->
+                <Card
+                img="/presentations/experience-visioning.png"
+                url=""
+                title="Experience Visioning"
+                footer="Mar 27, 2020"
+                >
+                    I led a discussion of experience visioning, with examples from Apple, Disney, Uber, Intel, and more.
+                </Card>
+                <Card
+                img="/presentations/importance-difficulty-matrix.png"
+                url=""
+                title="The Importance/Difficulty Matrix"
+                footer="Jul 12, 2019"
+                >
+                    The Importance/Difficulty Matrix is a tool for resolving some of the tensions that exist in prioritizing ideas. I led participants through the basic theory and ran a group exercise to help everyone practice the method.
+                </Card>
+            </div>
+        </div>
+    </section>
+
+</DefaultLayout>
