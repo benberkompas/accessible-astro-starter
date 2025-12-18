@@ -24,7 +24,7 @@ const { src = '/drawing.webp' }: Props = Astro.props
     <div style="text-align:center">
       <Heading level="h1">
         <!-- Improving experiences<br />through thoughtful<br />structural design -->
-         Improving experiences<br />by designing the system<br />beneath the surface
+         Improving experiences by<br /><span class="text-gradient">designing the system</span><br />beneath the surface
       </Heading>
     </div>
     <!-- <div>
@@ -55,5 +55,6 @@ const { src = '/drawing.webp' }: Props = Astro.props
     background-clip: border-box;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    padding-bottom: 0.05em;
   }
 </style>
