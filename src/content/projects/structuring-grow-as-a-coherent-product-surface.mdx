@@ -1,0 +1,190 @@
+---
+title: Structuring “Grow” as a Coherent Product Surface
+author: Ben Berkompas
+description: I led the system design and cross-functional alignment needed to turn “Grow” from a course library into a coherent product surface. This work focused on shaping decisions, reducing risk, and preparing the organization to evolve recovery features over time.
+minutes: 8
+company: Covenant Eyes
+---
+
+import { 
+  Heading, 
+  Media,
+  Avatar, 
+  AvatarGroup
+} from 'accessible-astro-components'
+import BlockQuote from '@components/BlockQuote.astro'
+import Callout from '@components/Callout.astro'
+import BreakoutImage from '@components/BreakoutImage.astro'
+import { Image } from 'astro:assets'
+import AccessibleGallery from '@components/AccessibleGallery.astro'
+    
+## Situation
+
+At Covenant Eyes, we’ve spent 25 years teaching people about relational accountability — an approach that helps people struggling with porn use rebuild trust, connection, and agency. Our product has always supported this philosophy, but for most of our history, the education behind it lived outside the software.
+
+That changed after the 2021 launch of Victory, our rebranded flagship accountability service. For the first time, we began offering short-form recovery courses directly in the app, bringing our philosophy and product functionality closer together.
+
+Between 2022 and 2025, this “Learning” area grew to include more than 40 courses. In 2025, I led an overhaul of our main navigation and renamed “Learning” to “Grow” — a small change on the surface, but one that signaled an intention to invest in a broader set of recovery-focused tools.
+
+That rename created a strategic inflection point. If “Grow” was going to be more than a course library, we needed to answer some hard questions:
+
+- Which capabilities actually belonged here?
+- Could any of them drive meaningful business value? (Courses never had.)
+- How would these tools fit together over time?
+- And where should we start, given limited resources? (This is a question of opportunity cost, which turned out to be very important.)
+
+This project wasn’t about designing courses. It was about turning “Grow” into a coherent product surface — and preparing the organization to make informed, low-risk decisions about what should come next.
+
+### Problem
+
+Here’s the underlying problem: our philosophy of relational accountability existed inside the product, but the system wasn’t designed to make that philosophy legible, scalable, or actionable.
+
+As a result, members experienced *what* the product did, without understanding *how* or *why* it supported accountability — and teams lacked a shared structure for evolving that experience over time.
+
+The introduction of “Grow” created a rare opportunity to bridge this divide. Not by adding more content, but by designing a system that connected philosophy (“how accountability works”) with functionality (“what the product makes possible”).
+
+Stakeholders were not initially aligned. Recovery Education had the clearest long-term vision, but Product needed evidence that this space was worth investing in. Words alone weren’t enough — we needed a shared model, concrete options, and a plan that made tradeoffs visible.
+
+### Team
+
+My role was to take a diverse set of ideas and constraints, lay down a “basecoat” of systems thinking, and express a clear set of realistic options that leadership and Product could actually make decisions against.
+
+<AvatarGroup display="grid" gridItemsSize="300px" gridGap="2rem">
+  <Avatar initials="BB" title="Ben" subtitle="Product Designer" />
+  <Avatar initials="MP" title="Mari" subtitle="Product Designer" />
+  <Avatar initials="SB" title="Sam" subtitle="Director, Recovery Ed" />
+  <Avatar initials="LE" title="Lisa" subtitle="Content Strategist, Recovery Ed" />
+  <Avatar initials="CM" title="Collin" subtitle="Product Manager" />
+  <Avatar initials="AB" title="Andrew" subtitle="Developer" />
+  <Avatar initials="JM" title="Jeremy" subtitle="Developer" />
+  <Avatar initials="WM" title="Bill" subtitle="Business Analyst" />
+  <Avatar initials="MC" title="Meliza" subtitle="UX Manager" />
+</AvatarGroup>
+
+### Constraints
+
+We were operating under several constraints:
+
+- **Knowledge continuity:** Mari, our most experienced designer in this area, was leaving the company, requiring an accelerated transfer of context and decisions.
+- **Limited engineering availability:** Andrew’s time was scarce, so early technical input needed to be focused on structural decisions, not UI review.
+- **Incremental delivery model:** Our teams favor 3–6 week efforts, which meant any vision had to be broken down into modular parts, buildable over time.
+- **Sparse metrics:** While revenue potential was part of the discussion, we lacked instrumentation to prove ROI. I coordinated with Marketing, BI, and Engineering to make improved data collection part of the solution.
+
+## Objective
+
+The objective was to help stakeholders see the latent opportunity in this space and to establish “Grow” as an integrated system from the start, rather than a collection of bolt-on features.
+
+This system-first approach would allow us to:
+
+- Offer new recovery experiences that increase the net value of the service
+- Create future monetization paths beyond subscription revenue
+- Collect and connect data so we could evaluate impact over time
+
+All while avoiding large, costly upfront builds.
+
+## Approach
+
+I began with three guiding principles:
+
+1. Help others *see* the opportunity for themselves, rather than prescribing solutions
+2. Establish a shared vision for the future so decisions could be made consistently
+3. Stay grounded in the present, prioritizing practical, incremental progress over speculative ideas
+
+None of this was possible without collaboration, so I prioritized workshops over solo work—not as a preference, but as a way to surface assumptions early, align decision criteria, and reduce rework later.
+
+## Key decisions
+
+### Emphasized shared understanding
+
+Misalignment became evident when we got to prioritization. Stakeholders were operating with different criteria and reaching conflicting conclusions about what mattered most.
+
+Rather than formal upfront framing, I chose to facilitate workshops in order to surface assumptions in real time. 
+
+I’ve done quite a bit of <a href="/teaching" target="new">teaching</a> about design over the years, but facilitation is different. I didn’t explain too much, I just invited people to join me and introduced the format in a very matter-of-fact way. 
+
+Then we got to work.
+
+I didn’t need my stakeholders to *become designers*. I needed them to bring their perspectives into the open so we could establish shared decision criteria.
+
+<BlockQuote author="Andrew, developer">I also enjoyed the grouping sessions Ben led as they brought up lots of good discussions. For example, we had a discussion regarding bookmarking & saving learning content. Everybody was able to share their thoughts on the definitions and distinctions of each of these terms. This gave me a new perspective that I hadn't thought of before and helped me take my thinking to another level. Overall, I think this would be great for developing interpersonal connections between tech and design, while delivering a more thought out product.</BlockQuote> 
+
+### Prototyped for learning
+
+Much of our early work was abstract and theoretical. I approached it that way in order to give the team a solid foundation before we got into the details.
+
+But we couldn’t ship a diagram. At some point, it all needed to become “real.”
+
+I created a rich interactive prototype (using Figma Make) that was grounded in the system design work we had done, and demonstrated 2 dozen distinct improvements we had talked about.
+
+This wasn’t about reaching final design.
+
+Prototypes are only worth what they help us learn.
+
+In this case, my prototype was a diagnostic tool to help me learn whether stakeholders were *actually* ready to invest in any of the ideas we’d been exploring. In most cases, the answer was “no,” or “not yet.”
+
+That clarity allowed us to stop speculating and focus on ideas the organization was actually ready to pursue.
+
+<BlockQuote author="Sam, Dir. Recovery Ed">Nice work, Ben. You are making Lisa and my dreams come true! These are all things on our wish list.</BlockQuote>
+
+### Kept ideas modular but connected
+
+Opportunity cost was an unstated — but highly important — factor in deciding which ideas would move forward, and when. I recognized that fact and made sure that proposals were as “bite-sized” as possible to prevent them from turning into “scope balloons”.
+
+This reduced the perceived risk of saying “yes”, because no decision committed the team to a large, expensive build.
+
+Modularity often comes at the expense of continuity. I designed for both. My prototype was fully feature-flagged, which proved that we could add functionality incrementally over time instead of batching things into a large release.
+
+### Shifted from ownership to support
+
+During this project, the UX team was reorg’d slightly. 
+
+My new team was focused on another part of Victory, and I recognized that ownership was no longer my highest-leverage contribution.
+
+Now I’m consulting with the team that is responsible for “Grow” and leading through influence rather than direct ownership.
+
+## Outcome
+
+This work laid the conceptual foundation and created organizational and technical readiness for “Grow” to evolve, even while roadmap timing remained uncertain.
+
+Before this work, conversations about “Grow” were abstract, opinion-driven, and difficult to prioritize. Afterward, teams had a shared structure they could use to evaluate ideas, sequence work, and make tradeoffs with more confidence.
+
+We consolidated our thinking into a single, durable reference that captured:
+
+- Conceptual objects
+- Systemic relationships
+- Actions (who can do what)
+- Attributes (how each object is structured)
+
+This gave Product, Design, Marketing, and Engineering a shared source of truth for future work, and enabled a new upstream collaboration model across disciplines.
+
+I now regularly support and consult with others as they work on features and improvements — including audio playback, progress tracking, conversion prompts, course findability, and premium courses — helping ensure new efforts align with the system rather than reinventing it.
+
+As priorities shift, the organization no longer has to rediscover what “Grow” is or could be. The structure is already in place to support faster, lower-risk decisions when the time is right.
+
+## Reflection
+
+### Ideas ≠ influence
+
+Our PM was not convinced of my ideas by default, but was open to being convinced if I could demonstrate the potential value. Once the value was demonstrated, he became an active ally. 
+
+That shift — from skepticism to shared ownership — is what influence looks like at this level.
+
+### Design in layers, implement in slices
+
+Working on a broad set of “horizontally-integrated” concepts helped clarify how vertical slices of functionality could be implemented without losing systemic coherence..
+
+### Understand peoples’ tolerance for complexity
+
+When you surface *existing* complexity, some people will think you’re actually *creating* complexity that wasn’t there.
+
+I learned that it’s important to differentiate between stakeholders’ tolerance for complexity and the actual, unavoidable complexity of the system.
+
+Not everyone should be invited to the *deepest* of deep dives because they’ll see it as slowing things down. What we’re actually doing is taking our bearings and setting the right course so that we can go fast.
+
+### Collaborate upstream
+
+Because alignment is often assumed to be higher than it actually is, working upstream improves decision quality and reduces downstream rework.
+
+<BlockQuote author="Andrew, developer">I am used to being handed a pitch without much of the backstory on it's creation… With this new approach, I was able to give early feedback on some thoughts and ideas I had. I foresee this saving everybody time by reducing redundant questions regarding design choices as well as avoiding any reworks if tech finds any mismatches with our current capabilities.</BlockQuote> 
+
+Taken together, these lessons reinforced for me that Staff-level design is less about producing artifacts, and more about shaping how decisions get made under uncertainty.
