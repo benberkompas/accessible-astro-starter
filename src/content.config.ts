@@ -11,6 +11,9 @@ const projects = defineCollection({
     title: z.string(),
     author: z.string(),
     description: z.string(),
+    featuredImage: z.object({
+      src: z.string(),
+      alt: z.string(),
   }),
 })
 
