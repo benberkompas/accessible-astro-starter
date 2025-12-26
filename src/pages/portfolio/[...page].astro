@@ -8,35 +8,68 @@ import type { GetStaticPaths, Page } from 'astro'
 import type { CollectionEntry } from 'astro:content'
 
 // Import images directly for optimization
-// import projectImage1 from '@assets/images/projects/project-image-1.png'
-// import projectImage2 from '@assets/images/projects/project-image-2.png'
-// import projectImage3 from '@assets/images/projects/project-image-3.png'
-// import projectImage4 from '@assets/images/projects/project-image-4.png'
-// import projectImage5 from '@assets/images/projects/project-image-5.png'
-// import projectImage6 from '@assets/images/projects/project-image-6.png'
-
-// export const getStaticPaths = (async ({ paginate }) => {
-//   const projects = await getCollection('projects')
-
-//   const projectImages = [projectImage1, projectImage2, projectImage3, projectImage4, projectImage5, projectImage6]
-
-//   const projectsWithImages = projects.map((project, index) => {
-//     return {
-//       ...project,
-//       featuredImage: projectImages[index % projectImages.length],
-//     }
-//   })
-
-//   return paginate(projectsWithImages, { pageSize: 6 })
-// }) satisfies GetStaticPaths
+import projectImage1 from '@assets/images/projects/project-image-1.png'
+import projectImage2 from '@assets/images/projects/project-image-2.png'
+import projectImage3 from '@assets/images/projects/project-image-3.png'
+import projectImage4 from '@assets/images/projects/project-image-4.png'
+import projectImage5 from '@assets/images/projects/project-image-5.png'
+import projectImage6 from '@assets/images/projects/project-image-6.png'
 
 export const getStaticPaths = (async ({ paginate }) => {
+  // Always fetch fresh projects from the content collection
+  // This ensures new/updated .mdx files are picked up
   const projects = await getCollection('projects')
-  return paginate(projects, { pageSize: 6 })
+  
+  // Debug: Log the number of projects found
+  console.log(`[Portfolio] Found ${projects.length} projects:`, projects.map(p => p.id))
+  
+  if (projects.length === 0) {
+    console.error('[Portfolio] WARNING: No projects found in collection!')
+    console.error('[Portfolio] This could mean:')
+    console.error('  1. The glob pattern is not matching files')
+    console.error('  2. Files are failing schema validation')
+    console.error('  3. The base path is incorrect')
+  }
+
+  // Define fallback images array inside the function to ensure proper scope
+  const projectImages = [projectImage1, projectImage2, projectImage3, projectImage4, projectImage5, projectImage6]
+
+  // Map projects with proper image handling
+  // If a project has a custom featuredImage in frontmatter, use that path.
+  // Otherwise, use a fallback imported image component.
+  const projectsWithImages = projects.map((p, index) => {
+    // Check if project has a custom featuredImage from frontmatter
+    const customImage = p.data.featuredImage
+    
+    if (customImage?.src) {
+      // Use custom image path from frontmatter
+      // The Card component will use the `img` prop for path strings
+      return {
+        ...p,
+        featuredImage: undefined, // Don't use imageComponent
+        featuredImagePath: customImage.src, // Use img prop instead
+        featuredImageAlt: customImage.alt || p.data.title,
+      }
+    } else {
+      // Use fallback imported image component
+      return {
+        ...p,
+        featuredImage: projectImages[index % projectImages.length],
+        featuredImagePath: undefined,
+        featuredImageAlt: undefined,
+      }
+    }
+  })
+
+  return paginate(projectsWithImages, { pageSize: 6 })
 }) satisfies GetStaticPaths
 
 interface Props {
-  page: Page<CollectionEntry<'projects'> & { featuredImage: any }>
+  page: Page<CollectionEntry<'projects'> & { 
+    featuredImage?: any
+    featuredImagePath?: string
+    featuredImageAlt?: string
+  }>
 }
 
 const { page } = Astro.props
@@ -60,18 +93,22 @@ const { page } = Astro.props
           page.data.map((project) => (
             <li>
               <Card
-                imageComponent={project.data.featuredImage}
+                imageComponent={project.featuredImage}
+                img={project.featuredImagePath}
+                imageAlt={project.featuredImageAlt || project.data.title}
                 url={'/portfolio/' + project.id}
                 title={project.data.title}
                 headingLevel="h2"
-                footer={'Author: ' + project.data.author}
+                footer={project.data.company ? `Company: ${project.data.company}` : undefined}
                 fullHeight={true}
               >
                 {project.data.description}
-                <span slot="meta">
-                  <Icon name="lucide:clock" />
-                  {project.data.minutes} min read
-                </span>
+                {project.data.minutes && (
+                  <span slot="meta">
+                    <Icon name="lucide:clock" />
+                    {project.data.minutes} min read
+                  </span>
+                )}
               </Card>
             </li>
           ))

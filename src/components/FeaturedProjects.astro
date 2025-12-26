@@ -7,6 +7,9 @@ import { getCollection } from 'astro:content'
 import projectImage1 from '@assets/images/projects/project-image-1.png'
 import projectImage2 from '@assets/images/projects/project-image-2.png'
 import projectImage3 from '@assets/images/projects/project-image-3.png'
+import projectImage4 from '@assets/images/projects/project-image-4.png'
+import projectImage5 from '@assets/images/projects/project-image-5.png'
+import projectImage6 from '@assets/images/projects/project-image-6.png'
 
 /**
  * FeaturedProjects Component
@@ -34,29 +37,55 @@ const { class: className, limit = 3, title = 'Featured projects' } = Astro.props
 
 // Get projects from content collection
 const projects = await getCollection('projects')
-const projectImages = [projectImage1, projectImage2, projectImage3]
+const projectImages = [projectImage1, projectImage2, projectImage3, projectImage4, projectImage5, projectImage6]
 
-// Limit projects and add featured images
-const featuredProjects = projects.slice(0, limit).map((project, index) => ({
-  ...project,
-  featuredImage: projectImages[index % projectImages.length],
-}))
+// Limit projects and add featured images with the same logic as portfolio page
+const featuredProjects = projects.slice(0, limit).map((project, index) => {
+  // Check if project has a custom featuredImage from frontmatter
+  const customImage = project.data.featuredImage
+  
+  if (customImage?.src) {
+    // Use custom image path from frontmatter
+    return {
+      ...project,
+      featuredImage: undefined, // Don't use imageComponent
+      featuredImagePath: customImage.src, // Use img prop instead
+      featuredImageAlt: customImage.alt || project.data.title,
+    }
+  } else {
+    // Use fallback imported image component
+    return {
+      ...project,
+      featuredImage: projectImages[index % projectImages.length],
+      featuredImagePath: undefined,
+      featuredImageAlt: undefined,
+    }
+  }
+})
 ---
 
 <section class:list={[className, 'my-24']}>
   <div class="container">
     <Heading level="h2" class="mb-6">{title}</Heading>
-    <div class="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3">
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
       {
         featuredProjects.map((project) => (
           <Card
             imageComponent={project.featuredImage}
+            img={project.featuredImagePath}
+            imageAlt={project.featuredImageAlt || project.data.title}
             url={'/portfolio/' + project.id}
             headingLevel="h2"
             title={project.data.title}
-            footer={'Author: ' + project.data.author}
+            footer={project.data.company ? `Company: ${project.data.company}` : undefined}
           >
             {project.data.description}
+            {project.data.minutes && (
+              <span slot="meta">
+                <Icon name="lucide:clock" />
+                {project.data.minutes} min read
+              </span>
+            )}
           </Card>
         ))
       }

@@ -45,6 +45,17 @@ import { Icon } from 'astro-icon/components'
     <li class="menu-item">
       <Link href="/teaching/">Teaching</Link>
     </li>
+    <li class="menu-item has-dropdown">
+       <button aria-haspopup="true" aria-expanded="false">
+        Sandbox
+        <Icon aria-hidden="true" name="lucide:chevron-down" size="32" />
+      </button>
+      <ul class="dropdown-menu">
+        <li class="submenu-item">
+          <Link href="/orca-navigator/">ORCA Navigator</Link>
+        </li>
+      </ul>
+    </li>
     <!-- <li class="menu-item">
       <Link href="/philosophy/">Philosophy</Link>
     </li> -->

@@ -6,33 +6,48 @@ import { Heading } from 'accessible-astro-components'
 import { getCollection, render } from 'astro:content'
 import type { CollectionEntry } from 'astro:content'
 
+// Import images directly for optimization
+import projectImage1 from '@assets/images/projects/project-image-1.png'
+import projectImage2 from '@assets/images/projects/project-image-2.png'
+import projectImage3 from '@assets/images/projects/project-image-3.png'
+import projectImage4 from '@assets/images/projects/project-image-4.png'
+import projectImage5 from '@assets/images/projects/project-image-5.png'
+import projectImage6 from '@assets/images/projects/project-image-6.png'
+
 export async function getStaticPaths() {
   const projects = await getCollection('projects')
 
-  const projectImages = [
-    { src: '/projects/project-image-1.png' },
-    { src: '/projects/project-image-2.png' },
-    { src: '/projects/project-image-3.png' },
-    { src: '/projects/project-image-4.png' },
-    { src: '/projects/project-image-5.png' },
-    { src: '/projects/project-image-6.png' },
-  ]
+  // Define fallback images array
+  const projectImages = [projectImage1, projectImage2, projectImage3, projectImage4, projectImage5, projectImage6]
 
-  return projects.map((project, index) => {
-    const projectWithImage = {
-      ...project,
-      featuredImage: projectImages[index % projectImages.length].src,
-    }
-
-    return {
-      params: { project: project.id },
-      props: { project: projectWithImage },
+  // Map projects with proper image handling - same logic as portfolio listing
+  const projectsWithImages = projects.map((project, index) => {
+    // Check if project has a custom featuredImage from frontmatter
+    const customImage = project.data.featuredImage
+    
+    if (customImage?.src) {
+      // Use custom image path from frontmatter
+      return {
+        ...project,
+        featuredImage: customImage.src, // String path for PageHeader
+      }
+    } else {
+      // Use fallback imported image component
+      return {
+        ...project,
+        featuredImage: projectImages[index % projectImages.length], // Imported image for PageHeader
+      }
     }
   })
+
+  return projectsWithImages.map((project) => ({
+    params: { project: project.id },
+    props: { project },
+  }))
 }
 
 interface Props {
-  project: CollectionEntry<'projects'> & { featuredImage: string }
+  project: CollectionEntry<'projects'> & { featuredImage: string | any }
 }
 
 const { project } = Astro.props
