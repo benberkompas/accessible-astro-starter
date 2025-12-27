@@ -22,6 +22,7 @@ const projects = defineCollection({
     description: z.string(),
     minutes: z.number().optional(),
     company: z.string().optional(),
+    order: z.number().optional(),
     featuredImage: z.object({
       src: z.string(),
       alt: z.string(),

@@ -31,13 +31,20 @@ export const getStaticPaths = (async ({ paginate }) => {
     console.error('  3. The base path is incorrect')
   }
 
+  // Sort projects by order field (ascending), projects without order go last
+  const sortedProjects = [...projects].sort((a, b) => {
+    const orderA = a.data.order ?? Number.MAX_SAFE_INTEGER
+    const orderB = b.data.order ?? Number.MAX_SAFE_INTEGER
+    return orderA - orderB
+  })
+
   // Define fallback images array inside the function to ensure proper scope
   const projectImages = [projectImage1, projectImage2, projectImage3, projectImage4, projectImage5, projectImage6]
 
   // Map projects with proper image handling
   // If a project has a custom featuredImage in frontmatter, use that path.
   // Otherwise, use a fallback imported image component.
-  const projectsWithImages = projects.map((p, index) => {
+  const projectsWithImages = sortedProjects.map((p, index) => {
     // Check if project has a custom featuredImage from frontmatter
     const customImage = p.data.featuredImage
     

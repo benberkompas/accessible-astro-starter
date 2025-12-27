@@ -37,10 +37,18 @@ const { class: className, limit = 3, title = 'Featured projects' } = Astro.props
 
 // Get projects from content collection
 const projects = await getCollection('projects')
+
+// Sort projects by order field (ascending), projects without order go last
+const sortedProjects = [...projects].sort((a, b) => {
+  const orderA = a.data.order ?? Number.MAX_SAFE_INTEGER
+  const orderB = b.data.order ?? Number.MAX_SAFE_INTEGER
+  return orderA - orderB
+})
+
 const projectImages = [projectImage1, projectImage2, projectImage3, projectImage4, projectImage5, projectImage6]
 
 // Limit projects and add featured images with the same logic as portfolio page
-const featuredProjects = projects.slice(0, limit).map((project, index) => {
+const featuredProjects = sortedProjects.slice(0, limit).map((project, index) => {
   // Check if project has a custom featuredImage from frontmatter
   const customImage = project.data.featuredImage
   
