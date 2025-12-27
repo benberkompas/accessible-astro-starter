@@ -1,0 +1,291 @@
+---
+title: Aligning Conceptual Models for Relational Accountability
+author: Ben Berkompas
+description: As a new accountability feature expanded in scope, I focused on resolving conceptual misalignment before it surfaced as UI churn or product debt. The result was clearer decision-making and a durable foundation for execution.
+minutes: 13
+company: Covenant Eyes
+featuredImage:
+  src: /projects/check-in-alignment/macro-models.jpg
+  alt: Description of the image
+---
+
+import { 
+  Heading, 
+  Media,
+  Avatar, 
+  AvatarGroup
+} from 'accessible-astro-components'
+import BlockQuote from '@components/BlockQuote.astro'
+import Callout from '@components/Callout.astro'
+import BreakoutImage from '@components/BreakoutImage.astro'
+import { Image } from 'astro:assets'
+import AccessibleGallery from '@components/AccessibleGallery.astro'
+import CaptionedImage from '@components/CaptionedImage.astro'
+
+## Situation
+
+Covenant Eyes has been helping people quit porn for over 25 years. The service relays activity from a person’s device to someone they’ve chosen to hold them accountable.
+
+Historically, this all happened via emailed reports which were passive and static.
+
+When we launched Victory — a reimagined version of our flagship accountability service — as a mobile app in 2021, in-app communication became possible. It was a more active, bi-directional channel which brought both opportunity and complexity.
+
+“Check-ins” began as a modest upgrade of our traditional email-based reporting. As we realized the true potential, however, we set our sights on something bigger: a deep, self-reflective experience, helping people connect in a more effective, relational way.
+
+<BreakoutImage src="/projects/check-in-alignment/evolution-reports-to-check-ins.jpg" alt="Image showing we progressed from data-heavy to more informational email reports, with check-ins marking a brand new chapter in how we deliver key accountability information." caption="Email reports had gone through many iterations over the past 15 years, and check-ins marked a brand new chapter." />
+
+### Problem
+
+Everyone was excited by the idea of check-ins, but as scope expanded it became clear the problem was no longer feature design — it was conceptual alignment.
+
+The team was operating in a state of “presumed agreement.”
+
+<CaptionedImage
+    src="/projects/check-in-alignment/glad-we-all-agree.png"
+    alt="Jeff Patton on how we go from presumed to actual agreement"
+    caption="Courtesy of Jeff Patton & Associates (https://jpattonassociates.com/glad-we-all-agree-2/)"
+    width={1200}
+    height={600}
+    class="h-full w-full rounded-lg object-cover"
+/>
+
+### Team
+
+My role was to support the design lead by diagnosing and resolving conceptual misalignment across stakeholders.
+
+<AvatarGroup display="grid" gridItemsSize="300px" gridGap="2rem">
+  <Avatar initials="TK" title="Tim" subtitle="Product Designer (lead)" />
+  <Avatar initials="BB" title="Ben" subtitle="Product Designer" />
+  <Avatar initials="AS" title="Aaron" subtitle="UX Researcher" />
+  <Avatar initials="CM" title="Collin" subtitle="Product Manager" />
+  <Avatar initials="SB" title="Sam" subtitle="Director, Recovery Ed" />
+  <Avatar initials="JO" title="Justin" subtitle="Marketing Manager" />
+  <Avatar initials="RB" title="Robert" subtitle="Member Care Manager" />
+  <Avatar initials="NM" title="Nicole" subtitle="VP Product" />
+  <Avatar initials="JP" title="John" subtitle="Product Strategist" />
+</AvatarGroup>
+
+### Constraints
+
+- Stakeholders expected concrete artifacts, while the real risk lived at the conceptual level. Tim and I deliberately paired his concrete artifacts with my abstract modeling to maintain momentum without locking in faulty assumptions.
+- The workshop was designed for in-person collaboration, with Tim facilitating. I needed to be an active participant but was not able to attend in person. We were able to overcome this, and it turned out better than anyone expected.
+- We had timeline pressure: just 3 weeks to plan and prepare, including running a series of pre-workshop stakeholder interviews.
+
+## Objective
+
+We needed to surface and resolve stakeholder misalignment *before* screens or detailed specs committed us to a direction that might lock in faulty assumptions or create product debt.
+
+## Diagnosis
+
+The team was operating under the presumption that everyone agreed. This apparent consensus masked quite a bit of misalignment and subtly stood in the way of progress.
+
+Key fault lines included:
+
+- Who the experience is primarily for (hero vs. ally)
+- What information a check-in should contain
+- Degree and timing of hero control
+- Whether check-ins would be more transactional or relational
+
+Without resolving these issues (and others) at an early stage, the downstream UI work would become a battleground where deeper disagreements re-emerged.
+
+## Approach
+
+### 1. Pre-workshop interviews
+
+I conducted six interviews with individual leaders who’d been invited to the workshop. 
+
+<CaptionedImage
+    src="/projects/check-in-alignment/onsite-plan.png"
+    alt="Diagram showing how we designed the workshop to lead from presumed agreement to actual agreement"
+    caption="These interviews were a foundational step toward alignment"
+    width={1200}
+    height={600}
+    class="h-full w-full rounded-lg object-cover"
+/>
+
+Using lightweight prompts, I focused on surfacing these issues:
+
+- Individual definitions of check-ins
+- Assumptions about structure, cadence, and ownership
+- Where confidence existed, and where it didn’t
+
+While there was generally strong agreement on desired *outcomes*, there was weak alignment on the *information structure and mechanics* that would allow us to achieve those outcomes.
+
+### 2. Agenda designed to foster productive conflict
+
+<CaptionedImage
+    src="/projects/check-in-alignment/misalignment-heatmap_hypothesis.jpg"
+    alt="Heatmap of topics that warranted deeper debate"
+    caption="Interviews suggested a number of areas where disagreement was likely, but only some of those topics would be productive at this stage."
+    width={1200}
+    height={600}
+    class="h-full w-full rounded-lg object-cover"
+/>
+
+Rather than presenting solutions, Tim and I decided to frame key areas of misalignment that were worth arguing about.
+
+The goal wasn’t consensus, it was reaching a shared understanding of tradeoffs.
+
+### 3. Conceptual modeling in real time
+
+During the first day of the onsite, I took detailed notes and created simple visual models in real time, in order to make abstract disagreements tangible and keep the discussion anchored in the right level of detail.
+
+This allowed stakeholders to disagree productively *without* defaulting to screens.
+
+<div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-2">
+
+    <CaptionedImage
+        src="/projects/check-in-alignment/personal-gap.jpg"
+        alt="Diagram showing how ally involvement will vary depending on the hero's current situation and goals"
+        caption="People need different things, but there's a structure to those differences."
+        width={1200}
+        height={600}
+        class="h-full w-full rounded-lg object-cover"
+    />
+    <CaptionedImage
+        src="/projects/check-in-alignment/progress-vs-motivation.jpg"
+        alt="Diagram showing how progress and motivation interact"
+        caption="People want progress, but it matters how we help them measure it"
+        width={1200}
+        height={600}
+        class="h-full w-full rounded-lg object-cover"
+    />
+
+</div>
+
+## Key Decisions
+
+### Align on concepts before screens
+
+We deliberately paused screen-level exploration to resolve foundational questions about what a check-in *is*, how it relates to reporting, and why it should exist in the system at all.
+
+This moved beyond the organization’s default expectations for UX — and initially outside Tim’s comfort zone — but it prevented downstream decision churn and rework.
+
+### Surface individual perspectives before group dynamics flattened them
+
+Productive disagreement is inevitable in the early stages of a project. The risk is letting it surface too late, in the wrong form.
+
+I met with each stakeholder to prevent that from happening.
+
+<CaptionedImage
+    src="/projects/check-in-alignment/stakeholder-interview_blurred.jpg"
+    alt="Notes from a stakeholder interview"
+    caption="I used a 'mad libs' format to gather peoples' answers to simple - but critical - questions"
+    width={1200}
+    height={600}
+    class="h-full w-full rounded-lg object-cover"
+/>
+
+Here were my discoveries:
+
+- Stakeholders had a lot of thoughts about how check-ins could benefit customers, so I encouraged Aaron (our researcher) to bring a strong “customer outcomes” angle, based in research, to keep these aspirations grounded.
+- Few had a clear idea of what information a check-in should contain. They described its *characteristics* but not what the information would actually be. I recommended Tim get into this on day 2.
+- We have two basic types of users: heroes and allies. Stakeholders were not aligned on who we were designing for. I suggested that Tim could raise this topic and help the group find common ground.
+- Some stakeholders (including the VP of Product) had strong opinions about the structure and mechanics of check-ins, while others barely mentioned it. We would need to understand the deeper “why” behind their ideas.
+
+Together, these insights shaped both the workshop agenda and the order in which decisions needed to be made.
+
+### Facilitate in person
+
+Being in the room allowed for disagreement to emerge and be channeled in a productive direction. Tim’s in-person facilitation was critical to maintaining momentum once difficult topics surfaced.
+
+<CaptionedImage
+    src="/projects/check-in-alignment/meeting-room-setup.jpg"
+    alt="How the meeting room was set up for virtual and in-person attendance"
+    caption="As a virtual attendee, I could show my work on the monitor or the projector"
+    width={1200}
+    height={600}
+    class="h-full w-full rounded-lg object-cover"
+/>
+
+Participants were also able to do hands-on activities like sketching. This leveled the playing field and helped each person play a more active role in decisions.
+
+<div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+
+    <CaptionedImage
+        src="/projects/check-in-alignment/stakeholder-concept_unknown.png"
+        alt=""
+        caption=""
+        width={1200}
+        height={600}
+        class="h-full w-full rounded-lg object-cover"
+    />
+    <CaptionedImage
+        src="/projects/check-in-alignment/stakeholder-concept_collin.jpg"
+        alt=""
+        caption=""
+        width={1200}
+        height={600}
+        class="h-full w-full rounded-lg object-cover"
+    />
+    <CaptionedImage
+        src="/projects/check-in-alignment/stakeholder-concept_nicole.jpeg"
+        alt=""
+        caption=""
+        width={1200}
+        height={600}
+        class="h-full w-full rounded-lg object-cover"
+    />
+
+</div>
+
+## Outcome
+
+### Explicit agreement
+
+The team moved from assumed alignment to explicit agreement on the fundamentals, including:
+
+- Check-ins as a container for reporting
+- Relationship-building as a primary goal (vs. something we presume will happen)
+- Clear boundaries around information sharing, with an emphasis on user privacy and agency
+
+<CaptionedImage
+    src="/projects/check-in-alignment/balancing-relationship-vs-porn.jpg"
+    alt="We determined to shift the balance from just the behavior toward the relationship"
+    caption="The balance between behavior and relationship is at the heart of our service, and we agreed to shift that balance toward the relationship"
+    width={1200}
+    height={600}
+    class="h-full w-full rounded-lg object-cover"
+/>
+
+### Working definition
+
+We arrived at a working definition of “check-in” which became a stable reference point for design, product, and leadership decisions.
+
+#### Check-in (noun)
+An opportunity for a hero to reflect on:
+
+- What they want for themselves
+- What they’ve committed to do
+- The progress they’ve made (or not)
+- What they can learn from their experience
+
+...In the presence of another whose intent is to help the hero achieve what they've committed to, where:
+
+- The ally’s agenda is secondary and contingent on the hero’s
+- Their engagement contributes to greater motivational autonomy for the hero
+- They engage in a way that's healthy and optimized for the long-term relationship
+
+### Successful launch
+
+This foundation materially improved our ability to move forward, enabling:
+
+- Faster, more confident downstream design
+- Streamlined (not perfect!) decision-making
+- Stronger buy-in across Product, UX, Marketing, and executive leadership
+
+The feature launched in January 2025. While challenges remained (as they always do) we avoided larger failures by addressing the right problems at the right level.
+
+## Reflection
+
+Most “design disagreement” is not about UI.
+
+It’s usually about peoples’ unexamined differences in one of these areas:
+
+1. **System model:** we disagree on how the system should work and why
+2. **Mental model:** we disagree about who we’re designing for and what *they* want, need, and expect
+3. **Conceptual model:** we disagree about how to reconcile #1 and #2
+
+UI will amplify those differences, however, it’s not the root cause.
+
+My role is to *identify where disagreement actually lives* and help teams resolve it consciously before it becomes product debt.

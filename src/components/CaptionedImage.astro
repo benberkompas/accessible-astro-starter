@@ -1,0 +1,77 @@
+---
+import { Image, type ImageMetadata } from 'astro:assets'
+
+/**
+ * CaptionedImage Component
+ *
+ * @description A component for displaying an image with an optional caption
+ */
+interface Props {
+  /**
+   * The image source (can be imported image or string path)
+   */
+  src: ImageMetadata | string
+  /**
+   * The image alt text
+   */
+  alt: string
+  /**
+   * Optional width for the image
+   */
+  width?: number
+  /**
+   * Optional height for the image
+   */
+  height?: number
+  /**
+   * Optional CSS classes to apply to the image
+   */
+  class?: string
+  /**
+   * Optional loading attribute
+   */
+  loading?: 'lazy' | 'eager'
+  /**
+   * Optional visible image caption text (only displays if provided)
+   */
+  caption?: string
+}
+
+const { 
+  src, 
+  alt, 
+  width, 
+  height, 
+  class: className,
+  loading = 'lazy',
+  caption 
+} = Astro.props
+---
+
+<div class="captioned-image">
+  <Image 
+    src={src} 
+    alt={alt} 
+    width={width}
+    height={height}
+    class={className}
+    loading={loading}
+  />
+  {caption && (
+    <p class="caption">{caption}</p>
+  )}
+</div>
+
+<style>
+  .captioned-image {
+    margin-block: 1rem;
+  }
+
+  .captioned-image .caption {
+    color: var(--color-neutral-500);
+    font-size: 1rem;
+    text-align: center;
+    margin-top: 0.5rem;
+  }
+</style>
+
