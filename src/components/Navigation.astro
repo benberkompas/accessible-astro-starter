@@ -280,8 +280,8 @@ import Logo from './Logo.astro'
           align-content: center;
         }
 
-        a:hover,
-        a:focus-visible,
+        a:hover:not(.highlight a),
+        a:focus-visible:not(.highlight a),
         .is-active,
         button[aria-expanded='true'],
         .has-dropdown > button:hover,
@@ -290,6 +290,12 @@ import Logo from './Logo.astro'
           text-decoration-style: wavy;
           text-decoration-thickness: 1px;
           text-underline-offset: 7px;
+        }
+        
+        // Exclude highlight links from general link hover styles
+        .highlight a:hover,
+        .highlight a:focus-visible {
+          text-decoration: none !important;
         }
 
         .is-active {
@@ -305,11 +311,29 @@ import Logo from './Logo.astro'
           border: 1px solid var(--foreground-color);
           border-radius: var(--radius-large);
           padding: var(--space-4xs) var(--space-2xs);
-          text-decoration: none;
+          text-decoration: none !important;
+          color: var(--foreground-color) !important;
+
+          // Ensure icon inherits text color
+          svg {
+            color: currentColor !important;
+            fill: currentColor !important;
+            stroke: currentColor !important;
+            transition: color var(--animation-speed-fast) var(--cubic-bezier), 
+                        fill var(--animation-speed-fast) var(--cubic-bezier),
+                        stroke var(--animation-speed-fast) var(--cubic-bezier);
+          }
 
           &:where(:hover, :focus-visible) {
-            background-color: var(--foreground-color);
+            background-color: var(--foreground-color) !important;
             color: var(--background-color) !important;
+            
+            // Ensure icon also changes color on hover
+            svg {
+              color: var(--background-color) !important;
+              fill: var(--background-color) !important;
+              stroke: var(--background-color) !important;
+            }
           }
         }
       }
