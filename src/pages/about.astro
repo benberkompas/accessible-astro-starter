@@ -1,45 +1,78 @@
 ---
 import DefaultLayout from '@layouts/DefaultLayout.astro'
 import PageHeader from '@components/PageHeader.astro'
-import Feature from '@components/Feature.astro'
-import { Button } from 'accessible-astro-components'
+import { Heading } from 'accessible-astro-components'
 ---
 
 <DefaultLayout title="About">
-    <section>
-        <PageHeader
-            title="About"
-            subtitle="Subtitle"
-            bgType="bordered"
-        />
-    </section>
+  <section>
+    <PageHeader title="About" subtitle="" bgType="bordered" showBreadcrumbs={false} />
+  </section>
 
-    <section class="my-12">
-        <div class="container space-content">
-            <p class="text-2xl">
-                The right solution<sup>3</sup> to the right problem<sup>2</sup> for the right people<sup>1</sup>. Built to deliver user value<sup>4</sup> that drives business value<sup>5</sup> in a way that's technically sustainable<sup>6</sup>.
-            </p>
-            <div class="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3">
-                <Feature icon="lucide:user" title="1. Right people">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quasi nobis optio? Qui in quo accusantium debitis sapiente obcaecati magnam incidunt sit.
-                </Feature>
-                <Feature icon="lucide:puzzle" title="2. Right problem">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quasi nobis optio? Qui in quo accusantium debitis sapiente.
-                </Feature>
-                <Feature icon="lucide:lightbulb" title="3. Right solution">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quasi nobis optio? Qui in quo accusantium.
-                </Feature>
-                <Feature icon="lucide:sparkles" title="4. User value">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quasi nobis optio? Qui in quo accusantium debitis sapiente obcaecati magnam.
-                </Feature>
-                <Feature icon="lucide:radar" title="5. Business value">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quasi nobis optio? Qui in quo accusantium debitis.
-                </Feature>
-                <Feature icon="lucide:code" title="6. Technical sustainability">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quasi nobis optio? Qui in quo accusantium.
-                </Feature>
-            </div>
-        </div>
-    </section>
+  <section class="my-12">
+    <div class="space-content container">
+      <Heading level="h2">What I'm best at</Heading>
+      <ul>
+        <li>
+          <strong>Systems thinking and information architecture:</strong> bringing structural clarity to complex, data-heavy
+          products through conceptual modeling, careful language, and productive debate
+        </li>
+        <li>
+          <strong>Problem framing:</strong> turning ambiguity into well-defined opportunities so teams solve the *right*
+          problem before investing in solutions
+        </li>
+        <li>
+          <strong>Domain fluency:</strong> developing working expertise in dense, technical spaces (healthcare, security,
+          developer tools) and translating real constraints into humane, usable systems
+        </li>
+        <li>
+          <strong>Cross-functional influence:</strong> aligning design, product, and engineering around shared mental models
+          without relying on formal authority
+        </li>
+        <li>
+          <strong>Research synthesis:</strong> extracting signal from messy inputs and connecting insights directly to strategic
+          decisions
+        </li>
+      </ul>
 
+      <Heading level="h2">What I love to do</Heading>
+      <ul>
+        <li>
+          <strong>Solve real, worthwhile problems:</strong> working with teams committed to helping others achieve outcomes
+          that matter to *them*, and building things we're proud to stand behind
+        </li>
+        <li>
+          <strong>Go deep on fewer things:</strong> spending the time required to understand a problem space and address
+          root causes, not just surface symptoms
+        </li>
+        <li>
+          <strong>Design durable frameworks:</strong> creating structures that scale, adapt, and endure, not just screens
+          that ship
+        </li>
+        <li>
+          <strong>Mentor designers:</strong> helping others strengthen their systems thinking, career judgment, and craft
+        </li>
+      </ul>
+
+      <Heading level="h2">What the world needs</Heading>
+      <ul>
+        <li>
+          <strong>Personal health and chronic disease:</strong> especially bone health and metabolic conditions, where clarity
+          and long-term behavior change matter deeply
+        </li>
+        <li>
+          <strong>Sustainable food systems:</strong> regenerative methods at scale, stronger local grower-consumer relationships,
+          and better access to truly nourishing food
+        </li>
+        <li>
+          <strong>Childhood education and life skills:</strong> restoring balance by reducing over-reliance on digital technology
+          and investing in practical, valuable skills
+        </li>
+        <li>
+          <strong>Faith in action:</strong> God was the first (and best) designer; our creative gifts are meant to serve
+          others and reflect care, humility, and excellence
+        </li>
+      </ul>
+    </div>
+  </section>
 </DefaultLayout>
