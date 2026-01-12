@@ -19,10 +19,13 @@ export const getStaticPaths = (async ({ paginate }) => {
   // Always fetch fresh projects from the content collection
   // This ensures new/updated .mdx files are picked up
   const projects = await getCollection('projects')
-  
+
   // Debug: Log the number of projects found
-  console.log(`[Portfolio] Found ${projects.length} projects:`, projects.map(p => p.id))
-  
+  console.log(
+    `[Portfolio] Found ${projects.length} projects:`,
+    projects.map((p) => p.id)
+  )
+
   if (projects.length === 0) {
     console.error('[Portfolio] WARNING: No projects found in collection!')
     console.error('[Portfolio] This could mean:')
@@ -47,7 +50,7 @@ export const getStaticPaths = (async ({ paginate }) => {
   const projectsWithImages = sortedProjects.map((p, index) => {
     // Check if project has a custom featuredImage from frontmatter
     const customImage = p.data.featuredImage
-    
+
     if (customImage?.src) {
       // Use custom image path from frontmatter
       // The Card component will use the `img` prop for path strings
@@ -72,26 +75,20 @@ export const getStaticPaths = (async ({ paginate }) => {
 }) satisfies GetStaticPaths
 
 interface Props {
-  page: Page<CollectionEntry<'projects'> & { 
-    featuredImage?: any
-    featuredImagePath?: string
-    featuredImageAlt?: string
-  }>
+  page: Page<
+    CollectionEntry<'projects'> & {
+      featuredImage?: any
+      featuredImagePath?: string
+      featuredImageAlt?: string
+    }
+  >
 }
 
 const { page } = Astro.props
 ---
 
-<DefaultLayout
-  title="Portfolio"
-  description="Samples of my best work (so far)"
->
-  <PageHeader
-    title="Portfolio"
-    subtitle=""
-    bgType="bordered"
-    showBreadcrumbs=""
-  />
+<DefaultLayout title="Portfolio" description="Samples of my best work (so far)">
+  <PageHeader title="Portfolio" subtitle="" bgType="bordered" showBreadcrumbs="" />
   <section class="my-12">
     <div class="container">
       <p class="text-sm"><em>Project {page.start + 1} through {page.end + 1} of {page.total} total projects</em></p>
