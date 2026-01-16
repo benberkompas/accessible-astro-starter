@@ -1,6 +1,7 @@
 ---
 import { Avatar, Breadcrumbs, BreadcrumbsItem, Heading } from 'accessible-astro-components'
 import { Image } from 'astro:assets'
+import { Icon } from 'astro-icon/components'
 import sanitizeHtml from 'sanitize-html'
 
 /**
@@ -44,9 +45,27 @@ interface Props {
    * Whether to show the breadcrumbs
    */
   showBreadcrumbs?: boolean
+  /**
+   * The reading time in minutes
+   */
+  minutes?: number
+  /**
+   * The company associated with the content
+   */
+  company?: string
 }
 
-const { class: className, title, subtitle, bgType, showBreadcrumbs = true, featuredImage, author } = Astro.props
+const {
+  class: className,
+  title,
+  subtitle,
+  bgType,
+  showBreadcrumbs = true,
+  featuredImage,
+  author,
+  minutes,
+  company,
+} = Astro.props
 
 // Sanitize subtitle HTML if present
 const sanitizedSubtitle: string = subtitle
@@ -100,13 +119,26 @@ const sanitizedSubtitle: string = subtitle
               alt=""
               width={1200}
               height={250}
-              class="h-[300px] w-full rounded-lg object-cover border"
+              class="h-[300px] w-full rounded-lg border object-cover"
             />
           </div>
         )
       }
       <Heading level="h1">{title}</Heading>
       {sanitizedSubtitle && <p class="text-2xl" set:html={sanitizedSubtitle} />}
+      {
+        (minutes || company) && (
+          <div class="mt-4 flex flex-wrap items-center gap-4 text-neutral-500">
+            {minutes && (
+              <span class="flex items-center gap-2">
+                <Icon name="lucide:clock" aria-hidden="true" />
+                {minutes} min read
+              </span>
+            )}
+            {company && <span>Company: {company}</span>}
+          </div>
+        )
+      }
       {
         author && (
           <div class="mt-6 flex items-center">
