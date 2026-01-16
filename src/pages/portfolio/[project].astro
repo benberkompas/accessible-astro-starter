@@ -24,7 +24,7 @@ export async function getStaticPaths() {
   const projectsWithImages = projects.map((project, index) => {
     // Check if project has a custom featuredImage from frontmatter
     const customImage = project.data.featuredImage
-    
+
     if (customImage?.src) {
       // Use custom image path from frontmatter
       return {
@@ -64,7 +64,7 @@ const author = {
   <PageHeader
     title={project.data.title}
     subtitle={project.data.description}
-    author={author}
+    author={undefined}
     bgType="bordered"
     featuredImage={project.featuredImage}
   />
