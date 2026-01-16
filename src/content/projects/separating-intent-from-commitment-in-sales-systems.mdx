@@ -1,0 +1,124 @@
+---
+title: Separating Intent from Commitment in Sales Systems
+author: Ben Berkompas
+description: A system design case study about separating recognition, qualification, and commitment — so sales tools support real customer relationships, not just transactions.
+minutes: 5
+company: Home Depot
+featuredImage:
+  src: /projects/customer-intent/diagram-banner.jpg
+  alt: Description of the image
+order: 3
+---
+
+import { 
+  Heading, 
+  Media,
+  Avatar, 
+  AvatarGroup
+} from 'accessible-astro-components'
+import BlockQuote from '@components/BlockQuote.astro'
+import Callout from '@components/Callout.astro'
+import BreakoutImage from '@components/BreakoutImage.astro'
+import { Image } from 'astro:assets'
+import AccessibleGallery from '@components/AccessibleGallery.astro'
+    
+## Situation
+
+By 2017, QuoteCenter had become a core part of The Home Depot’s strategy to grow share with professional contractors.
+
+QuoteCenter 2.0 (QC2) was a platform-wide update intended to streamline quoting while more deeply integrating with the order management and POS systems used daily in stores.
+
+### Problem
+
+Pro Sales Associates were evaluated on close rate, quotas, and follow-ups, often tied to specific customers they were responsible for. As a result, many were reluctant to create an order before they had confidence in a customer’s intent. Doing so could inflate their pipeline and make personal close rates appear artificially low.
+
+In QC1, QuoteCenter implicitly supported this behavior through workarounds like “ghost bids,” which allowed associates to explore pricing without formally committing to an order.
+
+QC2 removed those loopholes. The team now had to decide when the system should require commitment to drive a sale, and when it should allow exploration so associates could serve customers without prematurely inflating their order count.
+
+### Team
+
+I modeled associate workflows, conducted field interviews, synthesized findings, and made system-level design recommendations.
+
+In doing so, I helped the team recognize that customer intent is *inferred* over time — not known upfront — and redesign the system to support progressive commitment rather than forcing premature decisions.
+
+<AvatarGroup display="grid" gridItemsSize="300px" gridGap="2rem">
+  <Avatar initials="BB" title="Ben" subtitle="Design Lead" />
+  <Avatar initials="LF" title="Leo" subtitle="UX Manager" />
+  <Avatar initials="MB" title="Mike" subtitle="Product Manager" />
+</AvatarGroup>
+
+I interviewed Pro Sales Associates from multiple U.S. stores: Yvette (OR), Raul (CA), Christina (CA), Michelle (WA), Paul (TX), Lucas (MN), and Carrie (TX).
+
+### Constraints
+
+- **System constraints:** The Volume Pricing Program (VPP) required an order ID for every bid, forcing associates to create an order *before* knowing whether discounted pricing would lead to a purchase.
+- **Behavioral patterns:** Associates had learned to delay commitment in QC1 — using it to determine pricing without creating official orders — and resisted workflows that removed that flexibility.
+- **Mental models:** QuoteCenter was not the default starting point for many associates, who treated it as a secondary tool used when a customer was not yet ready to buy.
+
+<BlockQuote author="Lucas, Pro Sales Associate (Store 2832 - Albert Lea, MN)">If I have a customer who knows exactly what he wants, I will just go into eSVS to punch SKUs in. Otherwise I’ll go to HD.com or QC to look stuff up.</BlockQuote>
+
+## Objective
+
+Design QC2 to support progressive customer commitment, balancing business requirements for customer data with how associates actually infer purchase intent.
+
+## Diagnosis
+
+We were implicitly designing for three distinct moments:
+
+1. **Recognition** — knowing who the customer is
+2. **Qualification** — determining whether they intend to purchase
+3. **Commitment** — formally creating an order in the system
+
+QC2 collapsed these into a single step, forcing commitment before associates could qualify customer intent. As a result, the system was misaligned with how they actually worked — and was often bypassed in real sales interactions.
+
+<BlockQuote author="Raul, Pro Sales Associate (Store 1059 - El Centro, CA)">You’ve got to identify them, then qualify them, then put their name in the system and do your follow-up. ‘Identify customer’ and ‘qualify customer’ would come first. ‘Create new’ and ‘Find existing’ branch from there. Then you go to salesmanship.</BlockQuote>
+
+## Approach
+
+I began by modeling the associate–customer workflow as it was currently designed.
+
+<BreakoutImage src="/projects/customer-intent/diagram.jpg" alt="The workflow we had been designing and building" caption="We were making some big assumptions about how associates actually worked with customers" />
+
+I then interviewed Pro Sales Associates across multiple stores to validate and challenge that model.
+
+Finally, I synthesized the findings into a small set of system-level rules.
+
+## Solution
+
+The following rules emerged from the interviews and guided all subsequent design decisions. Together, they separated recognition, qualification, and commitment, allowing the system to reflect how associates actually operated.
+
+#### 1. Allow exploration without commitment
+
+Associates must be able to look up products and pricing without committing a customer to the system.
+
+#### 2. Gate irreversible actions on explicit commitment
+
+Actions that create downstream consequences — such as placing an order or generating an official quote — require an attached customer.
+
+#### 3. Make commitment visible but optional until required
+
+The option to attach a customer should be obvious and easily accessible, without blocking early-stage workflows.
+
+#### 4. Surface context after commitment
+
+Once a customer is attached, relevant context (identity, history, account status) should be immediately available to support follow-up and continuity.
+
+## Outcome
+
+This work helped the QC2 team avoid enforcing a workflow that would likely have been resisted regardless of UI quality.
+
+<Image
+    src="/projects/customer-intent/checkout.jpg"
+    alt=""
+    caption="Image courtesy of Home Depot (https://corporate.homedepot.com/page/image-gallery)"
+    width={1200}
+    height={600}
+    class="h-full w-full rounded-lg object-cover"
+/>
+
+It also established a shared mental model for intent-based workflow design, shifting focus from quoting and ordering to supporting how associates actually manage their customer relationships.
+
+After all, sales is about service — not just the transaction.
+
+<BlockQuote author="Raul, Pro Sales Associate (Store 1059 - El Centro, CA)">Sometimes you don't want to just take their money... I recently helped a lady who came in with drawings for a roofing project. She didn't fully know what she wanted, and I helped her build a materials list. When she said, ‘Let me just pay for this and we'll go,’ I stopped her and said, ‘Time out, the person who is going to install this will need to review it. You're out in the dessert. We don't want to make a mistake on the delivery.’</BlockQuote>
