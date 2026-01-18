@@ -5,17 +5,13 @@ import { Heading } from 'accessible-astro-components'
 import Image from 'astro/components/Image.astro'
 import Feature from '@components/Feature.astro'
 import { Link } from 'accessible-astro-components'
+import ContentMedia from '@components/ContentMedia.astro'
 ---
 
 <DefaultLayout title="Philosophy">
-  <PageHeader
-    title="Philosophy"
-    subtitle="I work in a principled way that emphasizes ethical integrity, mutual benefit, and structural longevity."
-    bgType="bordered"
-    showBreadcrumbs={false}
-  />
+  <PageHeader title="Philosophy" subtitle="" bgType="bordered" showBreadcrumbs={false} />
 
-  <section class="my-12">
+  <!--<section class="my-12">
     <div class="space-content container">
       <p>
         The right solution<sup>3</sup> to the right problem<sup>2</sup> for the right people<sup>1</sup>. Built to
@@ -39,31 +35,55 @@ import { Link } from 'accessible-astro-components'
           class="h-full w-full rounded-lg object-cover"
         />
       </div>
-      <!-- <div class="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3">
-        <Feature icon="lucide:user" title="1. Right people">
-          The specific people we've chosen to serve, defined in terms of their relevant characteristics, contexts, and
-          the domain they operate within.
-        </Feature>
-        <Feature icon="lucide:puzzle" title="2. Right problem">
-          The specific problems those people actually face in the domain &mdash; whether obstacles or unmet needs
-          &mdash; and that make sense for us to address.
-        </Feature>
-        <Feature icon="lucide:lightbulb" title="3. Right solution">
-          The solution(s) that we believe will do the best job of addressing those problems. This is highly
-          experimental.
-        </Feature>
-        <Feature icon="lucide:sparkles" title="4. Customer value">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quasi nobis optio? Qui in quo accusantium
-          debitis sapiente obcaecati magnam.
-        </Feature>
-        <Feature icon="lucide:radar" title="5. Business value">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quasi nobis optio? Qui in quo accusantium
-          debitis.
-        </Feature>
-        <Feature icon="lucide:code" title="6. Technical sustainability">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quasi nobis optio? Qui in quo accusantium.
-        </Feature>
-      </div> -->
     </div>
-  </section>
+  </section>-->
+
+  <ContentMedia imgSrc="/philosophy/people-problem-solution.png">
+    <Heading level="h2">Deliberate Choices</Heading>
+    <p class="text-2xl">
+      The right solution<sup>3</sup> to the right problem<sup>2</sup> for the right people<sup>1</sup>.
+    </p>
+    <p>
+      Software is a means to an end. It ought to be designed that way, beginning with the people we're designing for,
+      and focusing on helping them solve the problems that matter most to them.
+    </p>
+    <p>
+      "Success", then, is multifaceted. It is ultimately measured in terms of how much we improve the lives of the
+      people who use the system we've built.
+    </p>
+    <p>Everything else is a means to that end.</p>
+  </ContentMedia>
+
+  <ContentMedia imgSrc="/philosophy/customer-business-tech.png" reverseImg={true}>
+    <Heading level="h2">Mutual Benefit</Heading>
+    <p class="text-2xl">
+      Built to deliver customer value<sup>4</sup> that drives business value<sup>5</sup> in a way that's technically sustainable<sup
+        >6</sup
+      >.
+    </p>
+    <p>
+      Business success depends largely on customer success. When we find the synergy between the two, we create a
+      virtuous cycle of mutual benefit: customer value &rarr; business value.
+    </p>
+    <p>
+      Engineering is involved early and often, to ensure that this value can be delivered powerfully and sustainably
+      over time.
+    </p>
+  </ContentMedia>
+
+  <ContentMedia imgSrc="/philosophy/system-conceptual-mental-models.png">
+    <Heading level="h2">Systemic Fit</Heading>
+    <p class="text-2xl">
+      Bridging the gap between the way the system actually works and the way people expect it to work.
+    </p>
+    <p>Mental models are the unstated expectations, needs, and desires people bring into their experience.</p>
+    <p>
+      The system model is the way the system actually works, the composite of all the decisions we've made in building
+      it.
+    </p>
+    <p>
+      Most of my work is in the space between &mdash; the conceptual model "bridge" &mdash; helping us create and
+      strengthen systemic fit between the two.
+    </p>
+  </ContentMedia>
 </DefaultLayout>
