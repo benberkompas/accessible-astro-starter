@@ -2,41 +2,12 @@
 import DefaultLayout from '@layouts/DefaultLayout.astro'
 import PageHeader from '@components/PageHeader.astro'
 import { Heading } from 'accessible-astro-components'
-import Image from 'astro/components/Image.astro'
-import Feature from '@components/Feature.astro'
-import { Link } from 'accessible-astro-components'
 import ContentMedia from '@components/ContentMedia.astro'
+import Image from 'astro/components/Image.astro'
 ---
 
 <DefaultLayout title="Philosophy">
   <PageHeader title="Philosophy" subtitle="" bgType="bordered" showBreadcrumbs={false} />
-
-  <!--<section class="my-12">
-    <div class="space-content container">
-      <p>
-        The right solution<sup>3</sup> to the right problem<sup>2</sup> for the right people<sup>1</sup>. Built to
-        deliver customer value<sup>4</sup> that drives business value<sup>5</sup> in a way that's technically sustainable<sup
-          >6</sup
-        >.
-      </p>
-      <div class="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-2">
-        <Image
-          src="/philosophy/people-problem-solution.png"
-          alt="Valid and invalid combinations"
-          width={1200}
-          height={600}
-          class="h-full w-full rounded-lg object-cover"
-        />
-        <Image
-          src="/philosophy/customer-business-tech.png"
-          alt="Valid and invalid combinations"
-          width={1200}
-          height={600}
-          class="h-full w-full rounded-lg object-cover"
-        />
-      </div>
-    </div>
-  </section>-->
 
   <ContentMedia imgSrc="/philosophy/people-problem-solution.png">
     <Heading level="h2">Deliberate Choices</Heading>
@@ -86,4 +57,24 @@ import ContentMedia from '@components/ContentMedia.astro'
       strengthen systemic fit between the two.
     </p>
   </ContentMedia>
+
+  <section class="my-12">
+    <div class="space-content container">
+      <Heading level="h2">In Practice</Heading>
+      <p class="text-2xl">
+        While principles are crucial, they are only as good as the practice that brings them to life.
+      </p>
+      <p>
+        This is how I apply the principles described above in my design practice. It's a general sequence of steps, not
+        a strict linear process.
+      </p>
+      <Image
+        src="/philosophy/practice.png"
+        alt="Principles in practice"
+        width={1200}
+        height={600}
+        class="h-full w-full rounded-lg object-cover"
+      />
+    </div>
+  </section>
 </DefaultLayout>
