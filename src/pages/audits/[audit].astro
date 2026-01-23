@@ -1,0 +1,92 @@
+---
+import DefaultLayout from '@layouts/DefaultLayout.astro'
+import PageHeader from '@components/PageHeader.astro'
+import SocialShares from '@components/SocialShares.astro'
+import { Heading } from 'accessible-astro-components'
+import { getCollection, render } from 'astro:content'
+import type { CollectionEntry } from 'astro:content'
+
+// Import images directly for optimization
+import projectImage1 from '@assets/images/projects/project-image-1.png'
+import projectImage2 from '@assets/images/projects/project-image-2.png'
+import projectImage3 from '@assets/images/projects/project-image-3.png'
+import projectImage4 from '@assets/images/projects/project-image-4.png'
+import projectImage5 from '@assets/images/projects/project-image-5.png'
+import projectImage6 from '@assets/images/projects/project-image-6.png'
+
+export async function getStaticPaths() {
+  const audits = await getCollection('audits')
+
+  // Define fallback images array
+  const auditImages = [projectImage1, projectImage2, projectImage3, projectImage4, projectImage5, projectImage6]
+
+  // Map audits with proper image handling - same logic as audits listing
+  const auditsWithImages = audits.map((audit, index) => {
+    // Check if audit has a custom featuredImage from frontmatter
+    const customImage = audit.data.featuredImage
+
+    if (customImage?.src) {
+      // Use custom image path from frontmatter
+      return {
+        ...audit,
+        featuredImage: customImage.src, // String path for PageHeader
+      }
+    } else {
+      // Use fallback imported image component
+      return {
+        ...audit,
+        featuredImage: auditImages[index % auditImages.length], // Imported image for PageHeader
+      }
+    }
+  })
+
+  return auditsWithImages.map((audit) => ({
+    params: { audit: audit.id },
+    props: { audit },
+  }))
+}
+
+interface Props {
+  audit: CollectionEntry<'audits'> & { featuredImage: string | any }
+}
+
+const { audit } = Astro.props
+const { Content } = await render(audit)
+
+const author = {
+  name: audit.data.author,
+  image: '/projects/project-image-1.png',
+  bio: 'Audit Creator',
+}
+---
+
+<DefaultLayout title={audit.data.title} description={audit.data.description} url={`/audits/${audit.id}`}>
+  <PageHeader
+    title={audit.data.title}
+    subtitle={audit.data.description}
+    author={undefined}
+    bgType="bordered"
+    featuredImage={audit.featuredImage}
+    minutes={audit.data.minutes}
+    company={audit.data.company}
+  />
+  <section class="my-12">
+    <div class="narrow space-content container">
+      <Content />
+    </div>
+  </section>
+  <!-- <section class="my-12">
+    <div class="narrow space-content container">
+      <Heading level="h2">Share this audit</Heading>
+      <p>Like this audit? Share it with your network!</p>
+      <SocialShares />
+    </div>
+  </section> -->
+</DefaultLayout>
+
+<style lang="scss" is:global>
+  .narrow {
+    margin-inline: auto;
+    max-width: 65ch;
+  }
+</style>

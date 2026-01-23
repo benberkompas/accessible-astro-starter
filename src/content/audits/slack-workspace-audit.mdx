@@ -1,0 +1,87 @@
+---
+title: Slack Workspace Communication Model
+author: Ben Berkompas
+description: Analyzing how Slack structures conversations, channels, workspaces, and messages to enable effective team communication.
+minutes: 22
+order: 5
+auditType: general-audit
+featuredImage:
+  src: /projects/project-image-5.png
+  alt: Slack workspace interface
+---
+
+import { Heading, Media } from 'accessible-astro-components'
+import { Image } from 'astro:assets'
+import ContentMedia from '@components/ContentMedia.astro'
+
+## Overview
+
+Slack has redefined workplace communication by organizing conversations around channels rather than individual messages. This audit examines the object model that makes this work.
+
+## Core Objects
+
+**Workspace** - The top-level organization:
+- Contains teams and members
+- Has settings and configurations
+- Manages billing and subscriptions
+
+**Channels** - Conversation spaces:
+- Can be public or private
+- Have members
+- Contain messages and threads
+- Support integrations and apps
+
+**Messages** - Individual communication units:
+- Belong to channels or DMs
+- Can be threaded
+- Support reactions and files
+- Have timestamps and authors
+
+**Threads** - Nested conversations:
+- Belong to parent messages
+- Keep related discussions organized
+- Reduce channel noise
+
+**Direct Messages** - Private conversations:
+- Between two or more users
+- Function like channels but private
+- Contain messages and files
+
+## Relationship Structure
+
+- Workspace → Channels (one-to-many)
+- Workspace → Members (one-to-many)
+- Channels → Messages (one-to-many)
+- Messages → Threads (one-to-many)
+- Messages → Reactions (one-to-many)
+- Users → DMs (many-to-many)
+
+## Mental Model
+
+Slack's model centers on **channels as places**:
+
+1. **Spatial Metaphor**: Channels feel like rooms where conversations happen.
+
+2. **Threading Reduces Noise**: Threads allow detailed discussions without cluttering the main channel.
+
+3. **Membership Defines Access**: Channel membership determines what users can see and do.
+
+## Design Strengths
+
+- **Clear Hierarchy**: Workspace → Channel → Message creates intuitive navigation
+- **Flexible Organization**: Channels can be organized by topic, project, or team
+- **Context Preservation**: Threads keep related messages together
+
+## System Challenges
+
+- **Notification Complexity**: With many channels, managing notifications becomes difficult
+- **Information Overload**: High-activity channels can become overwhelming
+- **Search Challenges**: Finding specific information across many channels requires good search
+
+## Key Takeaways
+
+For communication tools:
+- Spatial metaphors help users understand organization
+- Threading can reduce noise while preserving context
+- Membership models need to balance access with privacy
+- Search becomes critical as scale increases

@@ -1,0 +1,78 @@
+---
+title: OOUX Analysis of Notion
+author: Ben Berkompas
+description: A comprehensive Object-Oriented UX analysis of Notion, examining how objects, relationships, and mental models shape the user experience of this powerful workspace tool.
+minutes: 20
+order: 1
+auditType: competitor-analysis
+featuredImage:
+  src: /projects/project-image-1.png
+  alt: Notion workspace interface
+---
+
+import { Heading, Media } from 'accessible-astro-components'
+import { Image } from 'astro:assets'
+import ContentMedia from '@components/ContentMedia.astro'
+
+## Overview
+
+Notion has become one of the most popular workspace tools by combining notes, databases, wikis, and project management into a single platform. This OOUX audit examines how Notion structures its object model and how that impacts user understanding and workflow.
+
+## Object Mapping
+
+### Core Objects
+
+**Pages** - The fundamental building block. Pages can contain:
+- Text content
+- Nested pages (creating hierarchies)
+- Database views
+- Embeds and media
+
+**Databases** - Structured collections that can be viewed in multiple ways:
+- Table view
+- Board view (Kanban)
+- Calendar view
+- Gallery view
+- List view
+
+**Blocks** - Atomic content units within pages (paragraphs, headings, images, etc.)
+
+### Key Relationships
+
+- Pages can contain other Pages (parent-child relationship)
+- Pages can contain Databases
+- Databases contain Pages (each row is a page)
+- Blocks belong to Pages
+- Pages can be linked to other Pages
+
+## Mental Model Analysis
+
+Notion's mental model is built around the concept of "everything is a page." This creates both power and complexity:
+
+**Strengths:**
+- Consistent interaction patterns across different content types
+- Flexible nesting allows for deep organization
+- Database rows as pages enables rich content within structured data
+
+**Challenges:**
+- The "page as database row" concept can be confusing initially
+- Relationship between databases and pages requires mental translation
+- Nested page hierarchies can become difficult to navigate
+
+## System Architecture Insights
+
+The object model reveals several design decisions:
+
+1. **Unified Content Model**: By making everything a page, Notion reduces the number of distinct object types users must learn.
+
+2. **Flexible Relationships**: Pages can link to other pages, creating a graph-like structure that supports various organizational patterns.
+
+3. **View Abstraction**: Databases separate the data model from the presentation, allowing multiple views of the same underlying structure.
+
+## Recommendations
+
+For teams building similar workspace tools, consider:
+
+- How to balance flexibility with clarity
+- When to introduce complexity vs. keeping things simple
+- How object relationships can support or hinder user workflows

@@ -1,0 +1,105 @@
+---
+title: Spotify Music Platform Object Model
+author: Ben Berkompas
+description: Analyzing how Spotify structures artists, albums, tracks, playlists, and user libraries to create a comprehensive music discovery and listening experience.
+minutes: 16
+order: 8
+auditType: general-audit
+featuredImage:
+  src: /projects/project-image-2.png
+  alt: Spotify interface showing playlists and albums
+---
+
+import { Heading, Media } from 'accessible-astro-components'
+import { Image } from 'astro:assets'
+import ContentMedia from '@components/ContentMedia.astro'
+
+## Overview
+
+Spotify has revolutionized music consumption by making vast libraries accessible through intelligent organization. This audit examines the object model that makes music discovery and library management work.
+
+## Core Objects
+
+**Track** - Individual songs:
+- Belongs to Albums
+- Performed by Artists
+- Has metadata (duration, genre, etc.)
+- Can be in multiple Playlists
+
+**Album** - Collections of tracks:
+- Created by Artists
+- Has release dates and artwork
+- Contains multiple tracks in sequence
+
+**Artist** - Music creators:
+- Create Albums
+- Perform Tracks
+- Have profiles and followers
+- Can be followed by Users
+
+**Playlist** - User-created collections:
+- Contains Tracks
+- Created by Users
+- Can be collaborative
+- Has descriptions and artwork
+
+**User Library** - Personal collection:
+- Saved Albums
+- Saved Tracks
+- Followed Artists
+- Followed Playlists
+
+## Relationship Patterns
+
+- Artist → Albums (one-to-many)
+- Album → Tracks (one-to-many)
+- Artist → Tracks (many-to-many, through albums)
+- User → Playlists (one-to-many)
+- Playlist → Tracks (many-to-many)
+- User → Library (one-to-one)
+- Library → Albums, Tracks, Artists (many-to-many)
+
+## Mental Model
+
+Spotify's model reflects how people think about music:
+
+1. **Hierarchical Organization**: Artist → Album → Track mirrors physical music organization.
+
+2. **Flexible Grouping**: Playlists allow custom organization beyond albums.
+
+3. **Personal Collection**: Library provides a "my music" mental model.
+
+## Design Patterns
+
+**Discovery Through Relationships**: 
+- "Fans also like" uses artist relationships
+- "Similar to" uses track metadata
+- Playlists suggest related tracks
+
+**Context Preservation**:
+- Playing a track shows its album and artist
+- Navigation maintains context (album → artist → similar artists)
+
+**Library Management**:
+- Save vs. Follow distinction (albums/tracks vs. artists/playlists)
+- Download for offline access
+
+## System Strengths
+
+- **Rich Metadata**: Extensive tagging enables powerful discovery
+- **Relationship Exploration**: Easy navigation between related content
+- **Personalization**: Library and playlists create personal experiences
+
+## Challenges
+
+- **Scale Complexity**: Millions of tracks require efficient organization
+- **Discovery Overload**: Too many options can be paralyzing
+- **Library Management**: Large libraries become difficult to navigate
+
+## Key Takeaways
+
+For content platforms:
+- Mirror real-world organization patterns
+- Support both structured (albums) and flexible (playlists) organization
+- Use relationships to enable discovery
+- Balance personalization with exploration

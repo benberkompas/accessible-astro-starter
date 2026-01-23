@@ -30,5 +30,25 @@ const projects = defineCollection({
   }),
 })
 
+const audits = defineCollection({
+  loader: glob({ 
+    pattern: '**/*.mdx', 
+    base: join(__dirname, 'content', 'audits')
+  }),
+  schema: z.object({
+    title: z.string(),
+    author: z.string(),
+    description: z.string(),
+    minutes: z.number().optional(),
+    company: z.string().optional(),
+    order: z.number().optional(),
+    featuredImage: z.object({
+      src: z.string(),
+      alt: z.string(),
+    }).optional(),
+    auditType: z.enum(['competitor-analysis', 'pre-interview', 'general-audit']).optional(),
+  }),
+})
+
 // 4. Export a single `collections` object to register you collection(s)
-export const collections = { projects }
+export const collections = { projects, audits }

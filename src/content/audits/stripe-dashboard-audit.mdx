@@ -1,0 +1,90 @@
+---
+title: Stripe Dashboard Object Model Analysis
+author: Ben Berkompas
+description: A pre-interview OOUX audit of Stripe's merchant dashboard, examining how payment objects, transactions, and account relationships are structured.
+minutes: 25
+company: Stripe
+order: 4
+auditType: pre-interview
+featuredImage:
+  src: /projects/project-image-4.png
+  alt: Stripe dashboard interface
+---
+
+import { Heading, Media } from 'accessible-astro-components'
+import { Image } from 'astro:assets'
+import ContentMedia from '@components/ContentMedia.astro'
+
+## Overview
+
+Stripe's merchant dashboard is a complex financial tool that must balance power with clarity. This audit examines how Stripe structures its object model to help merchants understand their business.
+
+## Primary Objects
+
+**Account** - The merchant account, containing:
+- Business information
+- Connected accounts (for platforms)
+- Settings and configurations
+
+**Payments** - Individual payment transactions:
+- Belong to Customers
+- Associated with Invoices
+- Have status (succeeded, failed, pending)
+- Include metadata and line items
+
+**Customers** - People or businesses making payments:
+- Have payment methods
+- Associated with subscriptions
+- Contain payment history
+
+**Invoices** - Billing documents:
+- Contain line items
+- Associated with subscriptions
+- Generate payments
+
+**Subscriptions** - Recurring billing relationships:
+- Have plans and pricing
+- Generate invoices
+- Track billing cycles
+
+## Object Relationships
+
+- Account → Customers (one-to-many)
+- Customers → Payments (one-to-many)
+- Customers → Subscriptions (one-to-many)
+- Subscriptions → Invoices (one-to-many)
+- Invoices → Payments (one-to-one, typically)
+
+## Mental Model Challenges
+
+Financial systems have inherent complexity:
+
+1. **Temporal Relationships**: Payments, invoices, and subscriptions have time-based relationships that can be confusing.
+
+2. **Status Transitions**: Objects move through various states (pending → succeeded → refunded), requiring clear status communication.
+
+3. **Error States**: Failed payments, declined cards, and disputes create additional object states that must be handled.
+
+## Design Patterns
+
+**Hierarchical Organization**: Account → Customer → Payment creates clear ownership chains.
+
+**Status Visibility**: Payment and subscription statuses are prominently displayed to reduce confusion.
+
+**Contextual Actions**: Actions are available based on object state (e.g., "Refund" only for succeeded payments).
+
+## Key Insights
+
+1. **Clarity Over Features**: Stripe prioritizes making complex financial concepts understandable.
+
+2. **Progressive Disclosure**: Advanced features are hidden until needed, reducing cognitive load.
+
+3. **Error Recovery**: The object model supports clear error states and recovery paths.
+
+## Recommendations
+
+For financial product design:
+- Make object relationships explicit
+- Provide clear status indicators
+- Support error recovery in the object model
+- Use progressive disclosure for complexity

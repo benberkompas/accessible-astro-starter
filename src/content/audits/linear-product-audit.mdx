@@ -1,0 +1,66 @@
+---
+title: Linear Product Management Platform Audit
+author: Ben Berkompas
+description: An OOUX deep-dive into Linear's issue tracking and product management system, focusing on how object relationships enable efficient workflows for engineering teams.
+minutes: 15
+company: Linear
+order: 2
+auditType: competitor-analysis
+featuredImage:
+  src: /projects/project-image-2.png
+  alt: Linear workspace interface
+---
+
+import { Heading, Media } from 'accessible-astro-components'
+import { Image } from 'astro:assets'
+import ContentMedia from '@components/ContentMedia.astro'
+
+## Overview
+
+Linear has reimagined issue tracking by focusing on speed, clarity, and developer experience. This audit examines how their object model supports rapid iteration and clear communication.
+
+## Object Model
+
+### Primary Objects
+
+**Issues** - The core work unit. Each issue represents:
+- A task, bug, or feature request
+- Belongs to a Project
+- Has a Team assignment
+- Contains comments, attachments, and history
+
+**Projects** - Collections of issues organized around:
+- Product initiatives
+- Sprints or milestones
+- Feature releases
+
+**Teams** - Organizational units that own issues and projects
+
+**Cycles** - Time-bound iterations (similar to sprints)
+
+### Relationship Patterns
+
+- Issues → Projects (many-to-one)
+- Issues → Teams (many-to-one)
+- Issues → Cycles (many-to-one, optional)
+- Projects → Teams (many-to-one)
+
+## Design Patterns
+
+**Minimal Object Types**: Linear intentionally limits object types to reduce cognitive load. This contrasts with tools like Jira that offer extensive customization.
+
+**Clear Ownership**: Every issue has explicit team ownership, reducing ambiguity about who's responsible.
+
+**Temporal Organization**: Cycles provide a lightweight way to group work by time without the overhead of formal sprint management.
+
+## Key Insights
+
+1. **Simplicity Through Constraint**: By limiting object types, Linear makes the system easier to understand and use.
+
+2. **Relationship Clarity**: The explicit relationships (issue → project → team) create clear mental models.
+
+3. **Workflow Optimization**: The object model directly supports common engineering workflows without requiring extensive configuration.
+
+## Takeaways
+
+Linear demonstrates how a well-designed object model can make complex work management feel simple and fast.

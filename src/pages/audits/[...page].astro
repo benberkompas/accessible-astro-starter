@@ -1,0 +1,134 @@
+---
+import DefaultLayout from '@layouts/DefaultLayout.astro'
+import PageHeader from '@components/PageHeader.astro'
+import { Badge, Card, Pagination } from 'accessible-astro-components'
+import { Icon } from 'astro-icon/components'
+import { getCollection } from 'astro:content'
+import type { GetStaticPaths, Page } from 'astro'
+import type { CollectionEntry } from 'astro:content'
+
+// Import images directly for optimization
+import projectImage1 from '@assets/images/projects/project-image-1.png'
+import projectImage2 from '@assets/images/projects/project-image-2.png'
+import projectImage3 from '@assets/images/projects/project-image-3.png'
+import projectImage4 from '@assets/images/projects/project-image-4.png'
+import projectImage5 from '@assets/images/projects/project-image-5.png'
+import projectImage6 from '@assets/images/projects/project-image-6.png'
+
+export const getStaticPaths = (async ({ paginate }) => {
+  // Always fetch fresh audits from the content collection
+  // This ensures new/updated .mdx files are picked up
+  const audits = await getCollection('audits')
+
+  // Debug: Log the number of audits found
+  console.log(
+    `[Audits] Found ${audits.length} audits:`,
+    audits.map((a) => a.id)
+  )
+
+  if (audits.length === 0) {
+    console.error('[Audits] WARNING: No audits found in collection!')
+    console.error('[Audits] This could mean:')
+    console.error('  1. The glob pattern is not matching files')
+    console.error('  2. Files are failing schema validation')
+    console.error('  3. The base path is incorrect')
+  }
+
+  // Sort audits by order field (ascending), audits without order go last
+  const sortedAudits = [...audits].sort((a, b) => {
+    const orderA = a.data.order ?? Number.MAX_SAFE_INTEGER
+    const orderB = b.data.order ?? Number.MAX_SAFE_INTEGER
+    return orderA - orderB
+  })
+
+  // Define fallback images array inside the function to ensure proper scope
+  const auditImages = [projectImage1, projectImage2, projectImage3, projectImage4, projectImage5, projectImage6]
+
+  // Map audits with proper image handling
+  // If an audit has a custom featuredImage in frontmatter, use that path.
+  // Otherwise, use a fallback imported image component.
+  const auditsWithImages = sortedAudits.map((a, index) => {
+    // Check if audit has a custom featuredImage from frontmatter
+    const customImage = a.data.featuredImage
+
+    if (customImage?.src) {
+      // Use custom image path from frontmatter
+      // The Card component will use the `img` prop for path strings
+      return {
+        ...a,
+        featuredImage: undefined, // Don't use imageComponent
+        featuredImagePath: customImage.src, // Use img prop instead
+        featuredImageAlt: customImage.alt || a.data.title,
+      }
+    } else {
+      // Use fallback imported image component
+      return {
+        ...a,
+        featuredImage: auditImages[index % auditImages.length],
+        featuredImagePath: undefined,
+        featuredImageAlt: undefined,
+      }
+    }
+  })
+
+  return paginate(auditsWithImages, { pageSize: 6 })
+}) satisfies GetStaticPaths
+
+interface Props {
+  page: Page<
+    CollectionEntry<'audits'> & {
+      featuredImage?: any
+      featuredImagePath?: string
+      featuredImageAlt?: string
+    }
+  >
+}
+
+const { page } = Astro.props
+---
+
+<DefaultLayout title="OOUX Audits" description="A collection of OOUX audits and analyses">
+  <PageHeader title="OOUX Audits" subtitle="" bgType="bordered" showBreadcrumbs="" />
+  <section class="my-12">
+    <div class="container">
+      <p class="text-sm"><em>Audit {page.start + 1} through {page.end + 1} of {page.total} total audits</em></p>
+      <ul class="my-3 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {
+          page.data.map((audit) => (
+            <li>
+              <Card
+                imageComponent={audit.featuredImage}
+                img={audit.featuredImagePath}
+                imageAlt={audit.featuredImageAlt || audit.data.title}
+                url={'/audits/' + audit.id}
+                title={audit.data.title}
+                headingLevel="h2"
+                footer={audit.data.company ? `Company: ${audit.data.company}` : undefined}
+                fullHeight={true}
+              >
+                {audit.data.description}
+                {audit.data.minutes && (
+                  <span slot="meta">
+                    <Icon name="lucide:clock" />
+                    {audit.data.minutes} min read
+                  </span>
+                )}
+              </Card>
+            </li>
+          ))
+        }
+      </ul>
+      <div class="mt-12 grid place-content-center">
+        <Pagination
+          firstPage={page.url.prev ? '/audits' : null}
+          previousPage={page.url.prev ? page.url.prev : null}
+          nextPage={page.url.next ? page.url.next : null}
+          lastPage={page.url.next ? `/audits/${Math.ceil(page.total / page.size)}` : null}
+          currentPage={`${page.currentPage}`}
+          totalPages={`${Math.ceil(page.total / page.size)}`}
+          ariaLabel="OOUX Audits pagination"
+        />
+      </div>
+    </div>
+  </section>
+</DefaultLayout>
