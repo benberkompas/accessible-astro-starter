@@ -1,0 +1,109 @@
+---
+title: Template
+author: Ben Berkompas
+description: This is where I'll summarize what I focused on.
+minutes: 10
+company: Stable
+order: 1
+auditType: pre-interview
+featuredImage:
+  src: /projects/project-image-4.png
+  alt: Stripe dashboard interface
+---
+
+import { Heading, Media, Card } from 'accessible-astro-components'
+import { Image } from 'astro:assets'
+import ContentMedia from '@components/ContentMedia.astro'
+import CaptionedImage from '@components/CaptionedImage.astro'
+
+## Overview
+...
+
+## Primary Objects
+<div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+  <Card
+    img="/audits/placeholder.png"
+    url=""
+    title="Object A"
+    footer=""
+    >
+        Working definition.
+  </Card>
+  <Card
+    img="/audits/placeholder.png"
+    url=""
+    title="Object B"
+    footer=""
+    >
+        Working definition.
+  </Card>
+  <Card
+    img="/audits/placeholder.png"
+    url=""
+    title="Object C"
+    footer=""
+    >
+        Working definition.
+  </Card>
+  <Card
+    img="/audits/placeholder.png"
+    url=""
+    title="Object D"
+    footer=""
+    >
+        Working definition.
+  </Card>
+</div>
+
+## The Good
+...
+
+## The Bad
+...
+
+### Masked Objects
+
+<CaptionedImage
+  src="/audits/placeholder.png"
+  alt=""
+  caption=""
+  width={1200}
+  height={600}
+  class="h-full w-full rounded-lg object-cover"
+/>
+
+### Isolated Objects
+
+<CaptionedImage
+  src="/audits/placeholder.png"
+  alt=""
+  caption=""
+  width={1200}
+  height={600}
+  class="h-full w-full rounded-lg object-cover"
+/>
+
+### Broken Objects
+
+<CaptionedImage
+  src="/audits/placeholder.png"
+  alt=""
+  caption=""
+  width={1200}
+  height={600}
+  class="h-full w-full rounded-lg object-cover"
+/>
+
+### Shapeshifters
+
+<CaptionedImage
+  src="/audits/placeholder.png"
+  alt=""
+  caption=""
+  width={1200}
+  height={600}
+  class="h-full w-full rounded-lg object-cover"
+/>
+
+## Conclusion
+...

@@ -23,7 +23,7 @@ export const getStaticPaths = (async ({ paginate }) => {
   // Debug: Log the number of audits found
   console.log(
     `[Audits] Found ${audits.length} audits:`,
-    audits.map((a) => a.id)
+    audits.map((a) => a.id),
   )
 
   if (audits.length === 0) {
@@ -87,8 +87,8 @@ interface Props {
 const { page } = Astro.props
 ---
 
-<DefaultLayout title="OOUX Audits" description="A collection of OOUX audits and analyses">
-  <PageHeader title="OOUX Audits" subtitle="" bgType="bordered" showBreadcrumbs="" />
+<DefaultLayout title="Audits" description="A collection of OOUX audits and analyses">
+  <PageHeader title="Audits" subtitle="" bgType="bordered" showBreadcrumbs={false} />
   <section class="my-12">
     <div class="container">
       <p class="text-sm"><em>Audit {page.start + 1} through {page.end + 1} of {page.total} total audits</em></p>

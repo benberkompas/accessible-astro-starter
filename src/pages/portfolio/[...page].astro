@@ -23,7 +23,7 @@ export const getStaticPaths = (async ({ paginate }) => {
   // Debug: Log the number of projects found
   console.log(
     `[Portfolio] Found ${projects.length} projects:`,
-    projects.map((p) => p.id)
+    projects.map((p) => p.id),
   )
 
   if (projects.length === 0) {
@@ -88,7 +88,7 @@ const { page } = Astro.props
 ---
 
 <DefaultLayout title="Portfolio" description="Samples of my best work (so far)">
-  <PageHeader title="Portfolio" subtitle="" bgType="bordered" showBreadcrumbs="" />
+  <PageHeader title="Portfolio" subtitle="" bgType="bordered" showBreadcrumbs={false} />
   <section class="my-12">
     <div class="container">
       <p class="text-sm"><em>Project {page.start + 1} through {page.end + 1} of {page.total} total projects</em></p>
