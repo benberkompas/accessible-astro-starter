@@ -1,0 +1,397 @@
+---
+import { Image } from 'astro:assets'
+import { Icon } from 'astro-icon/components'
+
+/** Image source: string path or imported image metadata (same as CaptionedImage). Astro Image accepts both at runtime. */
+type ImageSrc = string | Parameters<typeof Image>[0]['src']
+
+/**
+ * ComparisonSlider Component
+ *
+ * @description A before/after image comparison with a draggable slider. When
+ * prefers-reduced-motion is set, shows both images side by side with labels.
+ */
+interface Props {
+  /** Bottom image (revealed as user drags left) */
+  beforeSrc: ImageSrc
+  /** Top image (clipped by slider) */
+  afterSrc: ImageSrc
+  /** Alt text for bottom image */
+  beforeAlt: string
+  /** Alt text for top image */
+  afterAlt: string
+  /** Optional caption below */
+  caption?: string
+  /** Initial slider position 0–100 (default: 50) */
+  defaultPosition?: number
+  /** Label for "before" in reduced-motion view (e.g. "Before") */
+  beforeLabel?: string
+  /** Label for "after" in reduced-motion view (e.g. "After") */
+  afterLabel?: string
+  /** Optional width for images (for consistent sizing) */
+  width?: number
+  /** Optional height for images (for consistent sizing) */
+  height?: number
+  /** Height of the comparison area (e.g. 400 for 400px, or "50vh"). When set, overrides aspect-ratio. */
+  containerHeight?: number | string
+}
+
+const {
+  beforeSrc,
+  afterSrc,
+  beforeAlt,
+  afterAlt,
+  caption,
+  defaultPosition = 50,
+  beforeLabel = 'Before',
+  afterLabel = 'After',
+  width = 1200,
+  height = 600,
+  containerHeight,
+} = Astro.props
+
+const position = Math.min(100, Math.max(0, defaultPosition))
+const sliderId = `comparison-slider-${Math.random().toString(36).slice(2, 9)}`
+const rangeId = `comparison-range-${Math.random().toString(36).slice(2, 9)}`
+const heightStyle =
+  containerHeight != null
+    ? typeof containerHeight === 'number'
+      ? `${containerHeight}px`
+      : String(containerHeight)
+    : undefined
+---
+
+<figure class="comparison-slider-figure">
+  <div
+    class:list={['comparison-slider-wrapper', !!heightStyle && 'comparison-slider-wrapper-fixed-height']}
+    role="region"
+    aria-label="Before and after image comparison"
+    id={sliderId}
+    style={`--comparison-position: ${position}%${heightStyle ? `; height: ${heightStyle}` : ''}`}
+  >
+    {/* Reduced motion: side-by-side with labels (visible when prefers-reduced-motion: reduce) */}
+    <div class="comparison-slider-reduced-motion">
+      <div class="comparison-slider-reduced-motion-inner">
+        <div class="comparison-slider-reduced-motion-item">
+          <span class="comparison-slider-label">{beforeLabel}</span>
+          <Image
+            src={beforeSrc as any}
+            alt={beforeAlt}
+            width={width}
+            height={height}
+            class="comparison-slider-img"
+            loading="lazy"
+          />
+        </div>
+        <div class="comparison-slider-reduced-motion-item">
+          <span class="comparison-slider-label">{afterLabel}</span>
+          <Image
+            src={afterSrc as any}
+            alt={afterAlt}
+            width={width}
+            height={height}
+            class="comparison-slider-img"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+
+    {/* Interactive slider (hidden when prefers-reduced-motion) */}
+    <div class="comparison-slider-interactive">
+      <div class="comparison-slider-track">
+        <div class="comparison-slider-bottom">
+          <Image
+            src={beforeSrc as any}
+            alt={beforeAlt}
+            width={width}
+            height={height}
+            class="comparison-slider-img"
+            loading="lazy"
+          />
+        </div>
+        <div class="comparison-slider-top">
+          <Image
+            src={afterSrc as any}
+            alt={afterAlt}
+            width={width}
+            height={height}
+            class="comparison-slider-img"
+            loading="lazy"
+          />
+        </div>
+        <div class="comparison-slider-handle" aria-hidden="true">
+          <span class="comparison-slider-handle-grip" aria-hidden="true">
+            <Icon name="lucide:grip-vertical" size={24} class="comparison-slider-handle-grip-icon" aria-hidden="true" />
+          </span>
+        </div>
+      </div>
+      <label for={rangeId} class="comparison-slider-range-label">
+        Compare before and after images. Use the slider to reveal more of the after image.
+      </label>
+      <input
+        type="range"
+        id={rangeId}
+        class="comparison-slider-range"
+        min="0"
+        max="100"
+        value={position}
+        step="1"
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-valuenow={position}
+        aria-valuetext={`${position}% of after image visible`}
+        aria-label="Slider to reveal before or after image"
+      />
+    </div>
+  </div>
+  {caption && <figcaption class="comparison-slider-caption">{caption}</figcaption>}
+</figure>
+
+<style>
+  .comparison-slider-figure {
+    margin-block: 1rem;
+  }
+
+  .comparison-slider-wrapper {
+    position: relative;
+    border-radius: var(--radius-large, 6px);
+    aspect-ratio: 16 / 9;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .comparison-slider-wrapper-fixed-height {
+    aspect-ratio: auto;
+  }
+
+  /* Reduced motion: side-by-side */
+  .comparison-slider-reduced-motion {
+    display: none;
+    width: 100%;
+    height: 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .comparison-slider-reduced-motion {
+      display: block;
+    }
+
+    .comparison-slider-interactive {
+      display: none !important;
+    }
+  }
+
+  .comparison-slider-reduced-motion-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    height: 100%;
+  }
+
+  .comparison-slider-reduced-motion-item {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .comparison-slider-label {
+    margin-bottom: 0.25rem;
+    color: var(--foreground-color);
+    font-weight: 600;
+    font-size: 0.875rem;
+  }
+
+  .comparison-slider-reduced-motion-item .comparison-slider-img {
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    object-fit: cover;
+    object-position: left top;
+  }
+
+  /* Interactive slider */
+  .comparison-slider-interactive {
+    position: absolute;
+    inset: 0;
+    touch-action: none;
+  }
+
+  .comparison-slider-track {
+    position: relative;
+    cursor: ew-resize;
+    width: 100%;
+    height: 100%;
+  }
+
+  .comparison-slider-bottom,
+  .comparison-slider-top {
+    position: absolute;
+    inset: 0;
+  }
+
+  .comparison-slider-bottom .comparison-slider-img,
+  .comparison-slider-top .comparison-slider-img {
+    display: block;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: left top;
+  }
+
+  /* Before: visible only in the left pane */
+  .comparison-slider-bottom {
+    clip-path: inset(0 calc(100% - var(--comparison-position, 50%)) 0 0);
+    pointer-events: none;
+  }
+
+  .comparison-slider-bottom .comparison-slider-img {
+    pointer-events: none;
+  }
+
+  /* After: visible only in the right pane */
+  .comparison-slider-top {
+    clip-path: inset(0 0 0 var(--comparison-position, 50%));
+    pointer-events: none;
+  }
+
+  .comparison-slider-top .comparison-slider-img {
+    pointer-events: none;
+  }
+
+  .comparison-slider-handle {
+    display: flex;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: var(--comparison-position, 50%);
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    margin-left: -2px;
+    box-shadow: 0 0 0 2px var(--color-neutral-600);
+    /* background: var(--background-color); */
+    background: var(--color-neutral-100);
+    width: 0px;
+    pointer-events: none;
+  }
+
+  .comparison-slider-handle-grip {
+    display: flex;
+    position: relative;
+    flex-shrink: 0;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 0 2px var(--color-neutral-600);
+    border-radius: 50%;
+    /* background: var(--background-color); */
+    background: var(--color-neutral-100);
+    width: 36px;
+    min-width: 36px;
+    height: 36px;
+    min-height: 36px;
+  }
+
+  .comparison-slider-handle-grip-icon {
+    color: var(--color-neutral-600);
+  }
+
+  /* Visually hidden range input for keyboard and screen readers */
+  .comparison-slider-range-label {
+    position: absolute;
+    margin: -1px;
+    padding: 0;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+    white-space: nowrap;
+  }
+
+  .comparison-slider-range {
+    position: absolute;
+    opacity: 0;
+    z-index: 3;
+    cursor: ew-resize;
+    margin: 0;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .comparison-slider-range:focus-visible {
+    opacity: 0.2;
+    outline: 2px solid var(--link-color);
+    outline-offset: 2px;
+  }
+
+  .comparison-slider-caption {
+    margin-top: 0.5rem;
+    color: var(--color-neutral-500);
+    font-size: 1rem;
+    text-align: center;
+  }
+</style>
+
+<script>
+  function initComparisonSlider(wrapper: HTMLElement) {
+    const range = wrapper.querySelector<HTMLInputElement>('.comparison-slider-range')
+    if (!range) return
+
+    const setPosition = (value: number) => {
+      const clamped = Math.min(100, Math.max(0, value))
+      wrapper.style.setProperty('--comparison-position', `${clamped}%`)
+      range.value = String(clamped)
+      range.setAttribute('aria-valuenow', String(Math.round(clamped)))
+      range.setAttribute('aria-valuetext', `${Math.round(clamped)}% of after image visible`)
+    }
+
+    range.addEventListener('input', () => setPosition(Number(range.value)))
+    range.addEventListener('change', () => setPosition(Number(range.value)))
+
+    let isDragging = false
+
+    const onPointerMove = (e: PointerEvent) => {
+      if (!isDragging) return
+      const rect = wrapper.getBoundingClientRect()
+      const x = e.clientX - rect.left
+      const pct = (x / rect.width) * 100
+      setPosition(pct)
+    }
+
+    const onPointerUp = () => {
+      isDragging = false
+      document.removeEventListener('pointermove', onPointerMove)
+      document.removeEventListener('pointerup', onPointerUp)
+      document.removeEventListener('pointercancel', onPointerUp)
+    }
+
+    wrapper.querySelector('.comparison-slider-track')?.addEventListener('pointerdown', (e: Event) => {
+      const ev = e as PointerEvent
+      if ((ev.target as HTMLElement).closest('.comparison-slider-range')) return
+      ev.preventDefault()
+      isDragging = true
+      const rect = wrapper.getBoundingClientRect()
+      const x = ev.clientX - rect.left
+      setPosition((x / rect.width) * 100)
+      document.addEventListener('pointermove', onPointerMove)
+      document.addEventListener('pointerup', onPointerUp)
+      document.addEventListener('pointercancel', onPointerUp)
+    })
+  }
+
+  function run() {
+    document.querySelectorAll<HTMLElement>('.comparison-slider-wrapper').forEach(initComparisonSlider)
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', run)
+  } else {
+    run()
+  }
+</script>

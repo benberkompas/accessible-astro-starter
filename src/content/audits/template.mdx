@@ -15,6 +15,21 @@ import { Heading, Media, Card } from 'accessible-astro-components'
 import { Image } from 'astro:assets'
 import ContentMedia from '@components/ContentMedia.astro'
 import CaptionedImage from '@components/CaptionedImage.astro'
+import ComparisonSlider from '@components/ComparisonSlider.astro'
+
+## Structure
+
+<ComparisonSlider
+  beforeSrc="/audits/before.png"
+  afterSrc="/audits/after.png"
+  beforeAlt="Original layout"
+  afterAlt="Revised layout"
+  beforeLabel="Before"
+  afterLabel="After"
+  containerHeight={600}
+  defaultPosition={80}
+  caption=""
+/>
 
 ## Overview
 ...
