@@ -32,7 +32,7 @@ interface Props {
   width?: number
   /** Optional height for images (for consistent sizing) */
   height?: number
-  /** Height of the comparison area (e.g. 400 for 400px, or "50vh"). When set, overrides aspect-ratio. */
+  /** When omitted, container height is derived from the image aspect ratio (width/height). When set (e.g. 400 or "50vh"), overrides that and fixes the height. */
   containerHeight?: number | string
 }
 
@@ -59,15 +59,25 @@ const heightStyle =
       ? `${containerHeight}px`
       : String(containerHeight)
     : undefined
+// Derive aspect ratio from the image itself when it has dimensions (e.g. imported image); else use width/height props
+const imgWidth =
+  typeof beforeSrc === 'object' && beforeSrc != null && 'width' in beforeSrc && typeof (beforeSrc as { width?: number }).width === 'number'
+    ? (beforeSrc as { width: number }).width
+    : width
+const imgHeight =
+  typeof beforeSrc === 'object' && beforeSrc != null && 'height' in beforeSrc && typeof (beforeSrc as { height?: number }).height === 'number'
+    ? (beforeSrc as { height: number }).height
+    : height
+const aspectRatio = imgWidth / imgHeight
 ---
 
-<figure class="comparison-slider-figure">
+<figure class="comparison-slider-figure comparison-slider-breakout">
   <div
     class:list={['comparison-slider-wrapper', !!heightStyle && 'comparison-slider-wrapper-fixed-height']}
     role="region"
     aria-label="Before and after image comparison"
     id={sliderId}
-    style={`--comparison-position: ${position}%${heightStyle ? `; height: ${heightStyle}` : ''}`}
+    style={`--comparison-position: ${position}%; --comparison-aspect: ${aspectRatio}${heightStyle ? `; height: ${heightStyle}` : ''}`}
   >
     {/* Reduced motion: side-by-side with labels (visible when prefers-reduced-motion: reduce) */}
     <div class="comparison-slider-reduced-motion">
@@ -153,10 +163,27 @@ const heightStyle =
     margin-block: 1rem;
   }
 
+  /* Full width on small screens, matches BreakoutImage */
+  .comparison-slider-breakout {
+    margin-inline: -1rem;
+  }
+
+  @media (min-width: 768px) {
+    .comparison-slider-breakout {
+      margin-inline: -2rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .comparison-slider-breakout {
+      margin-inline: -120px;
+    }
+  }
+
   .comparison-slider-wrapper {
     position: relative;
     border-radius: var(--radius-large, 6px);
-    aspect-ratio: 16 / 9;
+    aspect-ratio: var(--comparison-aspect, 16 / 9);
     max-width: 100%;
     overflow: hidden;
   }
