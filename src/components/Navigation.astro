@@ -43,7 +43,8 @@ import Logo from './Logo.astro'
       const currentPathname = window.location.pathname
 
       mobileDesktopMenus.forEach((menu) => {
-        const menuItems = [...menu.querySelectorAll('a:not([rel*="external"])')] as HTMLAnchorElement[]
+        // Only top-level nav links (direct .menu-item > a), not dropdown submenu links
+        const menuItems = [...menu.querySelectorAll('.menu-item > a:not([rel*="external"])')] as HTMLAnchorElement[]
 
         menuItems.forEach((menuItem) => {
           if (currentPathname.includes(menuItem.pathname.replaceAll('/', '')) && menuItem.textContent !== 'Home') {
@@ -291,7 +292,7 @@ import Logo from './Logo.astro'
           text-decoration-thickness: 1px;
           text-underline-offset: 7px;
         }
-        
+
         // Exclude highlight links from general link hover styles
         .highlight a:hover,
         .highlight a:focus-visible {
@@ -311,23 +312,24 @@ import Logo from './Logo.astro'
           border: 1px solid var(--foreground-color);
           border-radius: var(--radius-large);
           padding: var(--space-4xs) var(--space-2xs);
-          text-decoration: none !important;
           color: var(--foreground-color) !important;
+          text-decoration: none !important;
 
           // Ensure icon inherits text color
           svg {
             color: currentColor !important;
             fill: currentColor !important;
             stroke: currentColor !important;
-            transition: color var(--animation-speed-fast) var(--cubic-bezier), 
-                        fill var(--animation-speed-fast) var(--cubic-bezier),
-                        stroke var(--animation-speed-fast) var(--cubic-bezier);
+            transition:
+              color var(--animation-speed-fast) var(--cubic-bezier),
+              fill var(--animation-speed-fast) var(--cubic-bezier),
+              stroke var(--animation-speed-fast) var(--cubic-bezier);
           }
 
           &:where(:hover, :focus-visible) {
             background-color: var(--foreground-color) !important;
             color: var(--background-color) !important;
-            
+
             // Ensure icon also changes color on hover
             svg {
               color: var(--background-color) !important;
