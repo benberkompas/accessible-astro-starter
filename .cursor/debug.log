@@ -1,0 +1,5 @@
+{"location":"ComparisonSlider.astro:script","message":"run() executed","data":{"hypothesisId":"B","wrapperCount":1,"readyState":"complete"},"timestamp":1770492686049}
+{"location":"ComparisonSlider.astro:script","message":"initComparisonSlider called","data":{"hypothesisId":"A","hasRange":true,"wrapperInDocument":true,"readyState":"complete"},"timestamp":1770492686049}
+{"location":"ComparisonSlider.astro:script","message":"astro:page-load fired","data":{"hypothesisId":"D","readyState":"complete"},"timestamp":1770492686049}
+{"location":"ComparisonSlider.astro:script","message":"run() executed","data":{"hypothesisId":"B","wrapperCount":1,"readyState":"complete"},"timestamp":1770492686050}
+{"location":"ComparisonSlider.astro:script","message":"initComparisonSlider called","data":{"hypothesisId":"A","hasRange":true,"wrapperInDocument":true,"readyState":"complete"},"timestamp":1770492686050}

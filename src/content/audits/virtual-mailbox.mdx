@@ -1,9 +1,9 @@
 ---
-title: Template
+title: Virtual Mailbox
 author: Ben Berkompas
 description: This is where I'll summarize what I focused on.
 minutes: 10
-company: Company
+company: Stable
 order: 1
 auditType: pre-interview
 featuredImage:
@@ -16,58 +16,66 @@ import { Image } from 'astro:assets'
 import ContentMedia from '@components/ContentMedia.astro'
 import CaptionedImage from '@components/CaptionedImage.astro'
 import ComparisonSlider from '@components/ComparisonSlider.astro'
+import BreakoutImage from '@components/BreakoutImage.astro'
 
 ## Structure
 
 <ComparisonSlider
-  beforeSrc="/audits/before.jpg"
-  afterSrc="/audits/after.jpg"
-  width={1850}
-  height={1500}
+  beforeSrc="/audits/stable/before.jpg"
+  afterSrc="/audits/stable/after.jpg"
+  width={3443}
+  height={1795}
   beforeAlt="Original layout"
   afterAlt="Revised layout"
   beforeLabel="Before"
   afterLabel="After"
-  defaultPosition={80}
+  defaultPosition={50}
   caption=""
 />
 
 ## Overview
 ...
 
-## Primary Objects
+<BreakoutImage src="/audits/stable/object-map.png" alt="" />
+
+## Core Objects
+
+<BreakoutImage src="/audits/stable/object-map_core.png" alt="" caption="Test" />
+
+<BreakoutImage src="/audits/stable/system-model_core.png" alt="" caption="Test" />
+
 <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
   <Card
     img="/audits/placeholder.png"
     url=""
-    title="Object A"
+    title="Mail Item"
     footer=""
     >
-        Working definition.
+        A unit of correspondence from a person or organization, sent to a registered agent, that arrives in physical form at the recipient's location and may be forwarded to a processing center for further processing
   </Card>
   <Card
     img="/audits/placeholder.png"
     url=""
-    title="Object B"
+    title="Location"
     footer=""
     >
-        Working definition.
+        A physical address (in many cases required by law) used to satisfy legal requirements
   </Card>
   <Card
     img="/audits/placeholder.png"
     url=""
-    title="Object C"
+    title="Organization"
     footer=""
     >
-        Working definition.
+        A legal entity offering goods and/or services, operating as a corporation, or nonprofit
   </Card>
   <Card
     img="/audits/placeholder.png"
     url=""
-    title="Object D"
+    title="Routing Rule"
     footer=""
     >
-        Working definition.
+        
   </Card>
 </div>
 

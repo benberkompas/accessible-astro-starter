@@ -3,6 +3,7 @@ import { Link } from 'accessible-astro-components'
 import { Heading } from 'accessible-astro-components'
 import { Icon } from 'astro-icon/components'
 import { Image } from 'astro:assets'
+import ComparisonSlider from '@components/ComparisonSlider.astro'
 
 /**
  * Hero Component
@@ -39,6 +40,18 @@ const { src = '/ben-workshop.jpg' }: Props = Astro.props
       height={800}
       class="rounded-lg"
     />
+    <!-- <ComparisonSlider
+      beforeSrc="/audits/stable/before.jpg"
+      afterSrc="/audits/stable/after.jpg"
+      width={3443}
+      height={1795}
+      beforeAlt="Original layout"
+      afterAlt="Revised layout"
+      beforeLabel="Before"
+      afterLabel="After"
+      defaultPosition={50}
+      caption=""
+    /> -->
   </div>
 </section>
 
