@@ -29,6 +29,7 @@ export default defineConfig({
         '@layouts': fileURLToPath(new URL('./src/layouts', import.meta.url)),
         '@assets': fileURLToPath(new URL('./src/assets', import.meta.url)),
         '@content': fileURLToPath(new URL('./src/content', import.meta.url)),
+        '@lib': fileURLToPath(new URL('./src/lib', import.meta.url)),
         '@pages': fileURLToPath(new URL('./src/pages', import.meta.url)),
         '@public': fileURLToPath(new URL('./public', import.meta.url)),
         '@post-images': fileURLToPath(new URL('./public/posts', import.meta.url)),
