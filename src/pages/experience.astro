@@ -232,7 +232,7 @@ const avgYears = (avgMonths / 12).toFixed(1) // one decimal place
 
             <Heading level="h4">Tools</Heading>
             <!-- <p>At Covenant Eyes, I rely on these software tools to get most of my work done.</p> -->
-            <AvatarGroup display="grid" gridGap="1.5rem">
+            <AvatarGroup class="tool-icons-muted" display="grid" gridGap="1.5rem">
               <Avatar
                 size="sm"
                 shape="square"
@@ -475,7 +475,7 @@ const avgYears = (avgMonths / 12).toFixed(1) // one decimal place
 
             <Heading level="h4">Tools</Heading>
             <!-- <p>These are the software tools I used at Home Depot, along with whiteboards, graph paper, and markers!</p> -->
-            <AvatarGroup display="grid" gridGap="1.5rem">
+            <AvatarGroup class="tool-icons-muted" display="grid" gridGap="1.5rem">
               <Avatar
                 size="sm"
                 shape="square"
@@ -758,6 +758,15 @@ const avgYears = (avgMonths / 12).toFixed(1) // one decimal place
     </script>
 
     <style lang="scss">
+      /* Grayscale tool logos until hover (full row: image + title). */
+      .tool-icons-muted :global(.avatar .image img) {
+        filter: grayscale(1);
+        transition: filter 0.5s cubic-bezier(0.55, 0.06, 0.32, 1);
+      }
+      .tool-icons-muted :global(.avatar:hover .image img) {
+        filter: grayscale(0);
+      }
+
       .inline-icon {
         display: inline;
         margin-bottom: 4px;
