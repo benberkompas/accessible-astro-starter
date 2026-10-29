@@ -9,7 +9,7 @@ import Image from 'astro/components/Image.astro'
 <DefaultLayout title="Philosophy">
   <PageHeader title="Philosophy" subtitle="" bgType="bordered" showBreadcrumbs={false} />
 
-  <ContentMedia imgSrc="/philosophy/people-problem-solution.png">
+  <ContentMedia imgSrc="/philosophy/people-problem-solution.svg">
     <Heading level="h2">Deliberate Choices</Heading>
     <p class="text-2xl">
       The right solution<sup>3</sup> to the right problem<sup>2</sup> for the right people<sup>1</sup>.
@@ -25,7 +25,7 @@ import Image from 'astro/components/Image.astro'
     <p>Everything else is a means to that end.</p>
   </ContentMedia>
 
-  <ContentMedia imgSrc="/philosophy/customer-business-tech.png" reverseImg={true}>
+  <ContentMedia imgSrc="/philosophy/customer-business-tech.svg" reverseImg={true}>
     <Heading level="h2">Mutual Benefit</Heading>
     <p class="text-2xl">
       Built to deliver customer value<sup>4</sup> that drives business value<sup>5</sup> in a way that's technically sustainable<sup
@@ -42,10 +42,11 @@ import Image from 'astro/components/Image.astro'
     </p>
   </ContentMedia>
 
-  <ContentMedia imgSrc="/philosophy/system-conceptual-mental-models.png">
+  <ContentMedia imgSrc="/philosophy/system-conceptual-mental-models.svg">
     <Heading level="h2">Systemic Fit</Heading>
     <p class="text-2xl">
-      Bridging the gap between the way the system actually works and the way people expect it to work.
+      Bridging the gap <sup>8</sup> between the way the system actually works <sup>9</sup> and the way people expect it to
+      work <sup>7</sup>.
     </p>
     <p>Mental models are the unstated expectations, needs, and desires people bring into their experience.</p>
     <p>
@@ -58,6 +59,8 @@ import Image from 'astro/components/Image.astro'
     </p>
   </ContentMedia>
 
+  <!--
+  
   <section class="my-12">
     <div class="space-content container">
       <Heading level="h2">In Practice</Heading>
@@ -77,4 +80,6 @@ import Image from 'astro/components/Image.astro'
       />
     </div>
   </section>
+  
+  -->
 </DefaultLayout>
