@@ -46,37 +46,11 @@ const avgYears = (avgMonths / 12).toFixed(1) // one decimal place
 <DefaultLayout title="Experience">
   <PageHeader title="Experience" subtitle="" bgType="bordered" showBreadcrumbs={false} />
 
-  <!-- Counters -->
-
-  <section class="my-12">
-    <div class="space-content container">
-      <Heading level="h2" id="overview">Overview</Heading>
-      <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
-        <div class="bordered">
-          <Counter count={`${years}+`} title="years" sub="experience in design & UX" />
-          <div class="text-sm text-neutral-600" style="text-align:center">
-            graphic design &rarr; UX design &rarr; IA, UXA, OOUX
-          </div>
-        </div>
-        <div class="bordered">
-          <Counter count="3" title="companies" sub="I've been employed by" />
-          <div class="text-sm text-neutral-600" style="text-align:center">
-            publishing &rarr; retail &rarr; addiction recovery
-          </div>
-        </div>
-        <div class="bordered">
-          <Counter count={avgYears} title="years" sub="avg. company tenure*" />
-          <div class="text-sm text-neutral-600" style="text-align:center">*since I began working in UX (2011)</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- Certifications -->
 
   <section class="my-12">
     <div class="space-content container">
-      <Heading level="h2" id="certifications">Certifications</Heading>
+      <!-- <Heading level="h2" id="certifications">Certifications</Heading> -->
       <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         <div class="bordered space-content">
           <Avatar
@@ -164,9 +138,35 @@ const avgYears = (avgMonths / 12).toFixed(1) // one decimal place
     </div>
   </section>
 
+  <!-- Counters -->
+
   <section class="my-12">
     <div class="space-content container">
-      <Heading level="h2" id="companies">Companies</Heading>
+      <!-- <Heading level="h2" id="overview">Overview</Heading> -->
+      <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+        <div class="bordered">
+          <Counter count={`${years}+`} title="years" sub="experience in design & UX" />
+          <div class="text-sm text-neutral-600" style="text-align:center">
+            graphic design &rarr; UX design &rarr; IA, UXA, OOUX
+          </div>
+        </div>
+        <div class="bordered">
+          <Counter count="3" title="companies" sub="I've been employed by" />
+          <div class="text-sm text-neutral-600" style="text-align:center">
+            publishing &rarr; retail &rarr; addiction recovery
+          </div>
+        </div>
+        <div class="bordered">
+          <Counter count={avgYears} title="years" sub="avg. company tenure*" />
+          <div class="text-sm text-neutral-600" style="text-align:center">*since I began working in UX (2011)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="my-12">
+    <div class="space-content container">
+      <!-- <Heading level="h2" id="companies">Companies</Heading> -->
 
       <!-- Covenant Eyes -->
       <div class="bordered space-content" id="covenant-eyes">
