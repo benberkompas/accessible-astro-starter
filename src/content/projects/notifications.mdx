@@ -1,0 +1,135 @@
+---
+title: Notifications & Preferences - Giving Users the Right Control
+author: Ben Berkompas
+description: Our mobile notification system gave users no middle ground - accept everything or turn it all off. I embedded myself in an infrastructure project to lay the foundation for multi-channel notification preferences, navigated competing priorities and organizational skepticism, and delivered a system that makes adding new user-controlled notifications nearly free.
+minutes: 4
+company: Covenant Eyes
+featuredImage:
+  src: /projects/notifications/tbd.jpg
+  alt: Description of the image
+order: 6
+---
+
+## **Context**
+
+### **The Nuclear Option**
+
+As our service shifted from web to mobile, notifications became one of the primary ways we deliver information to users. But they only had two choices: accept everything we send, or take the nuclear option and turn off notifications at the operating system level. 
+
+### **"Options Are Evil"**
+
+There was a long-standing sentiment that providing options is a bad idea. 
+
+This is rooted in real concerns, Barry Schwartz’ book *The Paradox of Choice* being the classic reference. But it prevented us from seeing the nuance. 
+
+My position was never that we should simply give people more control for its own sake. Rather we should give them the *right* control — options that empower them to tailor the service to their needs. 
+
+There was yet another an organizational behavior that complicated the situation: ideas perceived as too much effort tended to get set aside, and once that happened, the cost of returning to them sometimes became the justification for never doing so.
+
+## **Frame**
+
+### **A Window of Opportunity**
+
+A technical consolidation of microservices was underway, and architectural decisions were being made. 
+
+I didn't wait to be asked. 
+
+I invited myself into that work because I could see something others hadn't: the long-term opportunity to bring user-facing notification preferences with multi-channel control would require a foundation shaped *now*, during this window, not retrofitted later, and not left as an implementation detail for whenever someone greenlit the idea — because by then the cost would seem prohibitive and the project would be killed on arrival.
+
+### **Pattern Recognition, Not Speculation**
+
+This wasn't speculative. I've watched good ideas die because by the time people recognized the need, the groundwork hadn't been laid and the total effort looked enormous. I wanted to be prepared.
+
+### **What's Actually Under the Hood**
+
+Notifications have structure: classes, channels, defaults, and preference logic. Without modeling that structure early, every future attempt to improve notifications would be a custom, fragile, one-off effort.
+
+I worked initially with a DBA, our now software architect, and a content strategist. This was cross-functional from the very beginning.
+
+## **Crystallize**
+
+### **Defining the Concepts Together**
+
+I began by defining each key concept collaboratively. What do we mean when we say *event*? What's a *message*? A *tag*? A *channel*? We defined each of these together and mapped how they related to each other — essentially an entity-relationship diagram at first, though I now use Object-Oriented UX to do the same work more efficiently.
+
+### **A Model Built to Last**
+
+The model got me on the same wavelength with engineering and DBA. It helped us hash out early disagreements and get into more technical discussions of cardinality and defaults. 
+
+It was detailed enough to preserve our thinking, but abstract enough to pick up again later without deep recall. This became important.
+
+### **System First, Interface Second**
+
+When I later got into interface design, the UI mapped directly to the underlying model. 
+
+This wasn't abstract backend architecture — it was the conduit for producing an interface users could actually understand. 
+
+I was thinking about the user experience from the beginning, but we worked on the system first.
+
+## **Sustain**
+
+### **Four Phases**
+
+The story of how this work came about can be described in four parts.
+
+#### **Anticipate**
+
+I saw the future need and involved myself proactively during the infrastructure window, collaborating with the DBA and architect to lay the right foundation before anyone asked for it.
+
+#### **Yield**
+
+When the work surfaced to stakeholders, it couldn't hold up against competing priorities. 
+
+Our product manager and development manager both questioned the timing. 
+
+I pitched it, wasn't successful, and we set the effort aside. But I preserved the model as a bookmark.
+
+#### **Re-engage**
+
+Around twelve months later, notification volume was rising and the opt-out risk was undeniable. We picked the model back up. The team ramped quickly because the groundwork existed. We were not starting from zero.
+
+#### **Deliver**
+
+We shipped a first version of notification preferences. 
+
+I've maintained an inventory of notifications and events on the side ever since. That list keeps growing. We don't support all of them yet, but we can. The infrastructure is there.
+
+### **The Proof in Practice**
+
+Another designer on the team is now leading the design of Accountability Groups, a feature that depends heavily on this system. 
+
+She and I talk regularly about the notifications that feature needs, and it's clear we can ship them with appropriate preferences in place from the start. No reinventing, no deep system changes. 
+
+The infrastructure is ready and waiting for us to plug into it.
+
+## **Results**
+
+### **Before and After**
+
+Before this work, every notification was a custom effort. There were few preferences, and everything was disconnected. 
+
+Now the pipeline is straightforward: identify the event, get an event ID, link it to a message ID. The message contains the copy. Assign the message to a class. The class contains everything necessary to present the right preference in the interface. 
+
+Everything else is clockwork.
+
+### **Nobody Blinked**
+
+I've recently been involved in three projects where new notifications were on the table. Nobody blinked an eye at the effort. It's completely straightforward now.
+
+### **What Users Got**
+
+What users got is a system that lets them decide how they want to receive information from us — which areas, which types, through which channels. 
+
+They no longer have to turn off notifications for the entire app to get the control they need. 
+
+It's not everything I've envisioned it could be, but it's the right scaffolding for a system we can grow and improve.
+
+### **Stewarding a Master Plan**
+
+Others now describe this as a “master plan” in retrospect. 
+
+I take that as evidence that early collaborative architectural work across departments is not wasted, even when it gets paused. 
+
+If you pave the paths you believe will be needed and control your investment along the way, you arrive with the right structure in place — enabling teams to deliver great work to customers with greater efficiency and confidence. 
+
+Giving users control isn't automatically too much effort. It requires the right kind of early cross-functional collaboration, and a system designed to make those options nearly free to implement.

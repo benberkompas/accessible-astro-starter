@@ -1,0 +1,114 @@
+---
+title: Untangling Roles and Permissions in a Two-Sided Accountability Platform
+author: Ben Berkompas
+description: I led a structural analysis that mapped the system's hidden logic, exposed where role distinctions created complexity without serving users, and turned role simplification into a concrete roadmap priority.
+minutes: 4
+company: Covenant Eyes
+featuredImage:
+  src: /projects/roles-and-permissions/tbd.jpg
+  alt: Description of the image
+order: 3
+---
+
+## Context
+
+### A two-sided accountability service with tangled permissions
+
+Covenant Eyes offers a two-sided accountability service between people who need support and people who provide it.
+
+Historically, we've had four user roles governing who could see what, do what, and on whose behalf: 
+
+- Member
+- Ally
+- Filter Guardian
+- Account Admin
+
+Each role had various permissions, which had, over time, become tangled with the accountability model itself. Some existed not for convenience, but to protect users from taking actions that would undermine their own goals.
+
+I partnered with product management, member care, engineering, and our CEO on this work.
+
+## Frame
+
+### Mapping what we had so the team could see how it actually worked
+
+To frame the situation, we had to establish a shared mental model around roles and permissions:
+
+- Roles are buckets of permissions assigned to a person.
+- Permissions govern who can take what actions on what things.
+
+We mapped the four existing roles and their actual permission sets so the team could see what we had, how it worked, and, to some extent, why. 
+
+That’s how we were able to look more deeply at the problem and diagnose the real issues.
+
+It wasn’t a question of how many roles we had, but whether the distinctions between them justified the complexity they introduced.
+
+## Crystallize
+
+### Supporter roles with overlapping purpose
+
+The Ally and the Filter Guardian overlapped in their purpose. Both exist to help someone else.
+
+The Ally viewed a member's activity and kept them on track. 
+
+The Filter Guardian managed their filter settings so the member couldn't make changes that would undermine their goals. 
+
+We proposed collapsing them into one role that could be assigned to one person. But that quickly raised a few important questions: 
+
+- What if a member *wanted* to assign these roles to two different people? Should we just override their choice?
+- If someone was used to being a Filter Guardian, and we make them an Ally, how do we help them with that transition? Should we give them a choice? What if they decline?
+- We could continue to let members assign different permissions within a single Ally role — e.g. “this person handles my filters, that person views my activity” — but wouldn't we just recreate the same complexity under a new label? It might be worse than before, because now you'd have to think consciously about permissions where previously you just thought about roles.
+
+Making assumptions about such things is rarely a wise move. I began queuing up a research study to help us make an informed choice; when the time is right, I’ll make sure we start there.
+
+### An admin role that bundled financial control with accountability control
+
+The second problem was the Account Admin. 
+
+This role bundled financial control — billing, updating the card, canceling the subscription — with accountability control, like dictating whether someone could uninstall. 
+
+That made intuitive sense in a parental situation, which is the origin story for <u>this account structure</u>. 
+
+But bundling these permissions created unintended side effects. 
+
+- To get someone else to prevent you from uninstalling, you had to hand over your own financial access.
+- Sometimes people who needed to update their credit card to keep paying us couldn't access it. They had to call their admin on the phone and read them their card number just to keep their subscription intact.
+
+Our path forward wasn’t clear. We could hand Account Admin permissions back to members, but that would let them undermine their own goals. Moving them to the Ally could create new confusion.
+
+## Sustain
+
+### Adjusting the analysis based on what we heard from users
+
+This work wasn't something we wrapped up and moved on from. 
+
+We kept it open, working steadily with Member Care, comparing what they heard from users against the structural analysis. Their frontline perspective helped us adjust.
+
+### A deliberate decision with an unintended consequence that proved the method
+
+One decision we made proved the method in an unexpected way. 
+
+We locked the account admin role to the original subscriber so it couldn't be reassigned. 
+
+What we didn't anticipate was that without a way to hand off the accountability side of that role, the member was stuck with full ability to uninstall, cancel, and turn off services — exactly the actions the role was designed to constrain. 
+
+This hasn't been fixed yet. But surfacing it is the point of structural work. We want to take the system's hidden logic and make it visible so we can account for it. That discovery was evidence of the method working, not a failure resulting from it.
+
+### Documenting the full model so I could return to it daily
+
+Throughout this process, I used a <u>homegrown tool I call ORCA Navigator</u> to document the full permission model and return to it daily rather than holding it all in memory. I could pull from it into Miro, Figma, or Confluence to show my thinking without exposing people to the entire model's complexity.
+
+## Results
+
+### A framework for reasoning about roles and permissions that hadn't existed before
+
+As a result of this work, the team had a clear framework for reasoning about roles and permissions that hadn't existed before. 
+
+We surfaced tradeoffs that were previously invisible — particularly where permissions served accountability purposes rather than just access control. That distinction was crucial and new to the team. It had been nearly thirteen years since the purpose behind these permissions was actively discussed.
+
+### Roles and permissions are a priority
+
+Role simplification became a roadmap priority with concrete proposals, identified steps, and migration risks mapped in advance. 
+
+There is institutional memory and real pain around the difficulty of working in this space, and I believe that has slowed adoption. 
+
+But we now have a systematic approach, the problems are surfaced, and the path forward is clearer than before.

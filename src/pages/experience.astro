@@ -46,98 +46,6 @@ const avgYears = (avgMonths / 12).toFixed(1) // one decimal place
 <DefaultLayout title="Experience">
   <PageHeader title="Experience" subtitle="" bgType="bordered" showBreadcrumbs={false} />
 
-  <!-- Certifications -->
-
-  <section class="my-12">
-    <div class="space-content container">
-      <!-- <Heading level="h2" id="certifications">Certifications</Heading> -->
-      <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-        <div class="bordered space-content">
-          <Avatar
-            size="md"
-            shape="square"
-            label="Certified Object-Oriented UX Strategist"
-            title="Certified Object-Oriented UX Strategist"
-            subtitle="Rewired UX Studio"
-            img="/certifications/ooux.png"
-          />
-          <div>
-            <Badge type="default" size="sm">#15000255</Badge>
-            <Badge type="default" size="sm">Issued Nov 2025</Badge>
-            <Badge type="default" size="sm">Exp. Nov 2028</Badge>
-          </div>
-          <Link
-            href="https://www.ooux.com/people/benberkompas"
-            isButton
-            isExternal
-            type="default"
-            size="sm"
-            class="full-width"
-            target="new"
-          >
-            <!-- <Icon aria-hidden="true" name="lucide:badge-check" /> -->
-            View certificate
-          </Link>
-        </div>
-        <div class="bordered space-content">
-          <Avatar
-            size="md"
-            shape="square"
-            label="Certified Scrum Product Owner"
-            title="Certified Scrum Product Owner"
-            subtitle="Scrum Alliance"
-            img="/certifications/cspo.png"
-          />
-          <div>
-            <Badge type="default" size="sm">#696817</Badge>
-            <Badge type="default" size="sm">Issued Sep 2017</Badge>
-            <Badge type="default" size="sm">Exp. Sep 2019</Badge>
-          </div>
-          <Link
-            href="https://www.scrumalliance.org/members/696817"
-            title="View certificate on Scrum Alliance website"
-            arialabel="View certificate on Scrum Alliance website"
-            isButton
-            isExternal
-            type="default"
-            size="sm"
-            class="full-width"
-          >
-            <!-- <Icon aria-hidden="true" name="lucide:badge-check" /> -->
-            View certificate
-          </Link>
-        </div>
-        <div class="bordered space-content">
-          <Avatar
-            size="md"
-            shape="square"
-            label="UX & Mobile Design"
-            title="UX & Mobile Design"
-            subtitle="Neilsen Norman Group"
-            img="/certifications/nng.png"
-          />
-          <div>
-            <Badge type="default" size="sm">#1008199</Badge>
-            <Badge type="default" size="sm">Issued May 2015</Badge>
-          </div>
-          <Link
-            href="https://www.nngroup.com/ux-certification/people/"
-            title="View certificate on Nielsen Norman Group website"
-            arialabel="View certificate on Nielsen Norman Group website"
-            isButton
-            isExternal
-            type="default"
-            size="sm"
-            class="full-width"
-          >
-            <!-- <Icon aria-hidden="true" name="lucide:badge-check" /> -->
-            View certificate
-          </Link>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- Counters -->
 
   <section class="my-12">
@@ -163,6 +71,8 @@ const avgYears = (avgMonths / 12).toFixed(1) // one decimal place
       </div>
     </div>
   </section>
+
+  <!-- Companies -->
 
   <section class="my-12">
     <div class="space-content container">
@@ -222,7 +132,7 @@ const avgYears = (avgMonths / 12).toFixed(1) // one decimal place
               <Badge type="default">Information Architecture</Badge>
               <Badge type="default">UX Strategy</Badge>
               <Badge type="default">Interaction Design</Badge>
-              <Badge type="default">Prototyping</Badge>
+              <Badge type="default">AI Prototyping</Badge>
               <Badge type="default">Wireframing</Badge>
               <Badge type="default">User Research</Badge>
               <Badge type="default">Qualitative Data Analysis</Badge>
@@ -686,6 +596,98 @@ const avgYears = (avgMonths / 12).toFixed(1) // one decimal place
             </section>
         </div>
     </section> -->
+  </section>
+
+  <!-- Certifications -->
+
+  <section class="my-12" id="certifications">
+    <div class="space-content container">
+      <!-- <Heading level="h2" id="certifications">Certifications</Heading> -->
+      <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div class="bordered space-content">
+          <Avatar
+            size="md"
+            shape="square"
+            label="Certified Object-Oriented UX Strategist"
+            title="Certified Object-Oriented UX Strategist"
+            subtitle="Rewired UX Studio"
+            img="/certifications/ooux.png"
+          />
+          <div>
+            <Badge type="default" size="sm">#15000255</Badge>
+            <Badge type="default" size="sm">Issued Nov 2025</Badge>
+            <Badge type="default" size="sm">Exp. Nov 2028</Badge>
+          </div>
+          <Link
+            href="https://www.ooux.com/people/benberkompas"
+            isButton
+            isExternal
+            type="default"
+            size="sm"
+            class="full-width"
+            target="new"
+          >
+            <!-- <Icon aria-hidden="true" name="lucide:badge-check" /> -->
+            View certificate
+          </Link>
+        </div>
+        <div class="bordered space-content">
+          <Avatar
+            size="md"
+            shape="square"
+            label="Certified Scrum Product Owner"
+            title="Certified Scrum Product Owner"
+            subtitle="Scrum Alliance"
+            img="/certifications/cspo.png"
+          />
+          <div>
+            <Badge type="default" size="sm">#696817</Badge>
+            <Badge type="default" size="sm">Issued Sep 2017</Badge>
+            <Badge type="default" size="sm">Exp. Sep 2019</Badge>
+          </div>
+          <Link
+            href="https://www.scrumalliance.org/members/696817"
+            title="View certificate on Scrum Alliance website"
+            arialabel="View certificate on Scrum Alliance website"
+            isButton
+            isExternal
+            type="default"
+            size="sm"
+            class="full-width"
+          >
+            <!-- <Icon aria-hidden="true" name="lucide:badge-check" /> -->
+            View certificate
+          </Link>
+        </div>
+        <div class="bordered space-content">
+          <Avatar
+            size="md"
+            shape="square"
+            label="UX & Mobile Design"
+            title="UX & Mobile Design"
+            subtitle="Neilsen Norman Group"
+            img="/certifications/nng.png"
+          />
+          <div>
+            <Badge type="default" size="sm">#1008199</Badge>
+            <Badge type="default" size="sm">Issued May 2015</Badge>
+          </div>
+          <Link
+            href="https://www.nngroup.com/ux-certification/people/"
+            title="View certificate on Nielsen Norman Group website"
+            arialabel="View certificate on Nielsen Norman Group website"
+            isButton
+            isExternal
+            type="default"
+            size="sm"
+            class="full-width"
+          >
+            <!-- <Icon aria-hidden="true" name="lucide:badge-check" /> -->
+            View certificate
+          </Link>
+        </div>
+      </div>
+    </div>
   </section>
 
   <script is:inline>

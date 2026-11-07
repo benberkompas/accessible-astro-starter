@@ -1,0 +1,152 @@
+---
+title: ORCA Navigator - A Living System Model for Structural Design Decisions
+author: Ben Berkompas
+description: How I use object-oriented UX to help teams align on the conceptual structure of what we're building, and the tooling and workflows I've developed to sustain that practice.
+minutes: 4
+company: Covenant Eyes
+featuredImage:
+  src: /projects/orca-navigator/tbd.jpg
+  alt: Description of the image
+order: 4
+---
+
+## Context
+
+### Team alignment isn’t a solved problem
+
+I’ve often seen teams struggle because each person carries a slightly different mental model of how the system should work. Those differences usually come to the surface late, when the cost of reconciling them is high, and create tension (or downright conflict) at the very moment when the team should be gaining momentum.
+
+Generating more output is easier than it’s ever been. Anyone can crank out ideas, UI concepts, prototypes, or even rubrics for evaluating and grading the quality of these things. However, none of this addresses the root cause behind team misalignment, which is rarely a lack of ideas.
+
+More often, teams have an abundance of ideas but struggle with how they’d connect to form a strong *system*. 
+
+I’m firmly convinced that teams should learn to first design the system, then design how users will interface with that system.
+
+## **Frame**
+
+### **Design the system, then the user’s interface into it**
+
+The UI has two jobs:
+
+1. It must faithfully express the system users are interfacing with…
+2. …in a way that meets their needs, desires, and expectations whenever possible.
+
+I begin by taking a user-centered view on designing the system itself:
+
+- What are the core objects?
+- How do they relate to each other?
+- What actions can someone take on an object, and who should be able to take them?
+- What are the essential attributes that give the object structure and make it meaningful, recognizable, and useful?
+
+Each of those should, ideally, be discussed and agreed upon by the team. Items that require more research become unmistakable. 
+
+Once the structure is sound, we can bring it to life through the UI.
+
+### **AI as thought partner**
+
+I use Claude regularly throughout this process. It helps me encode decisions quickly, stress-test my thinking, find gaps I've missed, and generate UI concepts grounded in the model we’re building. 
+
+There are definitely times when Claude genuinely changes my thinking (otherwise, why would I bother using it?) but I evaluate everything carefully and stay in the driver's seat.
+
+## **Crystallize**
+
+Here are a few examples of how this has played out in my work.
+
+### **A cardinality conflict**
+
+We were exploring subscription sharing. 
+
+In our system, three objects were involved: 
+
+- Account
+- Subscription
+- User
+
+Each account could have one subscription and, at the time, one to many users. 
+
+Long-term we wanted each account to have *only one user*, but this meant people could no longer share in the same subscription, which was a particular concern for families.
+
+We realized that the fastest, cheapest path to subscription sharing meant doubling down on our current structure which allows multiple users on the same account. This approach would run squarely against our future direction.
+
+The key here was cardinality: *How many of one thing relate to how many of another thing?*
+
+Can an account have just 1 user, or can it have 1-to-many users?
+
+No other decision outranked this one. No amount of UI exploration would have revealed the answer, because this is a system design question.
+
+We discovered this conflict before committing to a direction. The team gained alignment in a matter of days, and the project was set aside because it conflicted with long-term strategy and didn't have sufficient upside. 
+
+### **A clean model that violated policy**
+
+In another case, we explored the idea of letting one user remotely approve another user’s action in the app. 
+
+Structurally, it was coherent. I was excited by the possibilities this would open for us.
+
+But when I looked into Apple and Google's policies, it became clear we couldn't do it. 
+
+The idea was sound on paper and impossible in practice. I recognized this early and was able to steer us in a different direction.
+
+The model is a thinking tool, but the thinking remains ours.
+
+### **Device as a first-class object**
+
+We’ll look at these three objects:
+
+- Device
+- Activity
+- User
+
+In our system today, device isn't really its own thing — it's an attribute of activity.
+
+I've been proposing that we treat device as a first-class object, and I've spent significant time modeling what that would mean.
+
+The implications are substantial. 
+
+Right now, we require even young children to be added as authenticated users. If they don't have an email address, they use a parent's. That’s sensible, but it means we can't enforce unique emails at sign-up — otherwise parents couldn’t use their email address more than once. 
+
+Because we don’t enforce unique email address at sign-up, some people end up with duplicate accounts they never intended to create. 
+
+The whole idea behind having parents add each child as a user was to help us attribute activity correctly. If the child is signed in to a device as a particular user, we can say any activity that occurs is likely to be theirs.
+
+There’s a cascade of assumptions hiding here. 
+
+1. If a child is too young to have their own email address, are they likely to know their own username and password?
+2. If they don’t know those, who will have to sign in for them? The parent. 
+3. And if multiple children share a device, the likelihood of anyone remembering to switch users — especially on an app designed to run invisibly in the background — is essentially zero.
+
+I modeled an alternative: make device is its own object.
+
+This would mean:
+
+- A child's iPad can be named, associated with that child, and the device itself can be used for attribution — without requiring the child to exist as an authenticated user in the system.
+- The email reuse scenario goes away.
+- The duplicate accounts go away.
+- The attribution problem gets a clean solution.
+
+I've presented this to our member care team and engineering leadership, and it's gaining traction largely because I’m framing it as a system-level structural change. 
+
+## **Sustain**
+
+### I built the tool I needed
+
+Whiteboards are great for thinking together, but I needed a way to capture and encode those decisions in a more structured format.
+
+I turned to JSON, which is great for the machines but not so easy for humans.
+
+So I challenged myself to build a custom tool that treats JSON as a lightweight backend and gives me practical ways to view the model, evaluate decisions, and maintain a living reference of the system.
+
+### **From shared tool to background engine**
+
+When I first built this tool, I envisioned putting it in everyone's hands. I ran into obstacles making that happen across the organization, so instead, I adapted; the tool became a background engine for my own practice. 
+
+I'm currently building Claude skills so others can extract the things they need without wading too deep into the theory.
+
+## **Results**
+
+### **Compounding context**
+
+Working this way has allowed me to ramp up into complex domains in weeks where it previously took months.
+
+I frequently consult across teams and departments, helping people understand the system we’ve built, and find better questions to ask and opportunities to consider. 
+
+Increasingly, I’m acting as connective tissue across the product — reconciling user needs, technical decisions, and business goals.
