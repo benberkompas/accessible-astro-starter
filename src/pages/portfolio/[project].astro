@@ -70,23 +70,25 @@ const author = {
     minutes={project.data.minutes}
     company={project.data.company}
   />
+
   <section class="my-12">
     <div class="narrow space-content container">
       <Content />
     </div>
-  </section>
-  <!-- <section class="my-12">
+
+    <!-- <section class="my-12">
     <div class="narrow space-content container">
       <Heading level="h2">Share this project</Heading>
       <p>Like this project? Share it with your network!</p>
       <SocialShares />
     </div>
   </section> -->
-</DefaultLayout>
+  </section>
 
-<style lang="scss" is:global>
-  .narrow {
-    margin-inline: auto;
-    max-width: 65ch;
-  }
-</style>
+  <style lang="scss" is:global>
+    .narrow {
+      margin-inline: auto;
+      max-width: 65ch;
+    }
+  </style>
+</DefaultLayout>
