@@ -18,8 +18,8 @@ import {
 } from 'accessible-astro-components'
 import BlockQuote from '@components/BlockQuote.astro'
 import Callout from '@components/Callout.astro'
-import BreakoutImage from '@components/BreakoutImage.astro'
-import { Image } from 'astro:assets'
+import MediaFrame from '@components/MediaFrame.astro'
+import FramedImage from '@components/FramedImage.astro'
 import AccessibleGallery from '@components/AccessibleGallery.astro'
 
 <Callout>
@@ -36,12 +36,9 @@ Home Depot wanted to grow its marketshare with professional contractors.
 
 QuoteCenter gave sales associates access to a massive catalog of stock and special order products, enabling them to quote and sell materials for an entire job in one place.
 
-<Image
-    src="/projects/quantity-conversion/store.jpg"
-    alt="Image of a Home Depot store"
-    width={1200}
-    height={600}
-    class="h-full w-full rounded-lg object-cover"
+<FramedImage
+  src="/projects/quantity-conversion/store.jpg"
+  alt="Image of a Home Depot store"
 />
 
 Earlier work to <a href="/portfolio/structuring-complex-product-options" target="new">structure complex product options</a> had gone well, but we hit a deeper challenge.
@@ -105,12 +102,9 @@ This study was one way I helped the team build confidence — internally and wit
 
 I combed through my running list of assumptions to find those with the highest relevance and risk, and converted them into structured, testable hypotheses.
 
-<Image
-    src="/projects/quantity-conversion/assumptions.png"
-    alt="A filtered view of assumptions in my custom research repository"
-    width={1200}
-    height={600}
-    class="h-full w-full rounded-lg object-cover"
+<FramedImage
+  src="/projects/quantity-conversion/assumptions.png"
+  alt="A filtered view of assumptions in my custom research repository"
 />
 
 Knowing we’d need both quantitative and qualitative data, I designed the study to begin with a standard task-based usability test, and end with a brief interview.
@@ -133,12 +127,9 @@ After 2 full days and 9 meaty sessions, I had hundreds of data-points but no cle
 
 Conventional wisdom says you should limit yourself to 1-2 big questions per study. I was beginning to understand why!
 
-<Image
-    src="/projects/quantity-conversion/analysis.jpg"
-    alt="A side-by-side showing how I reviewed video and captured qualitative and quantitative data"
-    width={1200}
-    height={600}
-    class="h-full w-full rounded-lg object-cover"
+<FramedImage
+  src="/projects/quantity-conversion/analysis.jpg"
+  alt="A side-by-side showing how I reviewed video and captured qualitative and quantitative data"
 />
 
 With some help from my manager, I realized that there were two questions that mattered most:
@@ -158,11 +149,19 @@ After all, transaction speed and associate confidence were important levers in p
 
 I chose to capture timestamp data in order to measure severity, which allowed PMs and engineering to reason about impact, not just system logic.
 
-<BreakoutImage src="/projects/quantity-conversion/metrics.png" alt="Spreadsheet showing timestamp data by participant, by task" caption="First I captured timestamps for specific actions, then ran simple calculations to determine the time elapsed between them" />
+<FramedImage
+  src="/projects/quantity-conversion/metrics.png" 
+  alt="Spreadsheet showing timestamp data by participant, by task" 
+  caption="First I captured timestamps for specific actions, then ran simple calculations to determine the time elapsed between them" 
+/>
 
 It’s one thing to say “6 out of 9 participants noticed when the quantity changed from what they originally entered…” It’s another to say “for the 6 people who noticed the quantity change, it took them 44 seconds on average to notice…”
 
-<BreakoutImage src="/projects/quantity-conversion/averages.png" alt="Spreadsheet showing average timestamp data by product" caption="Then I aggregated the timestamp data and calculated a per-product average" />
+<FramedImage 
+  src="/projects/quantity-conversion/averages.png" 
+  alt="Spreadsheet showing average timestamp data by product" 
+  caption="Then I aggregated the timestamp data and calculated a per-product average" 
+/>
 
 ### Test with realistic data
 
@@ -188,12 +187,9 @@ Our results indicated that a satisfactory* number of participants were able to n
 
 In my recommendations, I addressed 20 specific ways we could improve the design so that users would notice and rationalize the quantity change within acceptable time limits.
 
-<Image
-    src="/projects/quantity-conversion/recommendations.png"
-    alt="A list of my recommended changes"
-    width={1200}
-    height={600}
-    class="h-full w-full rounded-lg object-cover"
+<FramedImage
+  src="/projects/quantity-conversion/recommendations.png"
+  alt="A list of my recommended changes"
 />
 
 ## Solution
@@ -202,7 +198,11 @@ The changes I recommended made the system’s behavior legible and explicit, whi
 
 ### Before
 
-<BreakoutImage src="/projects/quantity-conversion/uom-original.png" alt="The original interface showing generic quantity input field and an information-dense list of vendor offerings" caption="It’s hard to see the quantity conversion process with a quantity of “1”, but in reality it was very subtle." />
+<FramedImage 
+  src="/projects/quantity-conversion/uom-original.png" 
+  alt="The original interface showing generic quantity input field and an information-dense list of vendor offerings" 
+  caption="It’s hard to see the quantity conversion process with a quantity of “1”, but in reality it was very subtle." 
+/>
 
 ### Make “what you’ll get” unambiguous
 
@@ -228,7 +228,11 @@ We did this through in-context conditional messaging.
 
 ### After
 
-<BreakoutImage src="/projects/quantity-conversion/uom-new.png" alt="An updated version of the interface showing a unit of measure selector next to the quantity input field and a clean view of vendor offerings with improved visual emphasis on unit price, along with a more descriptive summary bar at the bottom" caption="Notice how we reduced the information density in vendor offerings, spelled out how many “you’ll get” and included the unit of measure in the bottom toolbar" />
+<FramedImage 
+  src="/projects/quantity-conversion/uom-new.png" 
+  alt="An updated version of the interface showing a unit of measure selector next to the quantity input field and a clean view of vendor offerings with improved visual emphasis on unit price, along with a more descriptive summary bar at the bottom" 
+  caption="Notice how we reduced the information density in vendor offerings, spelled out how many “you’ll get” and included the unit of measure in the bottom toolbar" 
+/>
 
 ## Outcome
 

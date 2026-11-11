@@ -18,8 +18,8 @@ import {
 } from 'accessible-astro-components'
 import BlockQuote from '@components/BlockQuote.astro'
 import Callout from '@components/Callout.astro'
-import BreakoutImage from '@components/BreakoutImage.astro'
-import { Image } from 'astro:assets'
+import MediaFrame from '@components/MediaFrame.astro'
+import FramedImage from '@components/FramedImage.astro'
 import AccessibleGallery from '@components/AccessibleGallery.astro'
 
 <Callout>
@@ -128,17 +128,25 @@ The final solution applied these structural decisions to the layout, interaction
 
 ### Before
 
-<BreakoutImage src="/projects/product-variants/original.webp" alt="The original layout with vertically-stacked options" caption="The vertically-stacked layout for the product options made poor use of screen real-estate." />
+<FramedImage
+  src="/projects/product-variants/original.webp"
+  alt="The original layout with vertically-stacked options"
+  caption="The vertically-stacked layout for the product options made poor use of screen real-estate." 
+/>
 
 Products could be purchased in certain colors and lengths but not every color/length combo was available.
 
-<BreakoutImage src="/projects/product-variants/valid-invalid.webp" alt="Options that look disabled, and error states" caption="In the left-hand image, the 12' option looks disabled but is actually clickable. When you do click 12' (see the right-hand image), your selected color does not persist and the interface appears to be in an error state." />
+<FramedImage src="/projects/product-variants/valid-invalid.webp" alt="Options that look disabled, and error states" caption="In the left-hand image, the 12' option looks disabled but is actually clickable. When you do click 12' (see the right-hand image), your selected color does not persist and the interface appears to be in an error state." />
 
 ### Layout
 
 We needed a more condensed layout that made the best use of screen real-estate, and enabled users to take in the whole “landscape” of product options at a glance.
 
-<BreakoutImage src="/projects/product-variants/layout.webp" alt="Hand-drawn sketch of layout concepts" caption="Sketching lets me fly through concepts without investing too much time." />
+<FramedImage
+  src="/projects/product-variants/layout.webp" 
+  alt="Hand-drawn sketch of layout concepts" 
+  caption="Sketching lets me fly through concepts without investing too much time." 
+/>
 
 I narrowed my ideas down to 3 different concepts, weighed the pros and cons of each, and settled on concept C, seen below — a series of horizontal button groups. It not only maximized vertical real-estate, but was also well-suited for our responsive layout, allowing us to maximize horizontal real-estate by using an overflow menu. Most importantly for our users, it makes their options visible at a glance.
 
@@ -146,12 +154,9 @@ I narrowed my ideas down to 3 different concepts, weighed the pros and cons of e
 - Concept B could only display the categories, which meant clicking was unavoidable. 
 - Concept C allows all categories and most of their options to be visible at a glance.
 
-<Image
-    src="/projects/product-variants/controls.webp"
-    alt="Concepts for handling screen interaction"
-    width={1200}
-    height={600}
-    class="h-full w-full rounded-lg object-cover"
+<FramedImage
+  src="/projects/product-variants/controls.webp"
+  alt="Concepts for handling screen interaction"
 />
 
 ### Interaction Design
@@ -162,13 +167,10 @@ Having searched and landed on a product page, associates’ next step is to info
 
 Associates needed an experience that would build their confidence in what was available so they could have a natural conversation with their customer.
 
-<Image
-    src="/projects/product-variants/store.webp"
-    alt="Image of a Home Depot store center aisle"
-    width={1200}
-    height={600}
-    class="h-[300px] w-full rounded-lg object-cover"
-  />
+<FramedImage
+  src="/projects/product-variants/store.webp"
+  alt="Image of a Home Depot store center aisle"
+/>
 
 Imagine you’re the customer in this scenario:
 
@@ -203,7 +205,7 @@ It didn’t take long for me to realize that written descriptions, sketches, and
 
 This means that I can actually *experience* the interactions for myself, and effectively explain them to development, product management, and the broader design group.
 
-<BreakoutImage src="/projects/product-variants/code.webp" alt="Example code for my prototype" caption="I often turn to code for interaction design projects like this. There are few other prototyping mediums that get me highly realistic results faster than code." />
+<FramedImage src="/projects/product-variants/code.webp" alt="Example code for my prototype" caption="I often turn to code for interaction design projects like this. There are few other prototyping mediums that get me highly realistic results faster than code." />
 
 #### Designing for Confident Selection
 
@@ -215,23 +217,17 @@ Shortly after I settled on a non-linear, exploration-friendly workflow, a variet
 
 After a series of iterations, I landed on the following design.
 
-<Image
-    src="/projects/product-variants/ixd-demo.gif"
-    alt="Example of the interactions and how one choice affects another"
-    width={1200}
-    height={600}
-    class="h-full w-full rounded-lg object-cover"
-  />
+<FramedImage
+  src="/projects/product-variants/ixd-demo.gif"
+  alt="Example of the interactions and how one choice affects another"
+/>
 
 I decided we would allow users to select invalid options, and that their past selections would persist. This means they could end up in an invalid state. To explain this state, I designed a simple message for this state — “Your selected combination is not available” — because it seemed like the most natural way to let users know what was going on.
 
-<Image
-    src="/projects/product-variants/warning.webp"
-    alt="Warning when a combination is not available"
-    width={1200}
-    height={600}
-    class="h-full w-full rounded-lg object-cover"
-  />
+<FramedImage
+  src="/projects/product-variants/warning.webp"
+  alt="Warning when a combination is not available"
+/>
 
 ### Visual Design
 
@@ -246,7 +242,10 @@ This interface required some thoughtful visual cues. There were four primary pro
 
 The three concepts below show different visual approaches to the same underlying logic. In all three concepts, 16' was selected last.
 
-<BreakoutImage src="/projects/product-variants/glimmer-of-hope.webp" alt="How we helped people find their way to a valid combination" caption="" />
+<FramedImage
+  src="/projects/product-variants/glimmer-of-hope.webp" 
+  alt="How we helped people find their way to a valid combination" caption="" 
+/>
 
 Notice how only the third concept (on the far right) makes it feel like you have a path forward. We called this our “glimmer of hope” style, because it makes you feel like the system is moving you *forward* with each subsequent selection, instead of making you feel like you’ve reached a dead end.
 
@@ -256,13 +255,10 @@ The system is moving you *forward* with each subsequent selection, instead of 
 
 #### Emphasizing Invalid Options
 
-<Image
-    src="/projects/product-variants/invalid-options.webp"
-    alt="A subtle diagonal line indicates which options are invalid"
-    width={1200}
-    height={600}
-    class="h-full w-[400px] rounded-lg object-cover float-left mr-6 mb-10"
-  />
+<FramedImage
+  src="/projects/product-variants/invalid-options.webp"
+  alt="A subtle diagonal line indicates which options are invalid"
+/>
 
 While I had already designed some simple messaging for when users are in an invalid state, I thought it would be desirable to help them steer clear of that state altogether, or at least set the expectation that *if you click this option, your selected combination will be invalid.*
 
@@ -272,13 +268,10 @@ I did this by adding a subtle diagonal line to the button’s background. This w
 
 Finally there was the issue of where to place the labels (e.g. “Color,” “Edge,” etc.). Should they be inline with or above the button groups, aligned left or aligned right? I ended up following the recommendations in [this eye-tracking study](http://www.uxmatters.com/mt/archives/2006/07/label-placement-in-forms.php) by Matteo Penzo, placing the labels above the button groups, left-aligned, small, all-caps (for readability), and non-bold.
 
-<Image
-    src="/projects/product-variants/label-placement.webp"
-    alt="Exploring different ways to handle label placement"
-    width={1200}
-    height={600}
-    class="h-full w-full rounded-lg object-cover"
-  />
+<FramedImage
+  src="/projects/product-variants/label-placement.webp"
+  alt="Exploring different ways to handle label placement"
+/>
 
 ## Reflection
 

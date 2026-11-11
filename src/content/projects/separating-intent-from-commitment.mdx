@@ -18,8 +18,8 @@ import {
 } from 'accessible-astro-components'
 import BlockQuote from '@components/BlockQuote.astro'
 import Callout from '@components/Callout.astro'
-import BreakoutImage from '@components/BreakoutImage.astro'
-import { Image } from 'astro:assets'
+import MediaFrame from '@components/MediaFrame.astro'
+import FramedImage from '@components/FramedImage.astro'
 import AccessibleGallery from '@components/AccessibleGallery.astro'
     
 ## Situation
@@ -78,7 +78,11 @@ QC2 collapsed these into a single step, forcing commitment before associates cou
 
 I began by modeling the associate–customer workflow as it was currently designed.
 
-<BreakoutImage src="/projects/customer-intent/diagram.jpg" alt="The workflow we had been designing and building" caption="We were making some big assumptions about how associates actually worked with customers" />
+<FramedImage
+  src="/projects/customer-intent/diagram.jpg"
+  alt="The workflow we had been designing and building"
+  caption="We were making some big assumptions about how associates actually worked with customers"
+/>
 
 I then interviewed Pro Sales Associates across multiple stores to validate and challenge that model.
 
@@ -108,13 +112,10 @@ Once a customer is attached, relevant context (identity, history, account status
 
 This work helped the QC2 team avoid enforcing a workflow that would likely have been resisted regardless of UI quality.
 
-<Image
+<FramedImage
     src="/projects/customer-intent/checkout.jpg"
     alt=""
     caption="Image courtesy of Home Depot (https://corporate.homedepot.com/page/image-gallery)"
-    width={1200}
-    height={600}
-    class="h-full w-full rounded-lg object-cover"
 />
 
 It also established a shared mental model for intent-based workflow design, shifting focus from quoting and ordering to supporting how associates actually manage their customer relationships.
