@@ -1,0 +1,105 @@
+---
+import type { MarkdownHeading } from 'astro'
+
+interface Props {
+  headings: MarkdownHeading[]
+}
+
+const { headings } = Astro.props
+---
+
+<nav aria-label="On this page">
+  <!-- <h2 class="toc-title">On this page</h2> -->
+  <ul class="list-none">
+    {
+      headings.map((h) => (
+        <li class="my-1">
+          <a href={`#${h.slug}`} class="text-sm">
+            {h.text}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<script>
+  let cleanup: (() => void) | null = null
+
+  function init() {
+    cleanup?.()
+    cleanup = null
+
+    const nav = document.querySelector<HTMLElement>('nav[aria-label="On this page"]')
+    if (!nav) return
+
+    const links = Array.from(nav.querySelectorAll<HTMLAnchorElement>('a[href^="#"]'))
+
+    const targets = links.flatMap((link) => {
+      const heading = document.getElementById(decodeURIComponent(link.hash.slice(1)))
+      return heading ? [{ link, heading }] : []
+    })
+
+    const LINE = 0.3
+    let active: HTMLAnchorElement | null = null
+    let ticking = false
+
+    function update() {
+      ticking = false
+      const line = window.innerHeight * LINE
+
+      let current = null
+      for (const t of targets) {
+        if (t.heading.getBoundingClientRect().top <= line) current = t
+        else break
+      }
+
+      const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2
+      if (atBottom && targets.length) current = targets[targets.length - 1]
+
+      const next = current ? current.link : null
+      if (next === active) return
+
+      active?.removeAttribute('aria-current')
+      next?.setAttribute('aria-current', 'location')
+      active = next
+    }
+
+    function onScroll() {
+      if (!ticking) {
+        ticking = true
+        requestAnimationFrame(update)
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll)
+    update()
+
+    cleanup = () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+    }
+  }
+
+  // Fires on the initial load and after every client-side navigation
+  document.addEventListener('astro:page-load', init)
+  // Detach listeners before the old page is swapped out
+  document.addEventListener('astro:before-swap', () => {
+    cleanup?.()
+    cleanup = null
+  })
+</script>
+
+<style>
+  a {
+    display: block;
+    border-inline-start: 2px solid transparent;
+    padding-inline-start: 0.5rem;
+  }
+
+  a[aria-current='location'] {
+    border-inline-start-color: currentColor;
+    font-weight: 600;
+  }
+</style>

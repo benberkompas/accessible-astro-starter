@@ -1,0 +1,99 @@
+---
+/**
+ * MediaFrame Component
+ *
+ * @description The shared frame for case study media. Wraps any slotted <img>
+ * or <video> in a styleable frame, centers it, caps its display width, and
+ * optionally renders a caption inside the frame. All treatment knobs are CSS
+ * custom properties at the top of the <style> block.
+ */
+interface Props {
+  /**
+   * Optional caption, rendered inside the frame beneath the media
+   */
+  caption?: string
+  /**
+   * Optional maximum display width in pixels for the media. Defaults to 800.
+   */
+  width?: number
+}
+
+const { caption, width = 800 } = Astro.props
+---
+
+<figure class="media-frame" style={`--media-width: ${width}px`}>
+  <div class="media-frame__content">
+    <slot />
+  </div>
+  {caption && <figcaption class="media-frame__caption">{caption}</figcaption>}
+</figure>
+
+<style>
+  .media-frame {
+    /* Frame */
+    --frame-gradient-angle: 160deg;
+    --frame-gradient-start: light-dark(var(--color-gray-50), var(--color-gray-800));
+    --frame-gradient-end: light-dark(var(--color-gray-200), var(--color-gray-950));
+
+    /*
+     * Grain: a tiled SVG noise texture (feTurbulence) layered over the gradient.
+     * Intensity is the opacity='0.15' inside the SVG below; CSS variables can't
+     * reach inside a data URI. Set --frame-grain to none to turn it off.
+     */
+    --frame-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.15'/%3E%3C/svg%3E");
+    --frame-grain-size: 200px;
+    --frame-padding: 1.5rem;
+    --frame-radius: 0.75rem;
+    /* --frame-border-width: 1px; */
+    /* --frame-border-color: light-dark(var(--color-gray-200), var(--color-gray-800)); */
+    --frame-shadow: none;
+
+    /* Media inside the frame */
+    --media-radius: 0.375rem;
+    --media-shadow: 0 1px 3px light-dark(rgb(0 0 0 / 0.12), rgb(0 0 0 / 0.5));
+
+    /* Caption */
+    --caption-color: light-dark(var(--color-gray-500), var(--color-gray-400));
+    --caption-size: 0.875rem;
+    --caption-gap: 1rem;
+
+    /* Spacing around the whole figure */
+    --figure-margin-y: 2rem;
+
+    margin: var(--figure-margin-y) 0;
+    box-shadow: var(--frame-shadow);
+    border: var(--frame-border-width) solid var(--frame-border-color);
+    border-radius: var(--frame-radius);
+    background:
+      var(--frame-grain),
+      linear-gradient(var(--frame-gradient-angle), var(--frame-gradient-start), var(--frame-gradient-end));
+    /* Must come after the shorthand, which would otherwise reset it */
+    background-size:
+      var(--frame-grain-size) var(--frame-grain-size),
+      auto;
+    padding: var(--frame-padding);
+  }
+
+  /*
+   * Slotted content is rendered in the parent's scope, so Astro's scoped
+   * styles can't reach it. :global() is needed to style the media itself.
+   */
+  .media-frame__content :global(img),
+  .media-frame__content :global(video) {
+    display: block;
+    margin-inline: auto;
+    box-shadow: var(--media-shadow);
+    border-radius: var(--media-radius);
+    width: 100%;
+    max-width: var(--media-width);
+    height: auto;
+  }
+
+  .media-frame__caption {
+    margin-top: var(--caption-gap);
+    color: var(--caption-color);
+    font-size: var(--caption-size);
+    line-height: 1.5;
+    text-align: center;
+  }
+</style>

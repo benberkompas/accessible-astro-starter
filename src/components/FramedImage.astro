@@ -1,0 +1,36 @@
+---
+import { Image } from 'astro:assets'
+import MediaFrame from './MediaFrame.astro'
+
+/**
+ * FramedImage Component
+ *
+ * @description An <Image> inside the shared MediaFrame. All styling lives in
+ * MediaFrame; this component only handles the image itself.
+ */
+interface Props {
+  /**
+   * The image source (imported ImageMetadata, or a string for remote/public images)
+   */
+  src: ImageMetadata | string
+  /**
+   * The image alt text
+   */
+  alt: string
+  /**
+   * Optional caption, rendered inside the frame beneath the image
+   */
+  caption?: string
+  /**
+   * Optional maximum display width in pixels, passed to <Image> and used to
+   * cap the displayed size. Defaults to 800.
+   */
+  width?: number
+}
+
+const { src, alt = '', caption, width = 800 } = Astro.props
+---
+
+<MediaFrame caption={caption} width={width}>
+  <Image src={src} alt={alt} width={width} height={800} loading="lazy" />
+</MediaFrame>

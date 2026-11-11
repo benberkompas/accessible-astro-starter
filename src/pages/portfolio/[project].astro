@@ -2,6 +2,7 @@
 import DefaultLayout from '@layouts/DefaultLayout.astro'
 import PageHeader from '@components/PageHeader.astro'
 import SocialShares from '@components/SocialShares.astro'
+import TableOfContents from '@components/TableOfContents.astro'
 import { Heading } from 'accessible-astro-components'
 import { getCollection, render } from 'astro:content'
 import type { CollectionEntry } from 'astro:content'
@@ -51,7 +52,10 @@ interface Props {
 }
 
 const { project } = Astro.props
-const { Content } = await render(project)
+const { Content, headings } = await render(project)
+
+// Extract H2s
+const tocItems = headings.filter((h) => h.depth === 2)
 
 const author = {
   name: project.data.author,
@@ -72,23 +76,39 @@ const author = {
   />
 
   <section class="my-12">
-    <div class="narrow space-content container">
-      <Content />
+    <div class="case-study container">
+      {tocItems.length > 1 && <TableOfContents headings={tocItems} />}
+      <div class="narrow space-content">
+        <Content />
+      </div>
     </div>
-
-    <!-- <section class="my-12">
-    <div class="narrow space-content container">
-      <Heading level="h2">Share this project</Heading>
-      <p>Like this project? Share it with your network!</p>
-      <SocialShares />
-    </div>
-  </section> -->
   </section>
 
   <style lang="scss" is:global>
     .narrow {
       margin-inline: auto;
       max-width: 65ch;
+    }
+    .case-study {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 2rem;
+    }
+
+    @media (min-width: 64rem) {
+      .case-study {
+        grid-template-columns: 14rem minmax(0, 65ch);
+        justify-content: center;
+      }
+      .case-study nav {
+        position: sticky;
+        top: 2rem; /* must clear your site header if it's fixed */
+        align-self: start; /* without this, sticky does nothing in a grid */
+      }
+    }
+
+    .narrow h2 {
+      scroll-margin-top: 2rem; /* so anchored headings don't sit under a fixed header */
     }
   </style>
 </DefaultLayout>
