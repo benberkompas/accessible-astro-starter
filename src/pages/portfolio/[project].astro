@@ -54,8 +54,9 @@ interface Props {
 const { project } = Astro.props
 const { Content, headings } = await render(project)
 
-// Extract H2s
-const tocItems = headings.filter((h) => h.depth === 2)
+// Extract headings
+const tocItems = headings.filter((h) => h.depth === 2 || h.depth === 3)
+const h2Count = tocItems.filter((h) => h.depth === 2).length
 
 const author = {
   name: project.data.author,
@@ -77,7 +78,7 @@ const author = {
 
   <section class="my-12">
     <div class="case-study container">
-      {tocItems.length > 1 && <TableOfContents headings={tocItems} minutes={project.data.minutes} />}
+      {h2Count > 1 && <TableOfContents headings={tocItems} minutes={project.data.minutes} />}
       <div class="narrow space-content" data-article>
         <Content />
       </div>
@@ -97,13 +98,19 @@ const author = {
 
     @media (min-width: 64rem) {
       .case-study {
-        grid-template-columns: 14rem minmax(0, 65ch);
-        justify-content: center;
+        grid-template-columns: minmax(14rem, 1fr) minmax(0, 3fr);
+        gap: 3rem;
       }
+
+      .case-study .narrow {
+        margin-inline: 0;
+        max-width: none;
+      }
+
       .case-study nav {
         position: sticky;
-        top: 2rem; /* must clear your site header if it's fixed */
-        align-self: start; /* without this, sticky does nothing in a grid */
+        top: 2rem;
+        align-self: start;
       }
     }
 

@@ -1,5 +1,8 @@
 ---
 import type { MarkdownHeading } from 'astro'
+import { Icon } from 'astro-icon/components'
+import { Button } from 'accessible-astro-components'
+import { Link } from 'accessible-astro-components'
 
 interface Props {
   headings: MarkdownHeading[]
@@ -7,9 +10,21 @@ interface Props {
   minutes?: number
 }
 
+type TocItem = MarkdownHeading & { children: MarkdownHeading[] }
+
 const { headings, minutes } = Astro.props
 
-const items = headings.filter((h) => h.depth === 2)
+// Group each H3 under the H2 above it (an H3 before any H2 is dropped)
+const items = headings
+  .filter((h) => h.depth === 2 || h.depth === 3)
+  .reduce<TocItem[]>((acc, h) => {
+    if (h.depth === 2) {
+      acc.push({ ...h, children: [] })
+    } else if (acc.length > 0) {
+      acc[acc.length - 1].children.push(h)
+    }
+    return acc
+  }, [])
 ---
 
 <nav aria-label="On this page">
@@ -20,19 +35,44 @@ const items = headings.filter((h) => h.depth === 2)
     <span class="toc-progress-label">0%</span>
   </div>
 
-  {minutes && <p class="toc-minutes">{minutes} min read</p>}
+  <!-- Show estimated reading time -->
+  {
+    minutes && (
+      <p class="toc-minutes">
+        <Icon name="lucide:clock" aria-hidden="true" />
+        <span>{minutes} min read</span>
+      </p>
+    )
+  }
 
   <ul class="list-none">
     {
       items.map((h) => (
-        <li class="my-1">
-          <a href={`#${h.slug}`} class="text-sm">
+        <li class="my-1" data-h2>
+          <a href={`#${h.slug}`} class="text-m">
             {h.text}
           </a>
+          {h.children.length > 0 && (
+            <ul class="toc-sub list-none">
+              {h.children.map((sub) => (
+                <li class="my-1">
+                  <a href={`#${sub.slug}`} class="text-m">
+                    {sub.text}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
         </li>
       ))
     }
   </ul>
+
+  <!-- Return to top of case study -->
+  <!-- <Link href="#top" isButton type="primary" animateOnHover animationType="boop">
+    <Icon name="lucide:home" />
+    Back to top
+  </Link> -->
 </nav>
 
 <style>
@@ -52,7 +92,7 @@ const items = headings.filter((h) => h.depth === 2)
     flex: 1;
     border-radius: 2px;
     background: color-mix(in srgb, currentColor 20%, transparent);
-    height: 4px;
+    height: 10px;
     overflow: hidden;
   }
 
@@ -64,8 +104,17 @@ const items = headings.filter((h) => h.depth === 2)
   }
 
   .toc-minutes {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
     margin-block: 0 0.75rem;
-    font-size: 0.75rem;
+    font-size: 1rem; /* your value; I'd originally used 0.75rem */
+  }
+
+  .toc-minutes :global(svg) {
+    flex-shrink: 0;
+    width: 1em;
+    height: 1em;
   }
 
   a {
@@ -74,9 +123,24 @@ const items = headings.filter((h) => h.depth === 2)
     padding-inline-start: 0.5rem;
   }
 
+  .toc-sub {
+    padding-inline-start: 1rem;
+  }
+
+  /* Selected: the current heading */
   a[aria-current='location'] {
     border-inline-start-color: currentColor;
     font-weight: 600;
+  }
+
+  /* H3 lists are hidden only once the script has run, so without JS everything shows */
+  nav[data-enhanced] .toc-sub {
+    display: none;
+  }
+
+  nav[data-enhanced] li[data-expanded] > .toc-sub,
+  nav[data-enhanced] li:has(a:focus-visible) > .toc-sub {
+    display: block;
   }
 </style>
 
@@ -90,25 +154,52 @@ const items = headings.filter((h) => h.depth === 2)
     const nav = document.querySelector<HTMLElement>('nav[aria-label="On this page"]')
     if (!nav) return
 
+    // Tells the CSS the script is running, so it's safe to collapse the H3 lists
+    nav.setAttribute('data-enhanced', '')
+
     const article = document.querySelector<HTMLElement>('[data-article]')
     const fill = nav.querySelector<HTMLElement>('.toc-progress-fill')
     const label = nav.querySelector<HTMLElement>('.toc-progress-label')
     const links = Array.from(nav.querySelectorAll<HTMLAnchorElement>('a[href^="#"]'))
 
-    // Pair each link with its heading, in document order
+    // Pair each link with its heading and the top-level (H2) item it belongs to
     const targets = links.flatMap((link) => {
       const heading = document.getElementById(decodeURIComponent(link.hash.slice(1)))
-      return heading ? [{ link, heading }] : []
+      const top = link.closest<HTMLElement>('li[data-h2]')
+      return heading && top ? [{ link, heading, top }] : []
     })
+    type Target = (typeof targets)[number]
 
     const LINE = 0.3 // reference line, as a fraction of viewport height
-    let active: HTMLAnchorElement | null = null
+    const SETTLE_MS = 150 // how long scrolling must be still before we call it "settled"
+
+    let activeLink: HTMLAnchorElement | null = null
+    let activeTop: HTMLElement | null = null
     let ticking = false
+
+    // After a ToC click, scroll-driven selection is paused.
+    // target is the item to keep selected, or null for links like #top that have none.
+    let lock: { target: Target | null; settled: boolean; y: number } | null = null
+    let settleTimer: number | undefined
+
+    function select(t: Target | null) {
+      const nextLink = t ? t.link : null
+      if (nextLink === activeLink) return
+
+      activeLink?.removeAttribute('aria-current')
+      activeTop?.removeAttribute('data-expanded')
+
+      nextLink?.setAttribute('aria-current', 'location')
+      t?.top.setAttribute('data-expanded', '')
+
+      activeLink = nextLink
+      activeTop = t ? t.top : null
+    }
 
     function update() {
       ticking = false
 
-      // 1. Progress (runs on every update, before any early return)
+      // 1. Progress (always runs)
       if (article && fill && label) {
         const rect = article.getBoundingClientRect()
         const scrollable = rect.height - window.innerHeight
@@ -117,41 +208,95 @@ const items = headings.filter((h) => h.depth === 2)
         label.textContent = `${Math.round(p * 100)}%`
       }
 
-      // 2. Active section highlight
-      const line = window.innerHeight * LINE
+      // 2. After a click: don't re-pick headings while the page is scrolling there.
+      //    Once it stops, a clicked heading stays selected until the reader scrolls on.
+      //    A link with no heading (like #top) just releases the hold and falls through.
+      if (lock) {
+        if (!lock.settled) return
+        if (lock.target && Math.abs(window.scrollY - lock.y) < 2) {
+          select(lock.target)
+          return
+        }
+        lock = null
+      }
 
-      let current = null
+      // 3. Normal rule: the last heading past the reference line
+      const line = window.innerHeight * LINE
+      let current: Target | null = null
       for (const t of targets) {
         if (t.heading.getBoundingClientRect().top <= line) current = t
         else break
       }
 
-      // The last section may be too short for its heading to ever reach the line
+      // 4. At the very bottom, later headings can't reach the line,
+      //    so prefer the first heading still in view
       const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2
-      if (atBottom && targets.length) current = targets[targets.length - 1]
+      if (atBottom) {
+        const firstInView = targets.find((t) => {
+          const r = t.heading.getBoundingClientRect()
+          return r.bottom > 0 && r.top < window.innerHeight
+        })
+        if (firstInView) current = firstInView
+      }
 
-      const next = current ? current.link : null
-      if (next === active) return
+      select(current)
+    }
 
-      active?.removeAttribute('aria-current')
-      next?.setAttribute('aria-current', 'location')
-      active = next
+    function armSettle() {
+      window.clearTimeout(settleTimer)
+      settleTimer = window.setTimeout(() => {
+        if (lock) {
+          lock.settled = true
+          lock.y = window.scrollY
+        }
+        update()
+      }, SETTLE_MS)
     }
 
     function onScroll() {
+      if (lock && !lock.settled) armSettle()
       if (!ticking) {
         ticking = true
         requestAnimationFrame(update)
       }
     }
 
+    function onClick(e: MouseEvent) {
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return
+      const link = (e.target as Element).closest<HTMLAnchorElement>('a[href^="#"]')
+      if (!link) return
+
+      // A heading link selects its item; any other link (e.g. #top) selects nothing
+      const target = targets.find((t) => t.link === link) ?? null
+
+      lock = { target, settled: false, y: 0 }
+      select(target)
+      armSettle() // covers the case where the click causes no scroll at all
+    }
+
+    // If the reader grabs the scroll mid-animation, let go of the hold
+    function onUserInput() {
+      if (lock && !lock.settled) {
+        lock = null
+        window.clearTimeout(settleTimer)
+        onScroll()
+      }
+    }
+
     window.addEventListener('scroll', onScroll, { passive: true })
     window.addEventListener('resize', onScroll)
+    window.addEventListener('wheel', onUserInput, { passive: true })
+    window.addEventListener('touchstart', onUserInput, { passive: true })
+    nav.addEventListener('click', onClick)
     update()
 
     cleanup = () => {
+      window.clearTimeout(settleTimer)
       window.removeEventListener('scroll', onScroll)
       window.removeEventListener('resize', onScroll)
+      window.removeEventListener('wheel', onUserInput)
+      window.removeEventListener('touchstart', onUserInput)
+      nav.removeEventListener('click', onClick)
     }
   }
 
