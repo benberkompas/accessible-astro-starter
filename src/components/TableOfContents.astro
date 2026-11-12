@@ -119,8 +119,11 @@ const items = headings
 
   a {
     display: block;
-    border-inline-start: 2px solid transparent;
-    padding-inline-start: 0.5rem;
+    position: relative;
+    opacity: 0.5;
+    padding-inline-start: 1rem; /* room for the character */
+    /* border-inline-start: 2px solid transparent; */
+    /* padding-inline-start: 0.5rem; */
   }
 
   .toc-sub {
@@ -129,8 +132,16 @@ const items = headings
 
   /* Selected: the current heading */
   a[aria-current='location'] {
-    border-inline-start-color: currentColor;
-    font-weight: 600;
+    opacity: 1;
+    /* border-inline-start-color: currentColor; */
+    /* font-weight: 600; */
+  }
+
+  a[aria-current='location']::before {
+    position: absolute;
+    inset-inline-start: 0;
+    content: '›';
+    content: '›' / ''; /* empty alt text, so screen readers skip it */
   }
 
   /* H3 lists are hidden only once the script has run, so without JS everything shows */
