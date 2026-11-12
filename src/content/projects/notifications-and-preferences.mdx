@@ -22,13 +22,13 @@ import MediaFrame from '@components/MediaFrame.astro'
 import FramedImage from '@components/FramedImage.astro'
 import AccessibleGallery from '@components/AccessibleGallery.astro'
 
-## **Context**
+## Context
 
-### **The Nuclear Option**
+### The Nuclear Option
 
 As our service shifted from web to mobile, notifications became one of the primary ways we deliver information to users. But they only had two choices: accept everything we send, or take the nuclear option and turn off notifications at the operating system level. 
 
-### **"Options Are Evil"**
+### "Options Are Evil"
 
 There was a long-standing sentiment that providing options is a bad idea. 
 
@@ -38,9 +38,9 @@ My position was never that we should simply give people more control for its own
 
 There was yet another an organizational behavior that complicated the situation: ideas perceived as too much effort tended to get set aside, and once that happened, the cost of returning to them sometimes became the justification for never doing so.
 
-## **Frame**
+## Frame
 
-### **A Window of Opportunity**
+### A Window of Opportunity
 
 A technical consolidation of microservices was underway, and architectural decisions were being made. 
 
@@ -48,29 +48,29 @@ I didn't wait to be asked.
 
 I invited myself into that work because I could see something others hadn't: the long-term opportunity to bring user-facing notification preferences with multi-channel control would require a foundation shaped *now*, during this window, not retrofitted later, and not left as an implementation detail for whenever someone greenlit the idea — because by then the cost would seem prohibitive and the project would be killed on arrival.
 
-### **Pattern Recognition, Not Speculation**
+### Pattern Recognition, Not Speculation
 
 This wasn't speculative. I've watched good ideas die because by the time people recognized the need, the groundwork hadn't been laid and the total effort looked enormous. I wanted to be prepared.
 
-### **What's Actually Under the Hood**
+### What's Actually Under the Hood
 
 Notifications have structure: classes, channels, defaults, and preference logic. Without modeling that structure early, every future attempt to improve notifications would be a custom, fragile, one-off effort.
 
 I worked initially with a DBA, our now software architect, and a content strategist. This was cross-functional from the very beginning.
 
-## **Crystallize**
+## Crystallize
 
-### **Defining the Concepts Together**
+### Defining the Concepts Together
 
 I began by defining each key concept collaboratively. What do we mean when we say *event*? What's a *message*? A *tag*? A *channel*? We defined each of these together and mapped how they related to each other — essentially an entity-relationship diagram at first, though I now use Object-Oriented UX to do the same work more efficiently.
 
-### **A Model Built to Last**
+### A Model Built to Last
 
 The model got me on the same wavelength with engineering and DBA. It helped us hash out early disagreements and get into more technical discussions of cardinality and defaults. 
 
 It was detailed enough to preserve our thinking, but abstract enough to pick up again later without deep recall. This became important.
 
-### **System First, Interface Second**
+### System First, Interface Second
 
 When I later got into interface design, the UI mapped directly to the underlying model. 
 
@@ -78,17 +78,17 @@ This wasn't abstract backend architecture — it was the conduit for producing a
 
 I was thinking about the user experience from the beginning, but we worked on the system first.
 
-## **Sustain**
+## Sustain
 
-### **Four Phases**
+### Four Phases
 
 The story of how this work came about can be described in four parts.
 
-#### **Anticipate**
+#### Anticipate
 
 I saw the future need and involved myself proactively during the infrastructure window, collaborating with the DBA and architect to lay the right foundation before anyone asked for it.
 
-#### **Yield**
+#### Yield
 
 When the work surfaced to stakeholders, it couldn't hold up against competing priorities. 
 
@@ -96,17 +96,17 @@ Our product manager and development manager both questioned the timing.
 
 I pitched it, wasn't successful, and we set the effort aside. But I preserved the model as a bookmark.
 
-#### **Re-engage**
+#### Re-engage
 
 Around twelve months later, notification volume was rising and the opt-out risk was undeniable. We picked the model back up. The team ramped quickly because the groundwork existed. We were not starting from zero.
 
-#### **Deliver**
+#### Deliver
 
 We shipped a first version of notification preferences. 
 
 I've maintained an inventory of notifications and events on the side ever since. That list keeps growing. We don't support all of them yet, but we can. The infrastructure is there.
 
-### **The Proof in Practice**
+### The Proof in Practice
 
 Another designer on the team is now leading the design of Accountability Groups, a feature that depends heavily on this system. 
 
@@ -114,9 +114,9 @@ She and I talk regularly about the notifications that feature needs, and it's cl
 
 The infrastructure is ready and waiting for us to plug into it.
 
-## **Results**
+## Results
 
-### **Before and After**
+### Before and After
 
 Before this work, every notification was a custom effort. There were few preferences, and everything was disconnected. 
 
@@ -124,11 +124,11 @@ Now the pipeline is straightforward: identify the event, get an event ID, link i
 
 Everything else is clockwork.
 
-### **Nobody Blinked**
+### Nobody Blinked
 
 I've recently been involved in three projects where new notifications were on the table. Nobody blinked an eye at the effort. It's completely straightforward now.
 
-### **What Users Got**
+### What Users Got
 
 What users got is a system that lets them decide how they want to receive information from us — which areas, which types, through which channels. 
 
@@ -136,7 +136,7 @@ They no longer have to turn off notifications for the entire app to get the cont
 
 It's not everything I've envisioned it could be, but it's the right scaffolding for a system we can grow and improve.
 
-### **Stewarding a Master Plan**
+### Stewarding a Master Plan
 
 Others now describe this as a “master plan” in retrospect. 
 
