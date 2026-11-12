@@ -3,16 +3,28 @@ import type { MarkdownHeading } from 'astro'
 
 interface Props {
   headings: MarkdownHeading[]
+  /** The reading time in minutes */
+  minutes?: number
 }
 
-const { headings } = Astro.props
+const { headings, minutes } = Astro.props
+
+const items = headings.filter((h) => h.depth === 2)
 ---
 
 <nav aria-label="On this page">
-  <!-- <h2 class="toc-title">On this page</h2> -->
+  <p class="toc-title">On this page</p>
+
+  <div class="toc-progress" aria-hidden="true">
+    <div class="toc-progress-track"><div class="toc-progress-fill"></div></div>
+    <span class="toc-progress-label">0%</span>
+  </div>
+
+  {minutes && <p class="toc-minutes">{minutes} min read</p>}
+
   <ul class="list-none">
     {
-      headings.map((h) => (
+      items.map((h) => (
         <li class="my-1">
           <a href={`#${h.slug}`} class="text-sm">
             {h.text}
@@ -22,6 +34,51 @@ const { headings } = Astro.props
     }
   </ul>
 </nav>
+
+<style>
+  .toc-title {
+    font-weight: 600;
+  }
+
+  .toc-progress {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-block: 0.5rem;
+    font-size: 0.75rem;
+  }
+
+  .toc-progress-track {
+    flex: 1;
+    border-radius: 2px;
+    background: color-mix(in srgb, currentColor 20%, transparent);
+    height: 4px;
+    overflow: hidden;
+  }
+
+  .toc-progress-fill {
+    transform: scaleX(0);
+    transform-origin: left;
+    background: currentColor;
+    height: 100%;
+  }
+
+  .toc-minutes {
+    margin-block: 0 0.75rem;
+    font-size: 0.75rem;
+  }
+
+  a {
+    display: block;
+    border-inline-start: 2px solid transparent;
+    padding-inline-start: 0.5rem;
+  }
+
+  a[aria-current='location'] {
+    border-inline-start-color: currentColor;
+    font-weight: 600;
+  }
+</style>
 
 <script>
   let cleanup: (() => void) | null = null
@@ -33,19 +90,34 @@ const { headings } = Astro.props
     const nav = document.querySelector<HTMLElement>('nav[aria-label="On this page"]')
     if (!nav) return
 
+    const article = document.querySelector<HTMLElement>('[data-article]')
+    const fill = nav.querySelector<HTMLElement>('.toc-progress-fill')
+    const label = nav.querySelector<HTMLElement>('.toc-progress-label')
     const links = Array.from(nav.querySelectorAll<HTMLAnchorElement>('a[href^="#"]'))
 
+    // Pair each link with its heading, in document order
     const targets = links.flatMap((link) => {
       const heading = document.getElementById(decodeURIComponent(link.hash.slice(1)))
       return heading ? [{ link, heading }] : []
     })
 
-    const LINE = 0.3
+    const LINE = 0.3 // reference line, as a fraction of viewport height
     let active: HTMLAnchorElement | null = null
     let ticking = false
 
     function update() {
       ticking = false
+
+      // 1. Progress (runs on every update, before any early return)
+      if (article && fill && label) {
+        const rect = article.getBoundingClientRect()
+        const scrollable = rect.height - window.innerHeight
+        const p = scrollable > 0 ? Math.min(1, Math.max(0, -rect.top / scrollable)) : 0
+        fill.style.transform = `scaleX(${p})`
+        label.textContent = `${Math.round(p * 100)}%`
+      }
+
+      // 2. Active section highlight
       const line = window.innerHeight * LINE
 
       let current = null
@@ -54,6 +126,7 @@ const { headings } = Astro.props
         else break
       }
 
+      // The last section may be too short for its heading to ever reach the line
       const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2
       if (atBottom && targets.length) current = targets[targets.length - 1]
 
@@ -90,16 +163,3 @@ const { headings } = Astro.props
     cleanup = null
   })
 </script>
-
-<style>
-  a {
-    display: block;
-    border-inline-start: 2px solid transparent;
-    padding-inline-start: 0.5rem;
-  }
-
-  a[aria-current='location'] {
-    border-inline-start-color: currentColor;
-    font-weight: 600;
-  }
-</style>

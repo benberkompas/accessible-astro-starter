@@ -77,8 +77,8 @@ const author = {
 
   <section class="my-12">
     <div class="case-study container">
-      {tocItems.length > 1 && <TableOfContents headings={tocItems} />}
-      <div class="narrow space-content">
+      {tocItems.length > 1 && <TableOfContents headings={tocItems} minutes={project.data.minutes} />}
+      <div class="narrow space-content" data-article>
         <Content />
       </div>
     </div>
