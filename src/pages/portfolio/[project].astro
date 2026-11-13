@@ -78,7 +78,7 @@ const author = {
 
   <section class="my-12">
     <div class="case-study container">
-      {h2Count > 1 && <TableOfContents headings={tocItems} minutes={project.data.minutes} />}
+      {h2Count > 1 && <TableOfContents headings={tocItems} minutes={project.data.minutes} title={project.data.title} />}
       <div class="narrow space-content" data-article>
         <Content />
       </div>

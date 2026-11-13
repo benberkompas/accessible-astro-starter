@@ -8,11 +8,13 @@ interface Props {
   headings: MarkdownHeading[]
   /** The reading time in minutes */
   minutes?: number
+  /** Visible heading above the list; defaults to "On this page" */
+  title?: string
 }
 
 type TocItem = MarkdownHeading & { children: MarkdownHeading[] }
 
-const { headings, minutes } = Astro.props
+const { headings, minutes, title = 'On this page' } = Astro.props
 
 // Group each H3 under the H2 above it (an H3 before any H2 is dropped)
 const items = headings
@@ -28,7 +30,7 @@ const items = headings
 ---
 
 <nav aria-label="On this page">
-  <p class="toc-title">On this page</p>
+  <p class="toc-title">{title}</p>
 
   <div class="toc-progress" aria-hidden="true">
     <div class="toc-progress-track"><div class="toc-progress-fill"></div></div>
