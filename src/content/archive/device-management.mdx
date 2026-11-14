@@ -21,3 +21,38 @@ import Callout from '@components/Callout.astro'
 import MediaFrame from '@components/MediaFrame.astro'
 import FramedImage from '@components/FramedImage.astro'
 import AccessibleGallery from '@components/AccessibleGallery.astro'
+
+Right now, we require even young children to be added as authenticated users. If they don't have an email address, they use a parent's. That’s sensible, but it means we can't enforce unique emails at sign-up — otherwise parents couldn’t use their email address more than once. 
+
+Because we don’t enforce unique email address at sign-up, some people end up with duplicate accounts they never intended to create. 
+
+The whole idea behind having parents add each child as a user was to help us attribute activity correctly. If the child is signed in to a device as a particular user, we can say any activity that occurs is likely to be theirs.
+
+<FramedImage
+  src="/projects/orca-navigator/placeholder.jpg"
+  alt="Placeholder"
+  caption="Placeholder"
+/>
+
+There’s a cascade of assumptions hiding here. 
+
+1. If a child is too young to have their own email address, are they likely to know their own username and password?
+2. If they don’t know those, who will have to sign in for them? The parent. 
+3. And if multiple children share a device, the likelihood of anyone remembering to switch users — especially on an app designed to run invisibly in the background — is essentially zero.
+
+I modeled an alternative: make device is its own object.
+
+<FramedImage
+  src="/projects/orca-navigator/placeholder.jpg"
+  alt="Placeholder"
+  caption="Placeholder"
+/>
+
+This would mean:
+
+- A child's iPad can be named, associated with that child, and the device itself can be used for attribution — without requiring the child to exist as an authenticated user in the system.
+- The email reuse scenario goes away.
+- The duplicate accounts go away.
+- The attribution problem gets a clean solution.
+
+I've presented this to our member care team and engineering leadership, and it's gaining traction largely because I’m framing it as a system-level structural change.

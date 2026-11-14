@@ -2,7 +2,7 @@
 title: ORCA Navigator - A Living System Model for Structural Design Decisions
 author: Ben Berkompas
 description: How I use object-oriented UX to help teams align on the conceptual structure of what we're building, and the tooling and workflows I've developed to sustain that practice.
-minutes: 4
+minutes: 6
 company: Covenant Eyes
 featuredImage:
   src: /projects/orca-navigator/cover.png
@@ -22,6 +22,13 @@ import MediaFrame from '@components/MediaFrame.astro'
 import FramedImage from '@components/FramedImage.astro'
 import AccessibleGallery from '@components/AccessibleGallery.astro'
 
+<Callout>
+
+  ##### TL;DR
+  I start by designing the system, then the screens that allow users to interface with it. As I stepped into a lead role I needed better tools to handle the increasing complexity and help me guide and influence decisions across teams and departments. Whiteboards are amazing, but I needed more structure. So I built my own. I now have an AI-enhanced design workflow that helps me span from object modeling to UI design quickly, and consult with teams across our service.
+
+</Callout>
+
 ## Context
 
 ### Team alignment isn’t a solved problem
@@ -30,35 +37,67 @@ I’ve often seen teams struggle because each person carries a slightly differen
 
 Generating more output is easier than it’s ever been. Anyone can crank out ideas, UI concepts, prototypes, or even rubrics for evaluating and grading the quality of these things. However, none of this addresses the root cause behind team misalignment, which is rarely a lack of ideas.
 
-More often, teams have an abundance of ideas but struggle with how they’d connect to form a strong *system*. 
+More often, teams have an abundance of ideas but struggle to connect them together over time in a way that results in a strong *system*. There can be too much <a href="/portfolio/aligning-conceptual-models-for-relational-accountability" target="_blank">presumed alignment</a> and not enough *actual* alignment.
 
-I’m firmly convinced that teams should learn to first design the system, then design how users will interface with that system.
+<FramedImage
+  src="/projects/orca-navigator/glad-we-all-agree.png"
+  alt="Jeff Patton on how we go from presumed to actual agreement"
+  caption="Courtesy of Jeff Patton & Associates (https://jpattonassociates.com/glad-we-all-agree-2/)"
+/>
 
 ## Frame
 
-### Design the system, then the user’s interface into it
+### What are users interfacing with?
+
+There are many different interfaces involved in software development. There are Application Programming Interfaces (APIs) which allow separate systems to exchange information; one makes a request, the other returns a response. Then, of course, there are User Interfaces (UI) which is a term we often use interchangeably with screen design. We once distinguished between Graphical User Interfaces (GUIs) and other types of UI, but now every possible meaning for the phrase is lumped together under "UI", and some go even further, treating UI and UX as interchangeable...
+
+This suggests we have lost sight of what the user interface is actually for.
 
 The UI has two jobs:
 
-1. It must faithfully express the system users are interfacing with…
-2. …in a way that meets their needs, desires, and expectations whenever possible.
+1. It must faithfully express the underlying system
+2. And provide a way for users to interface with it in order to get things done
 
-I begin by taking a user-centered view on designing the system itself:
+*How* they do this - whether tapping a screen, dictating commands, having an agent act on their behalf, etc. - depends entirely on what the interface allows and the capabilities of the underlying system.
 
-- What are the core objects?
-- How do they relate to each other?
-- What actions can someone take on an object, and who should be able to take them?
-- What are the essential attributes that give the object structure and make it meaningful, recognizable, and useful?
+<FramedImage
+  src="/projects/orca-navigator/user-interface-system.svg"
+  alt="Placeholder"
+  caption="Users interface with the system in order to get things done"
+/>
 
-Each of those should, ideally, be discussed and agreed upon by the team. Items that require more research become unmistakable. 
+Either way, they're interfacing with the system, so it needs to be designed carefully. 
 
-Once the structure is sound, we can bring it to life through the UI.
+### Object-Oriented UX
 
-### AI as thought partner
+Designers play a crucial role in system design and that's where I start every project.
 
-I use Claude regularly throughout this process. It helps me encode decisions quickly, stress-test my thinking, find gaps I've missed, and generate UI concepts grounded in the model we’re building. 
+I've found the best way to approach this is with Object-Oriented UX, which is first a philosophy of design that recognizes humans are wired to percieve the world -- including the digital world -- in terms of objects.
 
-There are definitely times when Claude genuinely changes my thinking (otherwise, why would I bother using it?) but I evaluate everything carefully and stay in the driver's seat.
+It also provides a flexible methodology. We begin by identifying the key objects -- the nouns, the things that matter to people, and which should provide the conceptual bedrock of the system. From there, we ask how those objects relate to each other, including questions of cardinality (i.e. how many of one thing relate to how many of another thing). This gives us a sturdy *network* of connected concepts. Next we identify what actions may be taken on each object and who make take those actions; this is where <a href="/portfolio/roles-and-permissions" target="_blank">roles and permissions</a> enter the scene, and, yes, they get a lot of our attention! Finally, we look at the attributes of each object, the things that make it meaningful, recognizable, and useful to people.
+
+* **O**bjects
+* **R**elationships
+* **C**alls to action
+* **A**ttributes
+
+It's simple, but elegant, and has helped me enormously when I work on really complex systems. I have a "hook" for virtually every question or problem that comes up.
+
+<FramedImage
+  src="/projects/orca-navigator/orca.png"
+  alt="Placeholder"
+  caption="Objects, Relationships, Calls to action, and Attributes"
+/>
+
+### AI in the loop
+
+I use Claude regularly throughout this process. It helps me encode decisions quickly, stress-test my thinking, find gaps I've missed, and generate UI concepts grounded in the model we’re building.
+
+<FramedImage
+  src="/projects/orca-navigator/workflow.png"
+  alt="Placeholder"
+  caption="I regularly use Claude to improve and stretch my object modeling, VS Code for manual edits to the JSON, ORCA Navigator to visualize and evaluate my work, and Figma Console MCP to translate the modeling into UI concepts I can share."
+/>
 
 ## Crystallize
 
@@ -66,76 +105,47 @@ Here are a few examples of how this has played out in my work.
 
 ### A cardinality conflict
 
-We were exploring subscription sharing. 
+We were exploring subscription sharing. Three objects were involved: subscription, user, and account.
 
-In our system, three objects were involved: 
+<FramedImage
+  src="/projects/orca-navigator/account-cardinality.png"
+  alt="Placeholder"
+  caption="Each account could have one-to-many users."
+/>
 
-- Account
-- Subscription
-- User
-
-Each account could have one subscription and, at the time, one to many users. 
-
-Long-term we wanted each account to have *only one user*, but this meant people could no longer share in the same subscription, which was a particular concern for families.
-
-We realized that the fastest, cheapest path to subscription sharing meant doubling down on our current structure which allows multiple users on the same account. This approach would run squarely against our future direction.
+Long-term we wanted each account to have *only one user*, but this would mean people could no longer share a subscription, which was a particular concern for families.
 
 The key here was cardinality: *How many of one thing relate to how many of another thing?*
 
-Can an account have just 1 user, or can it have 1-to-many users?
+Should we pivot from our <a href="/portfolio/account-structure" target="_blank">historic account structure</a> and enforce a "one user per account" rule? Would that alienate multi-user accounts? Might some of them cancel their subscription? Would it be worth it?
 
-No other decision outranked this one. No amount of UI exploration would have revealed the answer, because this is a system design question.
+No amount of UI exploration would have revealed the answer, because this is fundamentally a system design question.
 
-We discovered this conflict before committing to a direction. The team gained alignment in a matter of days, and the project was set aside because it conflicted with long-term strategy and didn't have sufficient upside. 
-
-### A clean model that violated policy
-
-In another case, we explored the idea of letting one user remotely approve another user’s action in the app. 
-
-Structurally, it was coherent. I was excited by the possibilities this would open for us.
-
-But when I looked into Apple and Google's policies, it became clear we couldn't do it. 
-
-The idea was sound on paper and impossible in practice. I recognized this early and was able to steer us in a different direction.
-
-The model is a thinking tool, but the thinking remains ours.
+The team gained alignment in a matter of days, and the project was set aside because it conflicted with our long-term strategy and didn't offer sufficient upside to be worth the cost and risk. I look back on this decision and am *very* thankful we didn't pursue it further!
 
 ### Device as a first-class object
 
-We’ll look at these three objects:
+I'm currently exploring an opportunity involving these three objects: device, activity, and user.
 
-- Device
-- Activity
-- User
+In our system today, device isn't really an object —- it's an *attribute* of activity that tags along for the ride. When activity is sent to the server, device often accompanies it.
 
-In our system today, device isn't really its own thing — it's an attribute of activity.
+This can cause some very unexpected behavior for users, who want to know that all devices are accounted for and running properly.
 
-I've been proposing that we treat device as a first-class object, and I've spent significant time modeling what that would mean.
+A device's *status* and even *existence* within the system depends on there being recent activity. Sometimes there's a lapse in activity -- not because anything is wrong, but simply because of a user setting, or a device not being used -- but this still causes the device to appear "inactive", which is alarming to some of our users.
 
-The implications are substantial. 
+<FramedImage
+  src="/projects/orca-navigator/device-as-first-class.png"
+  alt="Placeholder"
+  caption="I've been proposing that we treat device as a first-class object, and have spent significant time modeling what that would mean."
+/>
 
-Right now, we require even young children to be added as authenticated users. If they don't have an email address, they use a parent's. That’s sensible, but it means we can't enforce unique emails at sign-up — otherwise parents couldn’t use their email address more than once. 
+The implications are substantial.
 
-Because we don’t enforce unique email address at sign-up, some people end up with duplicate accounts they never intended to create. 
+* We could build a much more reliable way of communicating device status and stop relying on recent activity as our only signal
+* We could finally address a deeper account structure challenge related to family accounts where young children are treated as authenticated users, required to have an email address, and parents must reuse their email address for their children; this results in duplicate accounts because we can't flag email addresses as "already taken"
+* We could offer device-level options for our filtering service, which would reduce the need for people to use hacky workarounds when they need to set up their personal and work devices differently
 
-The whole idea behind having parents add each child as a user was to help us attribute activity correctly. If the child is signed in to a device as a particular user, we can say any activity that occurs is likely to be theirs.
-
-There’s a cascade of assumptions hiding here. 
-
-1. If a child is too young to have their own email address, are they likely to know their own username and password?
-2. If they don’t know those, who will have to sign in for them? The parent. 
-3. And if multiple children share a device, the likelihood of anyone remembering to switch users — especially on an app designed to run invisibly in the background — is essentially zero.
-
-I modeled an alternative: make device is its own object.
-
-This would mean:
-
-- A child's iPad can be named, associated with that child, and the device itself can be used for attribution — without requiring the child to exist as an authenticated user in the system.
-- The email reuse scenario goes away.
-- The duplicate accounts go away.
-- The attribution problem gets a clean solution.
-
-I've presented this to our member care team and engineering leadership, and it's gaining traction largely because I’m framing it as a system-level structural change. 
+I've presented these concepts to our member care team and engineering leadership, and some are gaining traction largely because I’m framing them as system-level structural changes, not simply UI improvements.
 
 ## Sustain
 
@@ -146,6 +156,12 @@ Whiteboards are great for thinking together, but I needed a way to capture and e
 I turned to JSON, which is great for the machines but not so easy for humans.
 
 So I challenged myself to build a custom tool that treats JSON as a lightweight backend and gives me practical ways to view the model, evaluate decisions, and maintain a living reference of the system.
+
+<FramedImage
+  src="/projects/orca-navigator/json-viewer.png"
+  alt="Placeholder"
+  caption="I chose to use JSON as a lightweight backend because it's very easy to write, simple to customize, and wouldn't require me to learn how to build and manage a database."
+/>
 
 ### From shared tool to background engine
 
@@ -160,9 +176,7 @@ I'm currently building Claude skills so others can extract the things they need 
 Working this way has allowed me to ramp up into complex domains in weeks where it previously took months.
 
 <BlockQuote author="Collin Myers, Product Manager">
-  You're absolutely crushing it on the iOS projects this cycle! Super fast responsiveness across multiple domains from native UI to text for activity events, and high quality designs for the whole range of needs.
+  You're absolutely crushing it on the iOS projects this cycle! Super fast responsiveness across multiple domains from native UI to text for activity events, and high quality designs that accomplish the whole range of needs.
 </BlockQuote>
 
-I frequently consult across teams and departments, helping people understand the system we’ve built, and find better questions to ask and opportunities to consider. 
-
-Increasingly, I’m acting as connective tissue across the product — reconciling user needs, technical decisions, and business goals.
+With ORCA Navigator, I now have an AI-enhanced design workflow that helps me span from object modeling to UI design quickly, consult across teams and departments, help people understand the system we’ve built, and find better questions to ask and opportunities to consider.
