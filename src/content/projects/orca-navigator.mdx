@@ -2,7 +2,7 @@
 title: ORCA Navigator - A Living System Model for Structural Design Decisions
 author: Ben Berkompas
 description: How I use object-oriented UX to help teams align on the conceptual structure of what we're building, and the tooling and workflows I've developed to sustain that practice.
-minutes: 6
+minutes: 7
 company: Covenant Eyes
 featuredImage:
   src: /projects/orca-navigator/cover.png
@@ -131,7 +131,7 @@ In our system today, device isn't really an object —- it's an *attribute* of a
 
 This can cause some very unexpected behavior for users, who want to know that all devices are accounted for and running properly.
 
-A device's *status* and even *existence* within the system depends on there being recent activity. Sometimes there's a lapse in activity -- not because anything is wrong, but simply because of a user setting, or a device not being used -- but this still causes the device to appear "inactive", which is alarming to some of our users.
+A device's status -- and even *existence* within the system -- depends on there being recent activity. Sometimes there's a lapse in activity, not because anything is wrong, but simply because of a user setting, or a device not being used recently. Regardless of the cause the device appears "inactive", which is alarming because users want the peace of mind from knowing every device is protected.
 
 <FramedImage
   src="/projects/orca-navigator/device-as-first-class.png"
@@ -145,7 +145,7 @@ The implications are substantial.
 * We could finally address a deeper account structure challenge related to family accounts where young children are treated as authenticated users, required to have an email address, and parents must reuse their email address for their children; this results in duplicate accounts because we can't flag email addresses as "already taken"
 * We could offer device-level options for our filtering service, which would reduce the need for people to use hacky workarounds when they need to set up their personal and work devices differently
 
-I've presented these concepts to our member care team and engineering leadership, and some are gaining traction largely because I’m framing them as system-level structural changes, not simply UI improvements.
+I've presented these concepts to our member care team and engineering leadership, and they're gaining traction largely because I’m framing this as system-level structural opportunity, not simply a set of UI improvements.
 
 ## Sustain
 
@@ -163,6 +163,18 @@ So I challenged myself to build a custom tool that treats JSON as a lightweight 
   caption="I chose to use JSON as a lightweight backend because it's very easy to write, simple to customize, and wouldn't require me to learn how to build and manage a database."
 />
 
+### Always up-to-date
+
+Whenever I update an object -- adding a new relationship, correcting cardinality, clarifying roles, etc. -- the entire model immediately reflects the change.
+
+It works like a design token system: change a value once, it updates everywhere.
+
+<FramedImage
+  src="/projects/orca-navigator/change-propagation.png"
+  alt="Placeholder"
+  caption="For example, when I edit assessment.json, all projects that reference it instantly receive the update."
+/>
+
 ### From shared tool to background engine
 
 When I first built this tool, I envisioned putting it in everyone's hands. I ran into obstacles making that happen across the organization, so instead, I adapted; the tool became a background engine for my own practice. 
@@ -171,12 +183,38 @@ I'm currently building Claude skills so others can extract the things they need 
 
 ## Results
 
-### Compounding context
+### Ramping up
 
-Working this way has allowed me to ramp up into complex domains in weeks where it previously took months.
+Working this way has allowed me to ramp up into complex domains in a matter of weeks.
+
+Our iOS app is a good example. I had been watching the work for months, modeling various things from a distance, so by the time I joined the team and become directly involved I had already built a lot of context.
 
 <BlockQuote author="Collin Myers, Product Manager">
   You're absolutely crushing it on the iOS projects this cycle! Super fast responsiveness across multiple domains from native UI to text for activity events, and high quality designs that accomplish the whole range of needs.
 </BlockQuote>
+
+I took all that context straight into my project work, continuing to model and refine things based on what I learned from the team.
+
+<FramedImage
+  src="/projects/orca-navigator/ios-work.png"
+  alt="Placeholder"
+  caption="I often leverage Figma's built-in AI along with Claude + Figma Console MCP to translate my modeling into UI concepts. I used the iOS27 UI kit from Apple to make sure I followed their human interface guidelines."
+/>
+
+### Automating common tasks
+
+Now that I have a working object model that covers most of the service, I am able to leverage it for automating certain tasks.
+
+For instance, we now have a <a href="/portfolio/notifications-and-preferences" target="_blank">better notification system</a>, however, each time we build a feature that involves new notifications the team usually asks me to help them map out the details.
+
+I know this involves a series of objects and relationships I've already modeled, so I worked with Claude to encode those relationships into a decision tree then wrapped that reasoning in a skill
+
+<FramedImage
+  src="/projects/orca-navigator/skill.png"
+  alt="Placeholder"
+  caption="Knowing about objects like event, activity, and notification - how they're defined and structured - helps me encode that knowledge in skills that anyone can use to make more informed decisions."
+/>
+
+### Expanding my influence
 
 With ORCA Navigator, I now have an AI-enhanced design workflow that helps me span from object modeling to UI design quickly, consult across teams and departments, help people understand the system we’ve built, and find better questions to ask and opportunities to consider.
